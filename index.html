@@ -414,154 +414,169 @@ footer{border-top:1px solid var(--border);padding:44px 40px 28px}
   </div>
 </section>
 
-<!-- TEAM -->
-<section id="team" class="sec">
-  <div class="sec-inner">
-    <div class="sec-lbl">Leadership Team</div>
-    <h2>A new kind of <em>engineering company</em></h2>
-    <p class="sec-sub">DFM Insights is built by a human chairman and operated by an AI management team. Low overhead, fast decisions, product always in focus.</p>
-    <div class="chairman">
-      <div class="ch-icon">👤</div>
-      <div>
-        <div class="ch-role">Chairman & Founder</div>
-        <div class="ch-name">Hans Stam</div>
-        <div class="ch-bio">Serial hardware entrepreneur with experience across consumer electronics, industrial IoT, and medical devices. Hans sets strategic direction and holds final decision authority. The AI management team executes.</div>
-      </div>
-    </div>
-    <div class="tgrid">
-      <div class="tcard">
-        <div class="tavatar">🧠</div>
-        <div class="trole">Chief Executive Officer</div>
-        <div class="tname">Claude (AI)</div>
-        <div class="tbio">Responsible for product strategy, go-to-market execution, customer success, and day-to-day operational decisions. Reports directly to the Chairman.</div>
-        <div class="tquote">"Our strategy is pre-revenue validation: 10 founding members before we write a line of the paid platform. Commitment before code."</div>
-      </div>
-      <div class="tcard">
-        <div class="tavatar">⚙️</div>
-        <div class="trole">Chief Technology Officer</div>
-        <div class="tname">Claude (AI)</div>
-        <div class="tbio">Architects the Claude API integration, project management system, and secure document upload pipeline. Owns the technical roadmap from demo to full SaaS.</div>
-        <div class="tquote">"Core stack: Claude API with discipline-specific system prompts, Supabase backend, Next.js frontend. 8 weeks from greenlight to beta."</div>
-      </div>
-      <div class="tcard">
-        <div class="tavatar">📊</div>
-        <div class="trole">Chief Financial Officer</div>
-        <div class="tname">Claude (AI)</div>
-        <div class="tbio">Owns financial modelling, unit economics, pricing strategy, and Stripe revenue reporting. Monitors the path to profitability and advises on the Expert Review upsell funnel.</div>
-        <div class="tquote">"97% gross margin on Starter. At $49 blended CAC under $15, LTV:CAC ratio exceeds 36:1 once the Expert Review upsell is live."</div>
-      </div>
-    </div>
-
-    <div class="memo">
-      <div class="memo-from">CFO Memo · Unit Economics · DFM Insights</div>
-      <p><strong>Pre-launch target:</strong> 10 founding members × $49 = $490. This covers first-month Claude API costs and validates demand before committing development resources. Full refund if we don't hit 10 — zero risk to early adopters.</p>
-      <p><strong>Month 3 conservative model:</strong> 30 Starter projects ($1,470) + 3 Expert Reviews ($1,500) = $2,970/month gross. Claude API cost per Starter project: ~$1.20. Gross margin: 97% on Starter tier. Break-even at month 2.</p>
-    </div>
-
-    <div class="memo" style="margin-top:14px;border-left-color:#1a5fad">
-      <div class="memo-from">CTO Memo · Technical Architecture · DFM Insights</div>
-      <p><strong>Phase 1 (post 10 members):</strong> Auth (Clerk), project dashboard, encrypted document upload (S3), Claude API with 9 discipline-specific system prompts. React/Next.js + Supabase. Target: 8 weeks from greenlight to beta.</p>
-      <p><strong>Security commitment:</strong> All uploaded PRDs and BOMs stored encrypted at rest, isolated per user, never used to train any model. Hardware IP protection is a hard product guarantee, not a policy footnote.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ROADMAP -->
-<section class="sec" style="background:var(--cream);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
-  <div class="sec-inner">
-    <div class="sec-lbl">Roadmap</div>
-    <h2>Where we are and <em>where we're going</em></h2>
-    <div class="rgrid">
-      <div class="rphase">
-        <div class="rlbl">Phase 1</div>
-        <div class="rname">Validation</div>
-        <div class="rstatus s-live">● Live Now</div>
-        <ul class="ritems">
-          <li>Free demo — 10 example programs</li>
-          <li>EVT, DVT, PVT conversation library</li>
-          <li>Stage gate reviews</li>
-          <li>Planning & priority sessions</li>
-          <li>Pre-launch Stripe collection</li>
-          <li>10 founding members target</li>
-        </ul>
-      </div>
-      <div class="rphase">
-        <div class="rlbl">Phase 2</div>
-        <div class="rname">Starter Platform</div>
-        <div class="rstatus s-soon">◐ After 10 Members</div>
-        <ul class="ritems">
-          <li>User accounts & project dashboard</li>
-          <li>PRD & BOM upload (PDF, CSV, Excel)</li>
-          <li>AI DFM team — 9 disciplines</li>
-          <li>10 engineering questions per project</li>
-          <li>Priority issue cards P0/P1/P2</li>
-          <li>Expert Review upsell</li>
-        </ul>
-      </div>
-      <div class="rphase">
-        <div class="rlbl">Phase 3</div>
-        <div class="rname">Expert & PRD</div>
-        <div class="rstatus s-future">○ Q3 2026</div>
-        <ul class="ritems">
-          <li>Human + AI Expert Review ($500)</li>
-          <li>Full DFM report + video call</li>
-          <li>AI PRD generator</li>
-          <li>Collaborative PRD editing</li>
-          <li>Formal PRD expert review ($500)</li>
-          <li>BOM risk & lifecycle analysis</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- UNIT ECONOMICS -->
+<!-- WHO THIS IS FOR -->
 <section class="sec">
   <div class="sec-inner">
-    <div class="sec-lbl">Unit Economics</div>
-    <h2>The numbers <em>work</em></h2>
-    <div class="egrid">
-      <div class="ecell">
-        <div class="elbl">Gross Margin · Starter</div>
-        <div class="eval eco-g">97%</div>
-        <div class="enote">Claude API cost ~$1.20 per project. Everything else is margin.</div>
+    <div class="sec-lbl">Who It's For</div>
+    <h2>Built for the people who <em>build hardware</em></h2>
+    <p class="sec-sub">DFM Insights is designed for hardware teams at the moment they need it most — before the next build.</p>
+    <div class="pgrid" style="margin-top:44px">
+
+      <div class="pcell">
+        <div class="ctag">Hardware Founders</div>
+        <div class="chead">You're moving fast and can't afford a $80k respin</div>
+        <div class="cbody">You have a great product concept and a small team. What you don't have is a dedicated DFM engineer to stress-test your design before you send it to the CM. DFM Insights gives you that review — structured, expert-level, and available before EVT-1.</div>
       </div>
-      <div class="ecell sh">
-        <div class="elbl">Gross Margin · Expert</div>
-        <div class="eval eco-g">82%</div>
-        <div class="enote">$500 review, ~$90 combined human + API cost.</div>
+
+      <div class="pcell sh">
+        <div class="ctag">Hardware Engineers</div>
+        <div class="chead">You want a second opinion before the build order goes out</div>
+        <div class="cbody">You've been heads-down on the design. A fresh perspective across mechanical, RF, battery, and manufacturing can catch the tolerance stack-up or antenna keep-out violation that's been hiding in plain sight. DFM Insights is that second opinion — available at midnight before the build order goes out.</div>
       </div>
-      <div class="ecell">
-        <div class="elbl">LTV (Starter + Expert)</div>
-        <div class="eval">$549</div>
-        <div class="enote">$49 Starter + one Expert upsell at 20% conversion.</div>
+
+      <div class="pcell">
+        <div class="ctag">Product Managers</div>
+        <div class="chead">You need to know which issues are P0 before the gate review</div>
+        <div class="cbody">Walking into an EVT gate review without a clear picture of open items is uncomfortable. DFM Insights gives you a structured P0/P1/P2 issue list — so you know what the blockers are, who owns them, and what the path forward looks like.</div>
       </div>
-      <div class="ecell sh">
-        <div class="elbl">Break-Even</div>
-        <div class="eval">Month 2</div>
-        <div class="enote">30 Starter + 3 Expert per month. No external funding needed.</div>
+
+      <div class="pcell dk">
+        <div class="ctag">What you upload</div>
+        <div class="chead">Your PRD, your BOM — your actual product under review</div>
+        <div class="cbody">Unlike the free demo which shows example products, the paid tier works with your real design. Upload your Product Requirements Document and Bill of Materials. The AI engineering team reads your specific constraints, components, and design intent — then runs the review against your product, not a generic example.</div>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- FAQ -->
-<section id="faq" class="sec" style="background:var(--cream);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+<!-- WHAT'S INSIDE -->
+<section class="sec" style="background:var(--cream);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
   <div class="sec-inner">
-    <div class="sec-lbl">FAQ</div>
-    <h2>Common <em>questions</em></h2>
-    <div class="faqs">
-      <div class="fqi open"><div class="fqq">What happens after I pay the $49?</div><div class="fqa">You receive a confirmation email immediately. Once we reach 10 founding members, we begin building the paid platform (target: 8 weeks). You get early access before public launch. If we don't reach 10 members within 90 days, you receive a full refund — no questions asked.</div></div>
-      <div class="fqi open"><div class="fqq">Is this AI-generated or real engineering knowledge?</div><div class="fqa">Both. Our system uses Claude (Anthropic's AI) with specialist prompts for each engineering discipline — Mechanical, Electrical, RF/Antenna, Battery, Software, Manufacturing. For the $500 Expert Review tier, a human senior DFM engineer reviews and supplements the AI output before delivery.</div></div>
-      <div class="fqi open"><div class="fqq">Is my PRD and BOM kept confidential?</div><div class="fqa">Yes, unconditionally. All uploaded documents are stored encrypted, isolated per user account, and never shared with or used to train any AI model. A formal NDA is available on request for Expert Review clients.</div></div>
-      <div class="fqi open"><div class="fqq">What is a "project"?</div><div class="fqa">A project corresponds to one hardware product under development. It covers all three build stages (EVT, DVT, PVT), the planning session, and your 10 engineering questions. If you're building multiple products, you use one project slot per product.</div></div>
-      <div class="fqi open"><div class="fqq">What if I need more than 10 questions?</div><div class="fqa">You can purchase additional question packs (5 questions for $9) or upgrade to Expert Review for a deeper dive. Unlimited question plans for teams will be available once the platform is live.</div></div>
-      <div class="fqi open"><div class="fqq">What types of hardware can you review?</div><div class="fqa">Consumer electronics, medical devices (FDA 510(k), ISO 13485, IEC 60601), industrial IoT, EV components, smart home, wearables, robotics, and more. Our AI team covers RF/wireless, battery systems, embedded software, mechanical design, PCB layout, and manufacturing process.</div></div>
-      <div class="fqi open"><div class="fqq">Who runs this company?</div><div class="fqa">DFM Insights is founded and chaired by Hans Stam, a hardware entrepreneur with deep experience in electronics manufacturing. Day-to-day operations — product, engineering, and finance — are managed by an AI management team running on Claude. This structure keeps overhead near-zero and lets us deliver expert-level DFM analysis at a fraction of traditional consultancy cost.</div></div>
+    <div class="sec-lbl">What's Inside</div>
+    <h2>Everything your AI engineering team <em>reviews</em></h2>
+    <p class="sec-sub">Nine specialist disciplines. Every conversation is tailored to your product's specific constraints and build stage.</p>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:44px">
+
+      <div style="background:var(--white);padding:26px 24px">
+        <div style="font-size:22px;margin-bottom:10px">⚙️</div>
+        <div style="font-weight:600;font-size:15px;margin-bottom:7px">Mechanical Engineering</div>
+        <div style="font-size:13px;color:var(--mid);line-height:1.65">Tolerance stack-ups, housing drop performance, IP sealing, thermal management, strap and hinge durability, injection mould design for manufacturability.</div>
+      </div>
+
+      <div style="background:var(--white);padding:26px 24px">
+        <div style="font-size:22px;margin-bottom:10px">⚡</div>
+        <div style="font-weight:600;font-size:15px;margin-bottom:7px">Electrical Engineering</div>
+        <div style="font-size:13px;color:var(--mid);line-height:1.65">PCB layout, signal integrity, EMC compliance, power delivery, reflow profile and solder quality, component selection, test point coverage.</div>
+      </div>
+
+      <div style="background:var(--white);padding:26px 24px">
+        <div style="font-size:22px;margin-bottom:10px">📡</div>
+        <div style="font-weight:600;font-size:15px;margin-bottom:7px">RF & Antenna</div>
+        <div style="font-size:13px;color:var(--mid);line-height:1.65">Antenna keep-out zones, coexistence between radios, regulatory compliance (FCC, CE, IC), range validation, coupling between RF and charging circuits.</div>
+      </div>
+
+      <div style="background:var(--cream);padding:26px 24px">
+        <div style="font-size:22px;margin-bottom:10px">🔋</div>
+        <div style="font-weight:600;font-size:15px;margin-bottom:7px">Battery Engineering</div>
+        <div style="font-size:13px;color:var(--mid);line-height:1.65">Runtime budgeting, cell selection, BMS architecture, self-discharge, cycle life targets, thermal behaviour at charge, swelling risks at body temperature.</div>
+      </div>
+
+      <div style="background:var(--cream);padding:26px 24px">
+        <div style="font-size:22px;margin-bottom:10px">💻</div>
+        <div style="font-weight:600;font-size:15px;margin-bottom:7px">Software Engineering</div>
+        <div style="font-size:13px;color:var(--mid);line-height:1.65">Firmware architecture, power state management, OTA update strategy, EOL test coverage, protocol compliance (OCPP, Matter, BLE), SDK version risks.</div>
+      </div>
+
+      <div style="background:var(--cream);padding:26px 24px">
+        <div style="font-size:22px;margin-bottom:10px">🏭</div>
+        <div style="font-weight:600;font-size:15px;margin-bottom:7px">Manufacturing Engineering</div>
+        <div style="font-size:13px;color:var(--mid);line-height:1.65">Assembly sequence, yield risks, CM capability assessment, incoming QC procedures, cycle time, UV cure and reflow process parameters, SOP gaps.</div>
+      </div>
+
+      <div style="background:var(--white);padding:26px 24px">
+        <div style="font-size:22px;margin-bottom:10px">🧪</div>
+        <div style="font-weight:600;font-size:15px;margin-bottom:7px">Test & Verification</div>
+        <div style="font-size:13px;color:var(--mid);line-height:1.65">Test plan completeness, qualification lab lead times, IP/drop/thermal test sequence, EOL station design, regulatory pre-compliance strategy.</div>
+      </div>
+
+      <div style="background:var(--white);padding:26px 24px">
+        <div style="font-size:22px;margin-bottom:10px">🎨</div>
+        <div style="font-weight:600;font-size:15px;margin-bottom:7px">Industrial Design</div>
+        <div style="font-size:13px;color:var(--mid);line-height:1.65">Aesthetics vs manufacturability trade-offs, wall thickness, rib geometry, parting line placement, surface finish feasibility, CMF consistency across SKUs.</div>
+      </div>
+
+      <div style="background:var(--white);padding:26px 24px">
+        <div style="font-size:22px;margin-bottom:10px">📋</div>
+        <div style="font-weight:600;font-size:15px;margin-bottom:7px">Program Management</div>
+        <div style="font-size:13px;color:var(--mid);line-height:1.65">Critical path identification, stage gate readiness, carry-forward issue tracking, CM slot risk, schedule float analysis, P0/P1/P2 prioritisation.</div>
+      </div>
+
     </div>
   </div>
 </section>
 
+<!-- DFM MISTAKES -->
+<section class="sec">
+  <div class="sec-inner">
+    <div class="sec-lbl">Why DFM Matters</div>
+    <h2>The five mistakes that kill <em>hardware programs</em></h2>
+    <p class="sec-sub">These aren't edge cases. They happen on almost every first-time hardware program — and every one of them is detectable weeks before it becomes expensive.</p>
+
+    <div style="display:flex;flex-direction:column;gap:0;margin-top:44px;border:1px solid var(--border);border-radius:12px;overflow:hidden">
+
+      <div style="display:flex;gap:0;border-bottom:1px solid var(--border)">
+        <div style="width:52px;flex-shrink:0;background:var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:22px;color:var(--amber)">1</div>
+        <div style="padding:22px 26px;flex:1">
+          <div style="font-weight:600;font-size:15px;margin-bottom:6px">The tolerance stack-up that shows up at DVT</div>
+          <div style="font-size:13px;color:var(--mid);line-height:1.7">Individual component dimensions are each within spec. But when assembled, the cumulative worst-case variation causes the lid to rattle, the gasket to not seal, or the PCB to bind. A worst-case stack-up analysis at EVT takes 30 minutes. The tooling change to fix it at DVT takes 3 weeks.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:0;border-bottom:1px solid var(--border)">
+        <div style="width:52px;flex-shrink:0;background:var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:22px;color:var(--amber)">2</div>
+        <div style="padding:22px 26px;flex:1">
+          <div style="font-weight:600;font-size:15px;margin-bottom:6px">The antenna keep-out that was moved "just once"</div>
+          <div style="font-size:13px;color:var(--mid);line-height:1.7">The Qi charging coil got repositioned to fix the centre-of-gravity balance. Nobody updated the BT antenna keep-out. Range drops 10%. A 3D EM simulation would have flagged the coupling in an afternoon. Discovering it in EVT range testing means a PCB respin.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:0;border-bottom:1px solid var(--border)">
+        <div style="width:52px;flex-shrink:0;background:var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:22px;color:var(--amber)">3</div>
+        <div style="padding:22px 26px;flex:1">
+          <div style="font-weight:600;font-size:15px;margin-bottom:6px">The component substitution nobody documented</div>
+          <div style="font-size:13px;color:var(--mid);line-height:1.7">During a shortage, the CM substituted a 60A Shore gasket for the specified 70A. It passed EVT. It failed IP54 at DVT. The substitution was never captured in the BOM. A receiving inspection protocol and a "no substitute" flag on the BOM line would have prevented it.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:0;border-bottom:1px solid var(--border)">
+        <div style="width:52px;flex-shrink:0;background:var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:22px;color:var(--amber)">4</div>
+        <div style="padding:22px 26px;flex:1">
+          <div style="font-weight:600;font-size:15px;margin-bottom:6px">The EMC failure that could have been a $0.45 fix</div>
+          <div style="font-size:13px;color:var(--mid);line-height:1.7">The DC-DC converter switching frequency harmonics fail FCC Part 15B at DVT. A ferrite clamp on the power cable — $0.45 — would have resolved it. But it needs to be in the DVT-2 BOM, which means it needs to be identified before DVT-1, which means it needs an EMC pre-scan at EVT. Which nobody scheduled.</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:0">
+        <div style="width:52px;flex-shrink:0;background:var(--ink);display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:22px;color:var(--amber)">5</div>
+        <div style="padding:22px 26px;flex:1">
+          <div style="font-weight:600;font-size:15px;margin-bottom:6px">The biocompatibility failure at DVT on a $0.40 pigment</div>
+          <div style="font-size:13px;color:var(--mid);line-height:1.7">The red silicone strap looked great in the CAD. At DVT, the ISO 10993 cytotoxicity test flags the red pigment at &gt;0.5% concentration. The medical-grade certified alternative costs $0.40 more per unit. The 8-week lab re-test and DVT delay costs $40,000.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:28px;padding:22px 26px;background:var(--amber-bg);border:1px solid #f0c878;border-radius:10px;display:flex;align-items:center;gap:20px;flex-wrap:wrap">
+      <div style="flex:1;min-width:220px">
+        <div style="font-weight:600;font-size:15px;margin-bottom:4px">Every one of these is in the free demo.</div>
+        <div style="font-size:13px;color:var(--mid)">See how real engineering teams caught — or missed — these issues. No signup required.</div>
+      </div>
+      <a href="demo.html" style="background:var(--ink);color:var(--white);padding:11px 22px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none;white-space:nowrap;flex-shrink:0" target="_blank">Open Free Demo →</a>
+    </div>
+  </div>
+</section>
 <!-- CTA -->
 <section class="cta-banner">
   <h2>Ready to ship <em>better hardware</em>?</h2>
