@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DFM Insights — Design for Manufacturability Intelligence Platform</title>
+<meta name="description" content="DFM Insights shows how real hardware products get built — engineering conversations across EVT, DVT, and PVT build stages. Understand Design for Manufacturability through live project intelligence.">
+<meta name="keywords" content="DFM, Design for Manufacturability, EVT, DVT, PVT, hardware engineering, product development, manufacturing, NPI, new product introduction">
+<meta name="author" content="DFM Insights">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.dfminsights.com/">
+
+<!-- OPEN GRAPH -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.dfminsights.com/">
+<meta property="og:title" content="DFM Insights — Design for Manufacturability Platform">
+<meta property="og:description" content="Follow how real hardware products are made. Engineering conversations across EVT, DVT and PVT — from first prototype to mass production.">
+<meta property="og:image" content="https://www.dfminsights.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="DFM Insights">
+<meta property="og:locale" content="en_US">
+
+<!-- TWITTER CARD -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@dfminsights">
+<meta name="twitter:title" content="DFM Insights — Design for Manufacturability">
+<meta name="twitter:description" content="Follow how real hardware products are made — EVT, DVT, PVT engineering conversations from prototype to production.">
+<meta name="twitter:image" content="https://www.dfminsights.com/og-image.png">
+
+<!-- SCHEMA.ORG -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "DFM Insights",
+  "url": "https://www.dfminsights.com",
+  "description": "Design for Manufacturability intelligence platform showing engineering conversations across EVT, DVT and PVT build stages.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web Browser",
+  "creator": {
+    "@type": "Organization",
+    "name": "DFM Insights",
+    "url": "https://www.dfminsights.com"
+  }
+}
+</script>
+
+<!-- FAVICON (inline SVG) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23080c14'/%3E%3Crect x='4' y='4' width='24' height='24' rx='3' fill='none' stroke='%232d7adb' stroke-width='1.5'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='14' font-weight='700' fill='%232d7adb' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='36' fill='%23080c14'/%3E%3Crect x='20' y='20' width='140' height='140' rx='18' fill='none' stroke='%232d7adb' stroke-width='8'/%3E%3Ctext x='90' y='120' font-family='monospace' font-size='80' font-weight='700' fill='%232d7adb' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c14;
+    --bg2: #0c1220;
+    --bg3: #111827;
+    --surface: #131d30;
+    --surface2: #182237;
+    --border: #1e2d4a;
+    --border2: #243452;
+    --text: #b8cce0;
+    --text-dim: #5a7090;
+    --text-bright: #ddeeff;
+    --accent: #2d7adb;
+    --accent-glow: rgba(45,122,219,0.18);
+
+    /* Team colors */
+    --c-pm:     #e2b854;
+    --c-mech:   #5ba4e8;
+    --c-ee:     #5eca82;
+    --c-sw:     #b07ade;
+    --c-tv:     #e88045;
+    --c-mfg:    #3ec9d6;
+    --c-rf:     #e87b9c;
+    --c-bat:    #7dcfa0;
+    --c-id:     #e06b6b;
+
+    --stage-evt: #e8a43b;
+    --stage-dvt: #5ba4e8;
+    --stage-pvt: #5eca82;
+
+    --radius: 6px;
+    --radius-lg: 10px;
+    --font-head: 'Barlow Condensed', sans-serif;
+    --font-body: 'Barlow', sans-serif;
+    --font-mono: 'Fira Code', monospace;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid bg */
+  body::before {
+    content:'';
+    position:fixed; inset:0; pointer-events:none; z-index:0;
+    background-image:
+      linear-gradient(rgba(45,122,219,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(45,122,219,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(8,12,20,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    display: flex; align-items: center; gap: 32px;
+    height: 58px;
+  }
+
+  .logo {
+    font-family: var(--font-head);
+    font-size: 22px; font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--text-bright);
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .logo-badge {
+    background: var(--accent);
+    color: #fff;
+    font-size: 9px; font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-top: 2px;
+  }
+
+  .header-nav {
+    display: flex; gap: 4px; margin-left: auto;
+  }
+
+  .header-tag {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border2);
+    color: var(--text-dim);
+    cursor: pointer;
+    transition: all .2s;
+    text-transform: uppercase;
+  }
+  .header-tag:hover { border-color: var(--accent); color: var(--accent); }
+
+  .header-status {
+    display: flex; align-items: center; gap: 6px;
+    font-family: var(--font-mono); font-size: 10px;
+    color: var(--text-dim); letter-spacing: 0.08em;
+    padding-left: 24px;
+    border-left: 1px solid var(--border);
+  }
+  .status-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #5eca82;
+    animation: pulse-dot 2s infinite;
+  }
+  @keyframes pulse-dot {
+    0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(94,202,130,0.4); }
+    50% { opacity:0.7; box-shadow: 0 0 0 4px rgba(94,202,130,0); }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; z-index: 1;
+    padding: 64px 32px 48px;
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 10px; letter-spacing: 0.22em;
+    color: var(--accent); text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .hero h1 {
+    font-family: var(--font-head);
+    font-size: clamp(42px,6vw,78px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.0;
+    color: var(--text-bright);
+    margin-bottom: 16px;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+
+  .hero-sub {
+    font-size: 16px; color: var(--text-dim);
+    max-width: 580px; margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+
+  .hero-pills {
+    display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .pill {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 20px;
+    border: 1px solid var(--border2);
+    color: var(--text-dim);
+  }
+  .pill.evt { border-color: var(--stage-evt); color: var(--stage-evt); }
+  .pill.dvt { border-color: var(--stage-dvt); color: var(--stage-dvt); }
+  .pill.pvt { border-color: var(--stage-pvt); color: var(--stage-pvt); }
+
+  .hero-stats {
+    display: flex; gap: 0; justify-content: center;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    max-width: 560px; margin: 0 auto;
+    background: var(--surface);
+  }
+  .hero-stat {
+    flex: 1; padding: 18px 20px; text-align: center;
+    border-right: 1px solid var(--border);
+  }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat-num {
+    font-family: var(--font-head);
+    font-size: 32px; font-weight: 700;
+    color: var(--text-bright); display: block;
+  }
+  .hero-stat-label {
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.14em;
+    color: var(--text-dim); text-transform: uppercase;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .main-layout {
+    position: relative; z-index: 1;
+    display: flex;
+    min-height: calc(100vh - 58px);
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    width: 280px; flex-shrink: 0;
+    border-right: 1px solid var(--border);
+    position: sticky; top: 58px;
+    height: calc(100vh - 58px);
+    overflow-y: auto;
+    background: var(--bg2);
+    padding: 16px 0;
+  }
+
+  .sidebar::-webkit-scrollbar { width: 4px; }
+  .sidebar::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  .sidebar-section-label {
+    font-family: var(--font-mono);
+    font-size: 9px; letter-spacing: 0.2em;
+    color: var(--text-dim); text-transform: uppercase;
+    padding: 10px 20px 6px;
+  }
+
+  .product-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-left: 3px solid transparent;
+    transition: all .15s;
+  }
+  .product-item:hover { background: var(--surface); }
+  .product-item.active {
+    background: var(--surface2);
+    border-left-color: var(--accent);
+  }
+
+  .product-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+  }
+  .product-item.active .product-icon {
+    border-color: var(--accent);
+    background: var(--accent-glow);
+  }
+
+  .product-info { min-width: 0; }
+  .product-name {
+    font-size: 12px; font-weight: 600;
+    color: var(--text); white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
+    margin-bottom: 2px;
+  }
+  .product-item.active .product-name { color: var(--text-bright); }
+  .product-meta {
+    font-family: var(--font-mono); font-size: 9px;
+    color: var(--text-dim); letter-spacing: 0.06em;
+  }
+
+  .stage-dots {
+    display: flex; gap: 3px; align-items: center;
+  }
+  .stage-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--border2);
+  }
+  .stage-dot.done { background: var(--stage-pvt); }
+  .stage-dot.active-dot { background: var(--stage-dvt); }
+  .stage-dot.pending { background: var(--stage-evt); }
+
+  /* ── CONTENT AREA ── */
+  .content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* ── WELCOME SCREEN ── */
+  .welcome-screen {
+    flex: 1;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 60px 40px;
+    text-align: center;
+    gap: 24px;
+  }
+
+  .welcome-screen h2 {
+    font-family: var(--font-head);
+    font-size: 28px; font-weight: 700;
+    color: var(--text-bright);
+  }
+
+  .welcome-screen p {
+    color: var(--text-dim);
+    max-width: 400px;
+  }
+
+  .arrow-hint {
+    font-family: var(--font-mono);
+    font-size: 11px; letter-spacing: 0.1em;
+    color: var(--accent);
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  /* ── PRODUCT DETAIL ── */
+  .product-detail {
+    flex: 1; display: flex; flex-direction: column;
+  }
+
+  .product-detail-header {
+    padding: 24px 32px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pd-top {
+    display: flex; align-items: flex-start; gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .pd-icon {
+    width: 52px; height: 52px;
+    border-radius: 10px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; flex-shrink: 0;
+  }
+
+  .pd-meta { flex: 1; }
+  .pd-category {
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 4px;
+  }
+
+  .pd-title {
+    font-family: var(--font-head);
+    font-size: 26px; font-weight: 700;
+    color: var(--text-bright); line-height: 1.1;
+    margin-bottom: 4px;
+  }
+
+  .pd-desc { font-size: 13px; color: var(--text-dim); }
+
+  .pd-badges {
+    display: flex; gap: 8px; align-items: center;
+    margin-top: 8px;
+  }
+
+  .badge {
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 3px 8px; border-radius: 3px;
+    border: 1px solid;
+  }
+  .badge-blue { border-color: var(--c-mech); color: var(--c-mech); }
+  .badge-green { border-color: var(--c-ee); color: var(--c-ee); }
+  .badge-orange { border-color: var(--stage-evt); color: var(--stage-evt); }
+
+  /* Stage Tabs */
+  .stage-tabs {
+    display: flex; gap: 0;
+    margin-top: 0;
+  }
+
+  .stage-tab {
+    padding: 12px 28px;
+    font-family: var(--font-head);
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    color: var(--text-dim);
+    transition: all .15s;
+    display: flex; align-items: center; gap: 8px;
+    text-transform: uppercase;
+  }
+  .stage-tab:hover { color: var(--text); }
+  .stage-tab.active { color: var(--text-bright); }
+  .stage-tab.evt.active { border-bottom-color: var(--stage-evt); }
+  .stage-tab.dvt.active { border-bottom-color: var(--stage-dvt); }
+  .stage-tab.pvt.active { border-bottom-color: var(--stage-pvt); }
+
+  .stage-dot-tab {
+    width: 7px; height: 7px; border-radius: 50%;
+  }
+  .evt .stage-dot-tab { background: var(--stage-evt); }
+  .dvt .stage-dot-tab { background: var(--stage-dvt); }
+  .pvt .stage-dot-tab { background: var(--stage-pvt); }
+
+  /* ── STAGE CONTENT ── */
+  .stage-content {
+    flex: 1; display: flex;
+    overflow: hidden;
+  }
+
+  .conversation-pane {
+    flex: 1; overflow-y: auto;
+    padding: 24px 32px;
+    min-width: 0;
+  }
+  .conversation-pane::-webkit-scrollbar { width: 5px; }
+  .conversation-pane::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+
+  .team-pane {
+    width: 260px; flex-shrink: 0;
+    border-left: 1px solid var(--border);
+    overflow-y: auto;
+    background: var(--bg2);
+    padding: 16px 0;
+  }
+  .team-pane::-webkit-scrollbar { width: 4px; }
+  .team-pane::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+
+  /* Stage description */
+  .stage-desc-bar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .stage-desc-icon {
+    width: 32px; height: 32px;
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0;
+  }
+  .evt-bg { background: rgba(232,164,59,0.12); border: 1px solid rgba(232,164,59,0.2); }
+  .dvt-bg { background: rgba(91,164,232,0.12); border: 1px solid rgba(91,164,232,0.2); }
+  .pvt-bg { background: rgba(94,202,130,0.12); border: 1px solid rgba(94,202,130,0.2); }
+
+  .stage-desc-text { flex: 1; }
+  .stage-desc-label {
+    font-family: var(--font-head);
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .evt .stage-desc-label { color: var(--stage-evt); }
+  .dvt .stage-desc-label { color: var(--stage-dvt); }
+  .pvt .stage-desc-label { color: var(--stage-pvt); }
+  .stage-desc-body { font-size: 12px; color: var(--text-dim); }
+
+  /* Thread / Messages */
+  .thread-day-divider {
+    display: flex; align-items: center; gap: 12px;
+    margin: 20px 0 14px;
+  }
+  .thread-day-line { flex: 1; height: 1px; background: var(--border); }
+  .thread-day-label {
+    font-family: var(--font-mono); font-size: 9px;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .message {
+    display: flex; gap: 12px; margin-bottom: 16px;
+    animation: fadeUp .3s ease forwards;
+  }
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(6px); }
+    to { opacity:1; transform: translateY(0); }
+  }
+
+  .msg-avatar {
+    width: 34px; height: 34px;
+    border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-head);
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.04em;
+    margin-top: 2px;
+    position: relative;
+  }
+
+  .msg-avatar::after {
+    content: attr(data-role-short);
+    position: absolute;
+    bottom: -2px; right: -2px;
+    width: 12px; height: 12px;
+    border-radius: 3px;
+    font-size: 7px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    font-family: var(--font-mono);
+  }
+
+  .msg-body { flex: 1; min-width: 0; }
+
+  .msg-header {
+    display: flex; align-items: baseline; gap: 8px;
+    margin-bottom: 4px; flex-wrap: wrap;
+  }
+
+  .msg-name {
+    font-weight: 600; font-size: 13px;
+    color: var(--text-bright);
+  }
+
+  .msg-role-badge {
+    font-family: var(--font-mono); font-size: 8px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 1px 5px; border-radius: 2px;
+    border: 1px solid;
+  }
+
+  .msg-time {
+    font-family: var(--font-mono); font-size: 9px;
+    color: var(--text-dim); letter-spacing: 0.06em;
+    margin-left: auto;
+  }
+
+  .msg-text {
+    font-size: 13px; color: var(--text);
+    line-height: 1.65;
+  }
+
+  .msg-text code {
+    font-family: var(--font-mono); font-size: 11px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1px 5px;
+    color: var(--accent);
+  }
+
+  .msg-text strong { color: var(--text-bright); font-weight: 600; }
+
+  .msg-attachment {
+    margin-top: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left-width: 3px;
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+
+  .attach-title {
+    font-family: var(--font-mono); font-size: 10px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 4px;
+  }
+
+  .attach-body { color: var(--text); line-height: 1.6; }
+
+  .msg-reaction {
+    margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap;
+  }
+
+  .reaction {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 2px 8px;
+    font-size: 11px; cursor: pointer;
+    transition: border-color .15s;
+    display: flex; align-items: center; gap: 4px;
+  }
+  .reaction:hover { border-color: var(--accent); }
+  .reaction-count {
+    font-family: var(--font-mono); font-size: 9px;
+    color: var(--text-dim);
+  }
+
+  .thread-reply {
+    margin-left: 46px; margin-top: -6px; margin-bottom: 10px;
+    padding-left: 14px;
+    border-left: 2px solid var(--border);
+  }
+
+  /* Issue cards */
+  .issue-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 16px;
+    margin: 8px 0;
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .issue-sev {
+    width: 6px; border-radius: 3px;
+    flex-shrink: 0; align-self: stretch;
+  }
+  .sev-high { background: #e05a5a; }
+  .sev-med  { background: var(--stage-evt); }
+  .sev-low  { background: var(--stage-pvt); }
+
+  .issue-content { flex: 1; }
+  .issue-title {
+    font-size: 12px; font-weight: 600;
+    color: var(--text-bright); margin-bottom: 3px;
+  }
+  .issue-body { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+
+  .issue-tags {
+    display: flex; gap: 4px; margin-top: 6px; flex-wrap: wrap;
+  }
+  .issue-tag {
+    font-family: var(--font-mono); font-size: 8px;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 1px 6px; border-radius: 2px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    color: var(--text-dim);
+  }
+
+  /* Team roster pane */
+  .team-section {
+    padding: 0 0 8px;
+  }
+
+  .team-section-header {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .team-section-header:hover { background: var(--surface); }
+
+  .team-color-bar {
+    width: 3px; height: 16px; border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  .team-section-name {
+    font-family: var(--font-head);
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    flex: 1;
+  }
+
+  .team-count {
+    font-family: var(--font-mono); font-size: 9px;
+    color: var(--text-dim);
+  }
+
+  .team-chevron {
+    font-size: 9px; color: var(--text-dim);
+    transition: transform .2s;
+  }
+  .team-section.open .team-chevron { transform: rotate(180deg); }
+
+  .team-members { padding: 0 16px 4px; }
+  .team-section:not(.open) .team-members { display: none; }
+
+  .team-member {
+    display: flex; align-items: center; gap: 8px;
+    padding: 5px 4px;
+    border-radius: 4px;
+    transition: background .15s;
+    cursor: default;
+  }
+  .team-member:hover { background: var(--surface); }
+
+  .tm-avatar {
+    width: 24px; height: 24px; border-radius: 5px;
+    font-family: var(--font-head);
+    font-size: 9px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .tm-info { flex: 1; min-width: 0; }
+  .tm-name {
+    font-size: 11px; font-weight: 500;
+    color: var(--text);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .tm-rank {
+    font-family: var(--font-mono); font-size: 8px;
+    color: var(--text-dim); letter-spacing: 0.08em;
+  }
+
+  .online-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--c-ee); flex-shrink: 0;
+  }
+  .offline-dot {
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--border2); flex-shrink: 0;
+  }
+
+  /* Utilities */
+  .hidden { display: none !important; }
+
+  .scroll-anchor { height: 1px; }
+
+  @media (max-width: 900px) {
+    .sidebar { width: 220px; }
+    .team-pane { width: 200px; }
+  }
+
+  @media (max-width: 700px) {
+    .sidebar { display: none; }
+    .team-pane { display: none; }
+    .conversation-pane { padding: 16px; }
+    header { padding: 0 16px; }
+    .hero { padding: 40px 16px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a class="logo" href="#">
+    <span>DFM<span style="color:var(--accent)">·</span>INSIGHTS</span>
+    
+  </a>
+  <nav class="header-nav" aria-label="Primary navigation">
+    <a class="header-tag" href="#projects" style="text-decoration:none">Projects</a>
+    <a class="header-tag" href="#about" style="text-decoration:none">About DFM</a>
+    <a class="header-tag" href="#stages" style="text-decoration:none">Stages</a>
+    <a class="header-tag" href="#contact" style="text-decoration:none">Contact</a>
+  </nav>
+  <div class="header-status">
+    <div class="status-dot"></div>
+    10 Projects Active
+  </div>
+</header>
+
+<!-- HERO -->
+<section id="hero" class="hero" aria-label="Platform overview">
+  <div class="hero-eyebrow">Design for Manufacturability · Live Project Intelligence</div>
+  <h1>How Products Actually<br><em>Get Made</em></h1>
+  <p class="hero-sub">Follow real engineering conversations across EVT, DVT, and PVT phases — from first prototype to production-ready hardware.</p>
+  <div class="hero-pills">
+    <span class="pill evt">EVT · Engineering Verification</span>
+    <span class="pill dvt">DVT · Design Verification</span>
+    <span class="pill pvt">PVT · Production Verification</span>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="hero-stat-num">10</span>
+      <span class="hero-stat-label">Live Products</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">87</span>
+      <span class="hero-stat-label">Engineers</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">3</span>
+      <span class="hero-stat-label">Build Stages</span>
+    </div>
+    <div class="hero-stat">
+      <span class="hero-stat-num">340+</span>
+      <span class="hero-stat-label">Issues Resolved</span>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<div id="projects" class="main-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section-label">Active Projects</div>
+    <div id="product-list"></div>
+  </aside>
+
+  <!-- CONTENT -->
+  <div class="content" id="content-area">
+
+    <!-- WELCOME -->
+    <div class="welcome-screen" id="welcome-screen">
+      <div style="font-size:48px">🏭</div>
+      <h2>Select a Product</h2>
+      <p>Choose a project from the sidebar to explore the engineering conversations happening across EVT, DVT, and PVT build stages.</p>
+      <div class="arrow-hint">← Select a product to begin</div>
+    </div>
+
+    <!-- PRODUCT DETAIL (hidden initially) -->
+    <div class="product-detail hidden" id="product-detail">
+      <div class="product-detail-header">
+        <div class="pd-top">
+          <div class="pd-icon" id="pd-icon"></div>
+          <div class="pd-meta">
+            <div class="pd-category" id="pd-category"></div>
+            <div class="pd-title" id="pd-title"></div>
+            <div class="pd-desc" id="pd-desc"></div>
+            <div class="pd-badges" id="pd-badges"></div>
+          </div>
+        </div>
+        <div class="stage-tabs" id="stage-tabs">
+          <div class="stage-tab evt active" onclick="switchStage('evt')">
+            <div class="stage-dot-tab"></div>EVT
+          </div>
+          <div class="stage-tab dvt" onclick="switchStage('dvt')">
+            <div class="stage-dot-tab"></div>DVT
+          </div>
+          <div class="stage-tab pvt" onclick="switchStage('pvt')">
+            <div class="stage-dot-tab"></div>PVT
+          </div>
+        </div>
+      </div>
+      <div class="stage-content">
+        <div class="conversation-pane" id="conversation-pane"></div>
+        <div class="team-pane" id="team-pane"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ────────────────────────────────────────────────────────────
+// DATA
+// ────────────────────────────────────────────────────────────
+
+const TEAMS = {
+  pm:   { name:'Program Management',      color:'var(--c-pm)',  short:'PM'  },
+  mech: { name:'Mechanical Engineering',  color:'var(--c-mech)',short:'ME'  },
+  ee:   { name:'Electrical Engineering',  color:'var(--c-ee)',  short:'EE'  },
+  sw:   { name:'Software Engineering',    color:'var(--c-sw)',  short:'SW'  },
+  tv:   { name:'Test & Verification',     color:'var(--c-tv)',  short:'TV'  },
+  mfg:  { name:'Manufacturing Eng.',      color:'var(--c-mfg)', short:'MFG' },
+  rf:   { name:'RF / Antenna',            color:'var(--c-rf)',  short:'RF'  },
+  bat:  { name:'Battery Engineering',     color:'var(--c-bat)', short:'BAT' },
+  id:   { name:'Industrial Design',       color:'var(--c-id)',  short:'ID'  },
+};
+
+const MEMBERS = {
+  // PM / TPM
+  sarah:   { name:'Sarah Chen',       team:'pm',   rank:'PM',          initials:'SC' },
+  marcus:  { name:'Marcus Johnson',   team:'pm',   rank:'TPM',         initials:'MJ' },
+  // Mechanical
+  rachel:  { name:'Dr. Rachel Kim',   team:'mech', rank:'Lead ME',     initials:'RK' },
+  tom:     { name:'Tom Patterson',    team:'mech', rank:'Sr. ME',      initials:'TP' },
+  lisa_m:  { name:'Lisa Wong',        team:'mech', rank:'Sr. ME',      initials:'LW' },
+  alex:    { name:'Alex Rivera',      team:'mech', rank:'ME',          initials:'AR' },
+  jamie:   { name:'Jamie Lee',        team:'mech', rank:'ME',          initials:'JL' },
+  chris_p: { name:'Chris Park',       team:'mech', rank:'ME',          initials:'CP' },
+  dana:    { name:'Dana Smith',       team:'mech', rank:'ME',          initials:'DS' },
+  // Electrical
+  david:   { name:'David Osei',       team:'ee',   rank:'Lead EE',     initials:'DO' },
+  maria:   { name:'Maria Santos',     team:'ee',   rank:'Sr. EE',      initials:'MS' },
+  kevin:   { name:'Kevin Zhao',       team:'ee',   rank:'Sr. EE',      initials:'KZ' },
+  tyler:   { name:'Tyler Brown',      team:'ee',   rank:'EE',          initials:'TB' },
+  priya:   { name:'Priya Patel',      team:'ee',   rank:'EE',          initials:'PP' },
+  sam_r:   { name:'Sam Rodriguez',    team:'ee',   rank:'EE',          initials:'SR' },
+  ash:     { name:'Ash Williams',     team:'ee',   rank:'EE',          initials:'AW' },
+  // Software
+  james:   { name:"James O'Brien",    team:'sw',   rank:'Lead SW',     initials:'JO' },
+  nadia:   { name:'Nadia Hassan',     team:'sw',   rank:'Sr. SW',      initials:'NH' },
+  luke:    { name:'Luke Turner',      team:'sw',   rank:'Sr. SW',      initials:'LT' },
+  emma:    { name:'Emma Davis',       team:'sw',   rank:'SW',          initials:'ED' },
+  carlos:  { name:'Carlos Mendez',    team:'sw',   rank:'SW',          initials:'CM' },
+  zoe:     { name:'Zoe Chen',         team:'sw',   rank:'SW',          initials:'ZC' },
+  ben:     { name:'Ben Taylor',       team:'sw',   rank:'SW',          initials:'BT' },
+  // Test & Verification
+  amanda:  { name:'Dr. Amanda Foster',team:'tv',   rank:'Lead TV',     initials:'AF' },
+  ryan:    { name:'Ryan Mills',       team:'tv',   rank:'Sr. TV',      initials:'RM' },
+  sophie:  { name:'Sophie Laurent',   team:'tv',   rank:'Sr. TV',      initials:'SL' },
+  matt:    { name:'Matt Kim',         team:'tv',   rank:'TV',          initials:'MK' },
+  ines:    { name:'Ines Ferreira',    team:'tv',   rank:'TV',          initials:'IF' },
+  josh:    { name:'Josh Cohen',       team:'tv',   rank:'TV',          initials:'JC' },
+  lily:    { name:'Lily Zhang',       team:'tv',   rank:'TV',          initials:'LZ' },
+  // Manufacturing
+  frank:   { name:'Frank Nakamura',   team:'mfg',  rank:'Lead MFG',    initials:'FN' },
+  helen:   { name:'Helen Park',       team:'mfg',  rank:'Sr. MFG',     initials:'HP' },
+  diego:   { name:'Diego Cruz',       team:'mfg',  rank:'Sr. MFG',     initials:'DC' },
+  aisha:   { name:'Aisha Okonkwo',    team:'mfg',  rank:'MFG',         initials:'AO' },
+  pete:    { name:'Pete Larsson',     team:'mfg',  rank:'MFG',         initials:'PL' },
+  mia:     { name:'Mia Torres',       team:'mfg',  rank:'MFG',         initials:'MT' },
+  jack:    { name:'Jack Wu',          team:'mfg',  rank:'MFG',         initials:'JW' },
+  // RF / Antenna
+  yusuf:   { name:'Dr. Yusuf Al-Rashid',team:'rf', rank:'Lead RF',     initials:'YA' },
+  chloe:   { name:'Chloe Martin',     team:'rf',   rank:'Sr. RF',      initials:'ChM' },
+  andre:   { name:'Andre Petrov',     team:'rf',   rank:'Sr. RF',      initials:'AP' },
+  fatima:  { name:'Fatima Hassan',    team:'rf',   rank:'RF',          initials:'FH' },
+  owen:    { name:'Owen Davies',      team:'rf',   rank:'RF',          initials:'OD' },
+  nina:    { name:'Nina Patel',       team:'rf',   rank:'RF',          initials:'NP' },
+  max_c:   { name:'Max Chen',         team:'rf',   rank:'RF',          initials:'MC' },
+  // Battery
+  leila:   { name:'Dr. Leila Ahmadi', team:'bat',  rank:'Lead BAT',    initials:'LA' },
+  carlos_v:{ name:'Carlos Vega',      team:'bat',  rank:'Sr. BAT',     initials:'CV' },
+  mei:     { name:'Mei Tanaka',       team:'bat',  rank:'Sr. BAT',     initials:'MiT' },
+  sam_b:   { name:'Sam Brooks',       team:'bat',  rank:'BAT',         initials:'SaB' },
+  ava:     { name:'Ava Johnson',      team:'bat',  rank:'BAT',         initials:'AJ' },
+  raj:     { name:'Raj Sharma',       team:'bat',  rank:'BAT',         initials:'RS' },
+  ella:    { name:'Ella Murphy',      team:'bat',  rank:'BAT',         initials:'EM' },
+  // Industrial Design
+  felix:   { name:'Felix Reyes',      team:'id',   rank:'Lead ID',     initials:'FR' },
+  priya_id:{ name:'Priya Nair',       team:'id',   rank:'Sr. ID',      initials:'PN' },
+  sophie_id:{name:'Sophie Blanc',     team:'id',   rank:'Sr. ID',      initials:'SB' },
+  oliver:  { name:'Oliver Grant',     team:'id',   rank:'ID',          initials:'OG' },
+  luna:    { name:'Luna Kim',         team:'id',   rank:'ID',          initials:'LK' },
+};
+
+// ────────────────────────────────────────────────────────────
+// PRODUCTS
+// ────────────────────────────────────────────────────────────
+
+const PRODUCTS = [
+  {
+    id:'p1', icon:'🎧', name:'Aurora TWS Earbuds',
+    category:'Consumer Audio', stage:'DVT',
+    desc:'True wireless earbuds with ANC, spatial audio, and 36-hour case life.',
+    badges:['BT 5.3','ANC','IP54'],
+  },
+  {
+    id:'p2', icon:'⌚', name:'Pulse Health Band',
+    category:'Medical Wearable', stage:'PVT',
+    desc:'Continuous ECG, SpO2, and skin temperature wearable for clinical use.',
+    badges:['FDA Class II','BLE','IP68'],
+  },
+  {
+    id:'p3', icon:'🔌', name:'VoltPath EV Charger',
+    category:'EV Infrastructure', stage:'EVT',
+    desc:'Level 2 smart home EV charger with load balancing and CCS2 connectivity.',
+    badges:['240V AC','48A','Wi-Fi/LTE'],
+  },
+  {
+    id:'p4', icon:'📡', name:'Nexus Smart Hub',
+    category:'Smart Home', stage:'DVT',
+    desc:'Matter + Thread home automation hub with edge-AI voice assistant.',
+    badges:['Matter','Thread','Wi-Fi 6'],
+  },
+  {
+    id:'p5', icon:'🎮', name:'Prism Handheld Console',
+    category:'Consumer Gaming', stage:'EVT',
+    desc:'7" AMOLED handheld gaming console with x86 SoC and active cooling.',
+    badges:['x86 SoC','AMOLED','PCIe SSD'],
+  },
+  {
+    id:'p6', icon:'🏭', name:'FieldSense IoT Node',
+    category:'Industrial IoT', stage:'PVT',
+    desc:'Ruggedized wireless sensor node for industrial predictive maintenance.',
+    badges:['IP67','LoRa WAN','-40°C'],
+  },
+  {
+    id:'p7', icon:'💡', name:'Lumen Smart Pendant',
+    category:'Smart Lighting', stage:'DVT',
+    desc:'Tunable white + RGB smart pendant with UWB presence detection and Zigbee.',
+    badges:['Zigbee 3.0','UWB','230V'],
+  },
+  {
+    id:'p8', icon:'🚪', name:'GuardEye Doorbell Cam',
+    category:'Home Security', stage:'PVT',
+    desc:'4K doorbell camera with on-device ML, wide-band Wi-Fi, and solar assist.',
+    badges:['4K HDR','ML Chip','Solar'],
+  },
+  {
+    id:'p9', icon:'💻', name:'DockCore Thunderbolt Hub',
+    category:'PC Peripherals', stage:'DVT',
+    desc:'Thunderbolt 5 dock with 140W PD, dual 8K output, and 2.5GbE.',
+    badges:['TB5','140W PD','2.5GbE'],
+  },
+  {
+    id:'p10', icon:'🫀', name:'MedPatch Cardiac Monitor',
+    category:'Medical Device', stage:'EVT',
+    desc:'Disposable 14-day patch ECG with on-device arrhythmia detection.',
+    badges:['FDA 510(k)','14-day','BLE 5.3'],
+  },
+];
+
+// ────────────────────────────────────────────────────────────
+// CONVERSATIONS
+// ────────────────────────────────────────────────────────────
+
+function msg(who, time, text, attach, reactions) {
+  return { who, time, text, attach, reactions };
+}
+
+function day(label) {
+  return { type:'day', label };
+}
+
+function issue(sev, title, body, tags) {
+  return { type:'issue', sev, title, body, tags };
+}
+
+const CONVERSATIONS = {
+
+  // ─────────────────────────────── P1: Aurora TWS ───────────────────────────
+  p1: {
+    evt: [
+      day('Week 1 — EVT Build Kickoff'),
+      msg('sarah','09:04', "Good morning team. EVT-1 units just arrived from the CM — 20 sets. <strong>Goal this sprint: validate acoustic chamber, BT range, and fit geometry.</strong> Marcus, can you get the build tracker updated with today's date?"),
+      msg('marcus','09:07', "Done — ticket PRJ-001 is live. I've also set up daily standups at 09:00. Test team, please log all defect counts in Jira under 'EVT-1 Issues' component.", null, ['👍 8']),
+      msg('rachel','09:15', "Mechanical here. First issue flagged: the <strong>charging case hinge has ~0.4mm slop</strong> at the pivot. It's within initial spec but I'm worried it'll pass tolerance stack when we add the PCB bracket. Tom, can you run a worst-case stack-up on the hinge assembly?"),
+      msg('tom','09:22', "On it. Preliminary calculation shows worst case = 0.7mm slop if all dims go to ±tolerance simultaneously. That means the lid could rattle at 2–3g vibration. I'll update the CAD and resubmit a tightened tolerance on the hinge pin diameter — going from ±0.1mm to ±0.05mm.", null, ['🔧 4']),
+      {type:'issue', sev:'med', title:'CHG-HINGE-001: Case lid rattle risk', body:'Tolerance stack-up on hinge pivot shows 0.7mm worst-case slop. Pin diameter tolerance to be tightened to ±0.05mm.', tags:['mechanical','EVT-1','hinge']},
+      msg('felix','09:30', "ID perspective: if we tighten the pin tolerances the CM will push back on cost. Can we add a small detent leaf spring to provide tactile closure feel AND take up slop? I have a sketch — posting to Confluence now."),
+      msg('rachel','09:35', "Good idea Felix. Leaf spring adds 0.3g per case but eliminates the tolerance sensitivity. I'll model it today. Chris, can you get a sample cut from the spring supplier by Friday?"),
+      msg('chris_p','09:38', "Sure. I'll contact K-Spring Ltd. Lead time is 3 days for prototypes so we should have samples by Thursday EOD."),
+      day('Week 1 — Acoustic & BT Testing Begins'),
+      msg('amanda','10:00', "Test team here. We're running acoustic chamber tests now. <strong>Issue: 3 out of 20 units show 2–3dB SPL drop at 8kHz</strong> compared to the reference tuned unit. Correlates with driver placement variance. Posting raw measurement CSV to SharePoint."),
+      msg('david','10:09', "That 8kHz dip looks like a vent resonance. The primary vent is 0.8mm diameter — if the drill jig shifts even 0.15mm off-center we'll detune the Helmholtz. EE isn't in the driver chain but I'd look at the gasket seating first."),
+      msg('rachel','10:14', "Confirmed. I checked the CMM report for those 3 units — vent positions are off by 0.18–0.22mm. The drill jig needs a locating pin added. Alex, please raise this with the CM tooling team today.", null, ['✅ 6']),
+      msg('alex','10:16', "Filed CM-DR-047. They say they can add the locating pin without a full jig rebuild. Targeting fix for EVT-2."),
+      msg('yusuf','10:40', "RF team starting BT range tests. Indoor anechoic: <strong>nominal range 9.8m</strong>, spec requires 10m at -70dBm RSSI threshold. We're 0.2m short. The antenna trace is very close to the charging coil — I think we're seeing coupling."),
+      msg('maria','10:48', "Checked the PCBA layout. The Qi coil is indeed 3.5mm from the BT antenna keep-out. Original design had 5mm clearance but the coil was repositioned in the last revision to fix the center-of-gravity balance. We need to re-route."),
+      msg('yusuf','10:55', "Running a 3D field sim now. I'll have a recommended keep-out update by EOD. Worst case we need to shorten the coil slightly — losing about 4% charging efficiency.", null, ['📡 3']),
+      {type:'issue', sev:'high', title:'RF-001: BT antenna coupling to Qi coil', body:'BT range drops to 9.8m (spec 10m). Qi coil is 3.5mm from BT keep-out vs required 5mm. 3D EM sim in progress.', tags:['RF','EE','BT','EVT-1','critical']},
+      msg('leila','11:05', "Battery team: cycle testing started. Initial capacity is 58mAh per earbud, 480mAh case — matches spec. <strong>Concern: the case BMS shows a 7% self-discharge rate per week at 25°C</strong>, we need <5%. Checking if this is a firmware threshold or a physical leakage."),
+      msg('james','11:18', "BMS firmware v0.1 is using a 10mA wake-interval for case lid detection. That alone is 240mAh/day equivalent drain. Sam, change the wake interval to 60s and test again — that should bring self-discharge to ~1%."),
+      msg('sam_r','11:25', "Patching now. Will re-run self-discharge test overnight. Updated FW: v0.1.3. I'll post results tomorrow morning."),
+      msg('sarah','17:00', "Good first day everyone. Key EVT-1 open issues: RF coupling (high), hinge slop (med), vent drill accuracy (med), BMS self-discharge (med). All 4 have owners and timelines. Stand-up at 09:00 tomorrow. Log any new defects in Jira before EOD."),
+    ],
+    dvt: [
+      day('Week 8 — DVT-1 Build Review'),
+      msg('marcus','08:55', "DVT-1 build: 150 units received, all pre-screened by CM. EVT issues CHG-HINGE-001, RF-001, and the vent jig fix are all confirmed closed on this build. Today we start DVT qualification testing. Amanda's team has the test plan — let's align."),
+      msg('amanda','09:05', "<strong>DVT test plan activated.</strong> Priority matrix: (1) IP54 ingress, (2) 1.2m drop onto concrete, (3) 5000-cycle touch sensor endurance, (4) ANC perf across 6 head-form sizes. Assigning: Ryan → IP tests, Sophie → drop tests, Matt & Ines → touch endurance, Lily → ANC head-forms."),
+      msg('ryan','09:12', "IP54 result — Day 1: <strong>3 units failed dust ingress at the USB-C port gasket.</strong> Water spec passed. The gasket durometer is 60A but drawing shows 70A. CM used wrong compound. Raising CM corrective action now."),
+      msg('frank','09:20', "Manufacturing: I reviewed the BOM — the 60A gasket was substituted during a component shortage in EVT phase and never corrected in the DVT BOM. My fault for not catching the rollover. Issuing an ECN to hardcode 70A Shore as 'no substitute' material.", null, ['🔧 5']),
+      msg('helen','09:25', "DVT-2 build orders are being placed next week. I'll add a receiving inspection check for gasket compound certificate. Pete, can you set up incoming QC on the 70A batch?"),
+      msg('pete','09:28', "Set up. Using durometer gauge + CoC verification. I'll train Mia on the procedure today."),
+      day('Week 9 — Drop Testing & Thermal'),
+      msg('sophie','09:40', "Drop test results — 1.2m concrete: <strong>12 out of 30 units cracked the outer earbud shell at the driver insertion seam.</strong> The injection bond line has a stress riser. This is worse than EVT because we moved to a thinner shell (1.1mm vs 1.3mm in EVT) for cosmetic reasons."),
+      msg('felix','09:48', "That thinner wall was my call to achieve the target 4.8g weight. But 40% failure at 1.2m is not acceptable. Can we add a rib pattern to the inner wall without affecting external aesthetics?"),
+      msg('rachel','09:55', "Simulated 3 rib configurations overnight. <strong>Option C — 4 radial ribs 0.4mm tall — reduces peak stress by 31% and only adds 0.15g.</strong> Shell thickness stays at 1.1mm. Posting FEA results to Confluence now."),
+      msg('sarah','10:00', "Decision needed: do we go with Option C and tool up for DVT-2, or do we accept a weight increase back to 1.2mm? Felix?"),
+      msg('felix','10:04', "Option C, rib pattern. Weight target of 5g is acceptable — 4.8g was aspirational. Let's get to a robust product.", null, ['✅ 9']),
+      msg('rachel','10:06', "Issuing tooling change request TOOL-031. CM says 2-week lead for mold modification. DVT-2 build pushed by 2 weeks — Marcus, please update the schedule."),
+      msg('marcus','10:09', "Updated. DVT-2 now Week 13. PVT entry buffered accordingly. I'll inform stakeholders."),
+      day('Week 11 — ANC Performance & Software'),
+      msg('nadia','11:00', "ANC team update: the feedforward mic placement is generating a 200Hz low-frequency resonance in the error mic signal. This is causing the DSP to overcompensate and creating an audible 'pumping' artifact at -5dB ANC depth."),
+      msg('james','11:08', "I can see it in the error signal spectrogram. The issue is the mic port is too close to the vent — it's picking up turbulence from jaw movement. Yusuf, is there any RF constraint preventing us from moving the error mic 1.5mm toward the outer face?"),
+      msg('yusuf','11:15', "No RF constraint there. The area 1.5mm outward is clear of all antenna keep-outs. Go ahead from RF side."),
+      msg('felix','11:18', "ID concern: moving the mic 1.5mm outward breaks the dust mesh flush line. But I can redesign the outer cap to accommodate. Let me post an updated CAD by tomorrow."),
+      msg('nadia','11:20', "Alternatively, I can add an adaptive notch filter in the ANC DSP at 200Hz. Might be less risky than a hardware change at DVT stage. Ben, can you prototype the notch filter in firmware today?"),
+      msg('ben','11:24', "On it. Using a 2nd-order IIR notch, center 200Hz, Q=8. I'll bench-test this afternoon with the reference anechoic recording. If it works in HW simulation I'll push a test build."),
+      msg('ben','16:45', "Notch filter test: <strong>pumping artifact eliminated across all 6 head-form sizes.</strong> ANC depth improved by 2dB average. No degradation in high-frequency ANC performance. Recommending firmware fix over mechanical change.", null, ['🎉 12', '🔊 4']),
+      msg('sarah','17:00', "Great outcome. Marcus, document this as a firmware resolution to DVT defect ANC-002. Sophie — are all drop test samples now passing with the ribbed shell on the 3D-printed mockups?"),
+      msg('sophie','17:05', "Yes — 30/30 pass on printed mockups with Option C ribs. We need to wait for real tool samples but confidence is high."),
+    ],
+    pvt: [
+      day('Week 18 — PVT Build & Line Setup'),
+      msg('marcus','08:30', "<strong>PVT-0 build underway — 500 units.</strong> This is final validation before mass production. All DVT open items must be closed or have approved deviations. Frank, what's the line readiness status?"),
+      msg('frank','08:40', "Assembly line has 3 stations: (1) PCBA press-fit, (2) acoustic housing bond, (3) final case assembly. Cycle time target is 22s per unit. Current actual: 28s — the acoustic bond cure is the bottleneck. Investigating UV cure lamp intensity — Aisha, check lamp calibration records."),
+      msg('aisha','08:48', "Lamp logs show intensity dropped 15% from spec over last 200h of runtime. CM was not replacing lamps on schedule. Replacing all lamps now. New cure time should drop to 6s from 9s. Should hit 22s cycle time by afternoon."),
+      msg('frank','08:51', "Good catch Aisha. Diego, add 'UV lamp intensity check every 150h' to the preventive maintenance schedule immediately.", null, ['✅ 7']),
+      msg('diego','08:53', "Updated PM schedule. Also adding it to the CM SOP and having them sign off."),
+      day('Week 18 — Yield Analysis'),
+      msg('ryan','10:00', "Day 1 PVT yield report: <strong>overall pass rate 91.4%</strong> (457/500 units). Main failure modes: (A) 4.2% BT antenna solder open — tombstoning on 0201 package; (B) 2.8% acoustic SPL out of spec; (C) 1.6% ANC activation failure — FW version mismatch at EOL programming."),
+      msg('maria','10:10', "BT antenna tombstoning — this is a reflow profile issue. The 0201 antenna feed components need slower ramp on the preheat zone. I'll work with the CM process engineer on a revised profile. Kevin, can you be on-site at the CM tomorrow morning?"),
+      msg('kevin','10:13', "Yes, I'll be there 08:00. Bringing my reflow profiler and will run 5 test panels with incremental preheat adjustments."),
+      msg('james','10:20', "ANC FW mismatch — root cause found. EOL test station is using FW package v2.1.0 but production units shipped with v2.1.2. The station firmware cache wasn't refreshed after last night's build. Zoe, push a cache-flush script to all EOL stations right now."),
+      msg('zoe','10:23', "Script pushed. All 6 EOL stations confirmed refreshed with v2.1.2. Testing a batch of 10 units — all passing ANC activation. This was a process control gap not a design bug.", null, ['✅ 8', '🚀 3']),
+      msg('amanda','10:30', "SPL out of spec — Sophie and I are investigating. Preliminary: the acoustic bond gap is slightly inconsistent at the nozzle exit, affecting the front cavity volume. 0.05mm variance in bond clamp pressure creates ±1.8dB SPL deviation. Frank, can we add a clamp force sensor to the bond station?"),
+      msg('frank','10:38', "Absolutely — we have a spare torque sensor that can be adapted. Jack, fit it to bond station #2 today and we'll validate the force window during the afternoon run."),
+      msg('jack','10:42', "Done. Set force window to 14.5–15.5N. Current clamp was running 12–17N — way too loose. New window should reduce SPL variance to ±0.5dB."),
+      msg('ryan','17:00', "<strong>End of Day 2 PVT yield: 96.8%</strong> (484/500 units). BT solder defects down to 0.6% with revised reflow profile. ANC FW mismatch to zero. SPL defects down to 2.6% — still tracking. On target for 99%+ yield at mass production."),
+      msg('sarah','17:10', "Excellent progress. Leila — battery final spec sign-off?"),
+      msg('leila','17:14', "<strong>Battery team sign-off: APPROVED.</strong> PVT units show 6.1hr earbud + 30.2hr case — both above spec (6h / 30h). 500-cycle capacity retention at 82.4%, above the 80% floor. Self-discharge settled at 0.9%/week. BMS firmware v1.3.1 is production-locked."),
+      msg('sarah','17:20', "DVT issues closed. Yield trending to spec. Battery approved. <strong>Recommending PVT gate pass subject to SPL yield reaching 99% by end of week.</strong> Marcus, send gate review package to VP Hardware tonight.", null, ['🎉 15', '🚀 11', '✅ 9']),
+    ],
+  },
+
+  // ─────────────────────────────── P2: Pulse Health Band ───────────────────
+  p2: {
+    evt: [
+      day('Week 1 — EVT Kickoff: Pulse Health Band'),
+      msg('sarah','08:50', "EVT for the Pulse Health Band starts today. This is a <strong>FDA Class II device</strong> — every design decision has regulatory implications. All defects must be logged with a risk classification per ISO 14971. Marcus, is the design history file (DHF) structure in place?"),
+      msg('marcus','09:00', "DHF skeleton is live in the document management system. All teams: any design change must create a DHF entry with rationale, risk analysis, and approval chain. No exceptions.", null, ['✅ 6']),
+      msg('leila','09:10', "Battery EVT focus: we're targeting 72h runtime at continuous ECG recording. Initial capacity: 95mAh LiPo. First charge cycle shows <strong>98.2mAh — good.</strong> Monitoring swelling at 45°C (body contact worst case) since the pouch sits against the skin. Carlos, can you run the 48h accelerated temp soak today?"),
+      msg('carlos_v','09:15', "Running now at 45°C / 95% RH. I'll pull data at 12h, 24h, and 48h. Also monitoring OCV to catch any micro-shorts early."),
+      msg('rachel','09:20', "Mechanical critical issue: <strong>the strap lug insert is cracking at the weld interface after 200 flex cycles</strong> (spec: 50,000). The lug is 316L SS but the weld fillet is too small. Tom, pull the tensile data on the weld samples from the supplier."),
+      msg('tom','09:28', "Weld samples show 60% of rated UTS at the fillet — failure mode is fatigue cracking not static fracture. We need either a larger fillet radius (going from 0.3mm to 0.6mm) or change to a press-fit lug insert. Press-fit is more repeatable."),
+      msg('rachel','09:35', "Agreed — switching to press-fit insert with a 0.02mm interference fit. This also removes the weld heat-affected zone concern near the battery compartment. Filing design change DC-004.", null, ['🔧 5']),
+      msg('david','10:00', "EE: ECG signal quality. We're getting <strong>significant 50Hz powerline noise</strong> on the ECG trace — SNR is 18dB, spec requires 25dB. The instrumentation amp layout has a feedback resistor that acts as an antenna pickup. Moving it to the bottom layer should fix it."),
+      msg('kevin','10:08', "Layout revision submitted. In the meantime I've increased the notch filter to 50Hz ±2Hz with 60dB attenuation in firmware. Priya, re-run the ECG noise floor test with FW v0.4 on the current hardware."),
+      msg('priya','10:45', "FW notch filter brings SNR to 22dB — better but not at spec yet. Need the layout fix to reach 25dB. Recommend both changes for EVT-2."),
+    ],
+    dvt: [
+      day('Week 9 — DVT Qualification: Regulatory Focus'),
+      msg('marcus','09:00', "<strong>DVT gate status:</strong> 8 of 11 EVT defects closed. 3 items carry forward to DVT: ECG SNR (now addressed in HW layout), strap lug (press-fit tooled), and BLE coexistence with ambient Wi-Fi. DVT adds biocompatibility and EMC pre-compliance."),
+      msg('amanda','09:10', "Biocompatibility: ISO 10993 cytotoxicity test results in from the external lab. <strong>All materials pass except the silicone strap pigment batch.</strong> The red pigment at >0.5% concentration shows borderline cytotoxicity. Frank, can we source a different red pigment that is certified medical-grade?"),
+      msg('frank','09:18', "Already sourced a Clariant Sandoplast medical red — biocomp certified. Lead time 2 weeks. The pigment change requires a new color qualification run but no tool change. Diego, get a quote today."),
+      msg('diego','09:22', "Quote obtained — $3.2k for qualification run. Approved within component change budget. Scheduling with the strap supplier."),
+      msg('yusuf','09:30', "BLE coexistence update. DVT-1 units are showing <strong>BLE packet loss rate of 8% when phone is actively using 2.4GHz Wi-Fi</strong>. The ANT-3 patch antenna is too close to the stainless case back — it's shorting the near-field. We need a ferrite layer between antenna and case."),
+      msg('chloe','09:38', "Ran antenna sim with 0.2mm ferrite sheet (TDK NFC30). Isolation improves by 14dB. BLE sensitivity recovers to -94dBm. Packet loss should drop to <0.5%. Ordering NFC30 samples for DVT-2 build."),
+      msg('leila','10:00', "Battery 72h runtime test result on DVT units: <strong>69.4h achieved</strong> — 3.6% short of target. Root cause: ECG sampling is running at 512Hz during sleep mode; spec allows dropping to 128Hz. James, can firmware reduce sample rate during inactivity?"),
+      msg('james','10:08', "Yes — implementing adaptive sample rate now. >2min inactivity drops ECG to 128Hz, motion-trigger restores to 512Hz within 200ms. Carlos, estimate the power saving."),
+      msg('carlos_v','10:12', "128Hz vs 512Hz drops the AFE current from 210μA to 55μA. At 8h/day active, that saves ~17mAh/day. Runtime estimate: 78h. Margin above 72h target confirmed.", null, ['✅ 7', '🔋 4']),
+    ],
+    pvt: [
+      day('Week 20 — PVT & Regulatory Submission Prep'),
+      msg('marcus','09:00', "<strong>PVT build: 300 units.</strong> This is the design lock build. Any hardware change from this point requires a design change order and regulatory re-evaluation. Frank, what's yield from Day 1?"),
+      msg('frank','09:10', "Day 1 PVT yield: <strong>94.7%</strong>. Main failures: (A) 3.1% ECG electrode skin contact resistance OOT — adhesive curing temp too high; (B) 2.2% BLE TX power low — rework of PA tuning cap needed."),
+      msg('david','09:20', "PA tuning cap deviation — I found a batch issue: the CM received 10pF caps labeled as 8.2pF. The 10pF pulls the PA match off frequency, dropping TX power by 4dB. Frank, 100% incoming inspection on all passives for the remaining PVT run."),
+      msg('frank','09:25', "Incoming QC extended to passives >0402 with LCR meter verification. Mia, set up the LCR station today. Suspect parts quarantined — 180 units to be re-screened."),
+      msg('amanda','10:00', "510(k) pre-submission checklist complete. All performance data collected. SNR ≥26dB across 30 subjects. ECG classification accuracy: 97.8% vs cardiologist gold standard. <strong>Recommending regulatory submission with PVT data package.</strong>"),
+      msg('sarah','10:10', "Regulatory submission target: end of this sprint. Marcus, please confirm all DHF documents are version-locked with approval signatures by Friday. This is our final gate.", null, ['✅ 11', '🏆 6']),
+    ],
+  },
+
+  // ─────────────────────────────── P3: VoltPath EV Charger ─────────────────
+  p3: {
+    evt: [
+      day('Week 1 — EVT: VoltPath Level 2 EV Charger'),
+      msg('sarah','09:00', "VoltPath EVT kickoff. Key challenge: this is <strong>240VAC mains-connected hardware</strong> — safety is the absolute priority. We need IEC 61851 compliance and UL 2594 listing. David, is the safety design review complete?"),
+      msg('david','09:12', "Safety design review complete. Key protections: 30mA RCD, overvoltage relay, thermal cutout at 90°C, and arc-fault detection in firmware. All protection circuits must be independently testable. Maria, can you prep the protection trip test jig for EVT-1?"),
+      msg('maria','09:20', "Test jig is ready. I'll run through the protection checklist: RCD trip time (<30ms), OVP threshold (280VAC), thermal cutout, and AFCI response. Tyler, assist me on isolating the mains test bench — follow LOTO procedure 4B."),
+      msg('tyler','09:25', "LOTO in place. Mains bench isolated and verified by two engineers per our high-voltage protocol. Ready to start.", null, ['✅ 5']),
+      msg('rachel','09:30', "Mechanical: the <strong>cable management strain relief is failing</strong> the IEC 60068-2-14 thermal shock test. The overmould cracks at -10°C after 50 cycles. Using PP-based compound — need to switch to a flexible TPE. Alex, contact the overmould supplier today."),
+      msg('alex','09:38', "Contacted. They recommend Santoprene 101-55 TPE — rated -40°C to +120°C. Cost premium of ~$0.80 per cable. I'll get a sample for destructive testing."),
+      msg('james','10:00', "Software: Load balancing algorithm EVT test. <strong>Issue: the OCPP 1.6 handshake is timing out with 2 of our 5 test backend servers.</strong> The timeout is 30s but we're seeing 45s server response times in real conditions. Need to increase the timeout or implement retry with exponential backoff."),
+      msg('luke','10:08', "Implementing exponential backoff with max 3 retries and 90s cap. This is standard for OCPP in high-load environments. Also catching the EVSE offline state gracefully — currently it locks the connector, which is a user experience issue."),
+      {type:'issue', sev:'high', title:'SAFETY-001: AFCI trip test results pending', body:'Arc fault circuit interrupter must trip within 0.5 cycles per UL 2594. Test results due EOD. Failure here blocks EVT-1 close.', tags:['safety','EE','UL','EVT-1','critical']},
+      msg('maria','17:00', "AFCI test results: <strong>PASS</strong> — trip time 8.3ms average (spec <8.3ms per half-cycle at 60Hz). All 10 test units pass. RCD trip at 28ms average (spec <30ms). <strong>SAFETY-001 CLOSED.</strong>", null, ['🎉 10', '✅ 8']),
+    ],
+    dvt: [
+      day('Week 10 — DVT: Thermal & EMC'),
+      msg('marcus','09:00', "DVT focus areas: full thermal validation at 48A continuous, EMC pre-compliance (FCC Part 15B + CISPR 32), and OCPP 2.0 upgrade testing. Kevin and Andre — you're leading the EMC campaign."),
+      msg('kevin','09:10', "EMC pre-scan results back from the 3rd party lab. <strong>Failing FCC Part 15B Class B at 150MHz and 300MHz.</strong> The DC-DC converter switching frequency and its 2nd harmonic are the culprits. The EMI filter stage needs a common-mode choke added."),
+      msg('andre','09:18', "RF simulation confirms — the cable is acting as a radiating monopole at 150MHz. Adding a ferrite clamp (TDK ZCAT3035-1330) on the power cable reduces emissions by 22dB at the problem frequencies. Cost: $0.45 per unit."),
+      msg('david','09:25', "Also adding a feed-through capacitor on the control pilot line — that's a secondary emission path we missed. ECN-067 filed. Helen, get these components on the DVT-2 BOM."),
+      msg('frank','10:00', "Thermal test results at 48A / 50°C ambient: <strong>EVSE module peak temp 78°C</strong> (limit 85°C). Relay contacts at 82°C — very close to the 85°C limit. Need better thermal conduction from relay to heatsink. Diego, check contact pad thermal compound."),
+      msg('diego','10:08', "Thermal pad under relay is 0.5mm — too thin for this power density. Switching to a 1mm Bergquist GP3000 pad. Thermal resistance drops from 2.1 to 0.8°C/W. Relay junction temp should come down to 71°C.", null, ['🌡️ 4']),
+    ],
+    pvt: [
+      day('Week 19 — PVT: UL Listing & Production'),
+      msg('marcus','09:00', "PVT build: 200 units for UL witness testing. Frank, production line status?"),
+      msg('frank','09:10', "Line qualified. <strong>Day 1 yield 95.2%.</strong> Main failure: GFCI calibration drift on 8 units — the trip current is set at the PCB trimmer and there's operator variation. Aisha, can we replace the trimmer with a laser-trimmed resistor in the production run?"),
+      msg('aisha','09:18', "Laser-trimmed 1% resistor eliminates the adjustment step entirely. One-time NRE for the trimming service is $2k. ROI positive at 1000+ units. Recommending approval."),
+      msg('amanda','10:00', "UL witness test starts Monday. All 200 units have passed our internal pre-screen. I need the full electrical safety test report, the EMC re-scan certificate, and the temperature rise test report — all must be in the UL submission package by Friday. Ryan, where are we on those three?"),
+      msg('ryan','10:08', "<strong>Electrical safety: COMPLETE — all 200 units pass.</strong> EMC re-scan: complete with ferrite fix — all pass FCC Part 15B. Temperature rise: running now, results Thursday. We're on track.", null, ['✅ 9', '🎉 5']),
+    ],
+  },
+
+  // ─────────────────────────────── P4: Nexus Smart Hub ─────────────────────
+  p4: {
+    evt: [
+      day('Week 1 — EVT: Nexus Smart Hub'),
+      msg('sarah','09:00', "Smart Hub EVT-1 underway. This product supports <strong>Matter, Thread, Wi-Fi 6, Zigbee 3.0, and Z-Wave</strong> — the antenna system is the most complex we've built. Yusuf, what's your top concern?"),
+      msg('yusuf','09:10', "We have 5 radios in a 120×80×25mm enclosure. Coexistence is the main challenge. BT/BLE shares 2.4GHz with Zigbee and Wi-Fi — we need a coexistence manager. Z-Wave at 868MHz and Thread also overlap with Matter. I'm running a full coexistence matrix today."),
+      msg('chloe','09:18', "Initial scan: Wi-Fi 6 OFDMA reduces Wi-Fi aggression on BT/Zigbee significantly. Thread uses 2.4GHz but 6LoWPAN packet sizes are small — BT and Thread coexist reasonably. <strong>Worst case: simultaneous Zigbee broadcast + BT audio streaming — 22% BT packet loss.</strong> We need an arbiter chip."),
+      msg('yusuf','09:25', "Recommending the Qorvo QPG7015M coexistence arbiter. It time-slots BT, Zigbee and Thread with the Wi-Fi MAC. David, is there PCB space for a 5mm × 5mm QFN near the radio cluster?"),
+      msg('maria','09:32', "Checking layout — yes, space available between the Thread module and the Wi-Fi RF front-end. I'll add it to the next layout revision. Kevin, pull the QPG7015M eval kit schematic as a reference."),
+      msg('james','10:00', "Software: Matter commissioning test. <strong>QR code pairing works but BLE PAKE authentication fails on iOS 17.4 devices.</strong> The Discriminator value in the commissioning dataset isn't matching. Emma, check the onboarding_passcode struct in our Matter SDK version."),
+      msg('emma','10:10', "Found it — we're using Matter SDK 1.0.0.2 and the Discriminator encoding changed in 1.1.0.0. Upgrading now. Emma will have a test build within 2 hours."),
+    ],
+    dvt: [
+      day('Week 9 — DVT: Coexistence & Thermal'),
+      msg('yusuf','09:00', "Coexistence retest with QPG7015M arbiter on DVT-1 units. <strong>BT packet loss during Zigbee broadcast: 0.8%</strong> (was 22% in EVT). Wi-Fi throughput unaffected. Thread mesh formation time <2s. Coexistence issue resolved."),
+      msg('amanda','09:10', "Thermal DVT: hub at 80% radio utilization + 100% CPU (edge AI active). Case temperature: <strong>52°C at ambient 35°C.</strong> The EU ErP directive requires idle power <0.5W — we're at 0.8W. James, what are the idle power contributors?"),
+      msg('james','09:18', "CPU governor is stuck at max-frequency during idle — kernel config issue. Fixing power governor to use 'schedutil' policy. Thread radio polls too aggressively. Reducing Thread poll rate from 500ms to 2000ms. Estimate: idle power to drop to ~0.35W."),
+      msg('luke','09:25', "Also the Wi-Fi module is in 'awake' mode between AP beacons. Enabling U-APSD (WMM Power Save) should reduce Wi-Fi idle from 180mW to 40mW."),
+      msg('nadia','10:00', "Edge AI voice assistant latency: <strong>wake-word detection 340ms, spec is <300ms.</strong> The neural net is running on the host CPU — we need to move it to the NPU co-processor. Carlos, how's the NPU port going?"),
+      msg('carlos','10:08', "NPU quantization done — model is INT8 on the NPU. Wake-word detection latency: <strong>185ms.</strong> Ahead of spec. Accuracy delta: -0.3% WER — acceptable.", null, ['🚀 8', '🤖 5']),
+    ],
+    pvt: [
+      day('Week 17 — PVT: Final Qualification'),
+      msg('frank','09:00', "<strong>PVT yield Day 1: 93.1%.</strong> Failures: Wi-Fi calibration (4.2%), Z-Wave frequency tolerance (2.7%). Both are EOL station calibration issues."),
+      msg('kevin','09:10', "Wi-Fi cal: the EOL fixture has a poorly shielded RF cable causing insertion loss variation. Replacing SMA cables with phase-stable versions. Re-run shows yield improves to 99.1% for Wi-Fi cal."),
+      msg('andre','09:18', "Z-Wave: the crystal load capacitance was spec'd for the module at room temp but our EOL test is at 20°C ambient vs the module's room temp cal at 25°C. Adjusting EOL test temperature or adding a 5°C offset to the frequency threshold — the latter is simpler.", null, ['✅ 6']),
+      msg('sarah','17:00', "<strong>PVT Day 3 yield: 98.4%.</strong> All radio systems calibrated and coexistence confirmed. Edge AI meets spec. ErP idle power at 0.32W. Recommending PVT gate approval. Excellent work across all teams.", null, ['🎉 13']),
+    ],
+  },
+
+  // ─────────────────────────────── P5: Prism Handheld ─────────────────────
+  p5: {
+    evt: [
+      day('Week 1 — EVT: Prism Handheld Gaming Console'),
+      msg('sarah','09:00', "Prism EVT-1 underway. 50 units from the CM. This is our most thermally aggressive product — x86 SoC with configurable 15W/28W TDP in a handheld. <strong>Thermal and battery life are the two existential risks.</strong>"),
+      msg('rachel','09:10', "Mechanical: the vapor chamber is 0.4mm thick and spans the full SoC die to the chassis vent. Tom ran simulations — at 28W TDP, junction temp is 94°C (limit 100°C). We have 6°C margin. But real-world airflow through the grip vents will vary. Alex, can you build the airflow test rig today?"),
+      msg('leila','09:20', "Battery: 5000mAh 2-cell pack. At 28W gaming load, runtime: <strong>1h 52min — spec is 2h.</strong> At 15W balanced mode: 3h 10min — passes. The gap at 28W is 8 minutes. Can we squeeze another 400mAh into the same envelope?"),
+      msg('carlos_v','09:28', "The cells are at 97% volumetric fill. No room for higher capacity without a thicker pack. Instead: optimize the display backlight — at max brightness it draws 2.8W. Adding an ambient light sensor to auto-dim could save 0.8W average = +22min runtime. Raj, model this."),
+      msg('raj','09:35', "Modeling done: auto-dimming saves 18–25min depending on usage scenario. Combined with CPU power-state optimizations, 28W-mode runtime would be 2h 03min — just over spec."),
+      msg('james','10:00', "SW: x86 kernel thermal daemon. <strong>The SoC is throttling aggressively even before junction temp hits 80°C</strong> — the DPTF policy is too conservative. Emma and Carlos, tune the DPTF temperature trip points based on the actual thermal model data from Rachel's team."),
+    ],
+    dvt: [
+      day('Week 10 — DVT: Drop, Display & Battery'),
+      msg('sophie','09:00', "1.5m drop test results: <strong>FAIL on 4/20 units — screen cracks.</strong> The AMOLED panel bonding adhesive is delaminating at the top corners under impact. The front glass is 0.7mm Gorilla Glass but the CNC chamfer creates a stress concentration point."),
+      msg('felix','09:10', "Industrial design: we can add a 0.5mm TPU overmould bead around the screen perimeter — it won't affect aesthetics much and provides an impact buffer. The chamfer radius needs to increase from 0.3mm to 0.5mm as well."),
+      msg('rachel','09:15', "Agreed. Also increasing the adhesive bond width from 1.2mm to 1.8mm. FEA shows impact stress at corners drops 38%. Filing tooling change TOOL-044."),
+      msg('leila','10:00', "Battery DVT: 300-cycle test complete. Capacity retention: <strong>88% at cycle 300</strong> — spec is 85% minimum. Thermal performance of cells at 28W: max cell temp 42°C — within safe window. Pack geometry is final."),
+      msg('nadia','11:00', "Game performance DVT: running 3DMark Wild Life Extreme. GPU utilization hits 98%, CPU at 85%, thermal daemon responding correctly. <strong>FPS target 60fps at medium settings: achieved 61fps average.</strong> Frame time variance is the remaining issue — P99 frame time is 28ms (target <25ms). Ben, profiling this now.", null, ['🎮 7']),
+    ],
+    pvt: [
+      day('Week 20 — PVT: Line Setup & Thermal Validation'),
+      msg('frank','09:00', "<strong>PVT-0 yield Day 1: 91.8%.</strong> Key failures: (A) 5.2% display dead pixels at power-on — ATE fixture probe contamination; (B) 3.0% battery capacity OOT — cell incoming grade mix-up."),
+      msg('frank','09:08', "Display probe contamination: the ATE fixture pins are picking up flux residue from the PCBA soldering step. Aisha, add an IPA wipe station between PCBA and display test. Pete, check probe pin condition on all 4 ATE fixtures."),
+      msg('leila','09:15', "Cell grade mix-up: we received a mix of Grade A and Grade B cells. Grade B capacity is 4,820mAh vs specified 5,000mAh. Raising NCR with cell supplier. Quarantining all Grade B stock. Jack, sort all cells by capacity test before any further build."),
+      msg('ryan','17:00', "<strong>Day 3 PVT yield: 97.6%.</strong> Display test yield at 99.4% after probe cleaning. Battery OOT eliminated after cell sorting. Thermal validation at 28W TDP: junction temp 91°C — 9°C margin to limit. <strong>Recommended for PVT gate pass.</strong>", null, ['🎉 10', '🎮 6']),
+    ],
+  },
+
+  // ──────────────── REMAINING PRODUCTS — RICH SUMMARIES ────────────────────
+
+  p6: {
+    evt: [
+      day('Week 1 — EVT: FieldSense Industrial IoT Node'),
+      msg('sarah','09:00', "FieldSense EVT kickoff. IP67 and -40°C to +85°C operating range are our design constraints. LoRa WAN must reach 5km urban and 15km line-of-sight. Rachel, where are we on the enclosure sealing?"),
+      msg('rachel','09:12', "The O-ring groove is designed for a Trelleborg EPDM 70 Shore A ring. But our first IP67 water ingress test <strong>failed at the cable gland</strong> — the polyamide gland body is cracking at -30°C. Need to switch to a glass-filled PA or metal gland body."),
+      msg('yusuf','09:20', "LoRa EVT range test: urban 868MHz, reached 4.2km (spec 5km). The PCB antenna is detuned — the ground plane edge is 8mm from the antenna element, should be at least 15mm. We're seeing a 2.5dB EIRP loss. Andre, can you mod the ground pour on the EVT boards?"),
+      msg('andre','09:28', "I can cut the ground pour on 10 boards by end of day. That should recover 2–2.5dB. Range should then hit 5.2–5.5km. For EVT-2 we'll fix the layout properly."),
+      msg('leila','10:00', "Battery: 19Ah primary lithium-thionyl chloride cells (non-rechargeable). Target 10-year life at 1 message per minute. <strong>Power budget calc: 120μA average — we're at 148μA.</strong> The MCU is not entering deep sleep correctly. Sam, check the sleep state firmware."),
+      msg('sam_b','10:10', "Found it — a peripheral clock gate isn't being asserted before sleep. Fixing now. With the clock gated, MCU current drops from 42μA to 2μA in deep sleep. Average current should hit ~115μA. <strong>10-year life confirmed.</strong>", null, ['✅ 7', '🔋 5']),
+    ],
+    dvt: [
+      day('Week 9 — DVT: Environmental Qualification'),
+      msg('amanda','09:00', "DVT environmental testing: thermal cycling -40°C to +85°C per IEC 60068-2-14. <strong>PASS on all 30 units after 100 cycles.</strong> Vibration test per IEC 60068-2-6: PASS. IP67 immersion (1m / 30min): PASS on 29/30 — one unit failed at the new cable gland interface. Gland batch issue, not a design issue."),
+      msg('frank','09:10', "Cable gland supplier confirmed a tooling issue on batch 2024-C. Replacement batch 2024-D incoming. All DVT-2 units will use 2024-D. Manufacturing hold issued on 2024-C inventory."),
+      msg('james','09:20', "LoRa WAN DVT: commissioned 50 nodes in a real industrial environment. <strong>Network join rate: 98.4%.</strong> ADR (Adaptive Data Rate) working correctly. OTA firmware update over LoRa: average 14 minutes for 64kB payload — acceptable for monthly update cadence."),
+    ],
+    pvt: [
+      day('Week 18 — PVT: Final Production Validation'),
+      msg('frank','09:00', "<strong>PVT yield: 97.2%</strong> across 200 units. Remaining failures: 2.8% LoRa frequency tolerance — addressed by EOL cal procedure. All IP67 tests passing with 2024-D cable glands. Battery voltage check at EOL: 100% pass. Recommending PVT gate."),
+      msg('sarah','09:10', "Approved. <strong>FieldSense IoT Node cleared for mass production.</strong> All regulatory certs (CE, FCC, IC) submitted with PVT data package.", null, ['🎉 9', '✅ 7']),
+    ],
+  },
+
+  p7: {
+    evt: [
+      day('Week 1 — EVT: Lumen Smart Pendant Light'),
+      msg('sarah','09:00', "Smart Pendant EVT. 230VAC mains product with Zigbee 3.0 and UWB presence detection. Key risks: flicker compliance (IEEE 1789), EMC, and thermal management of the LED array. David, what does first light look like?"),
+      msg('david','09:10', "<strong>First light achieved!</strong> LEDs fire correctly, tunable white 2700K–6500K working. <strong>Concern: flicker index measured at 0.18 at 50Hz mains frequency</strong> — IEEE 1789 requires <0.1 for no observable effect. The LED driver is a basic buck converter without active power factor correction at the 100Hz ripple."),
+      msg('kevin','09:18', "Adding a 100Hz ripple rejection stage — a second-stage LC filter and increasing the driver switching frequency to 200kHz. This moves the visible ripple component below the threshold. Sam, prototype the filter circuit on the eval board today."),
+      msg('yusuf','09:25', "UWB presence: EVT range test shows 6m detection in open space (spec 8m). The UWB antenna is embedded in the canopy plate — the metal canopy is blocking 40% of UWB signal. Need a cutout or a non-conductive window."),
+      msg('felix','09:32', "ID: I can add a polycarbonate window in the canopy at the UWB antenna location. Invisible from below but maintains signal path. No aesthetic compromise. Posting CAD update."),
+    ],
+    dvt: [
+      day('Week 9 — DVT Qualification'),
+      msg('amanda','09:00', "Flicker re-test with updated driver: <strong>Flicker Index 0.042 at 50Hz</strong> — passes IEEE 1789 with good margin. Colour rendering: CRI 95 at 3000K, CRI 93 at 6500K — both exceed spec of CRI >90. Lumen output: 1180lm at 12W (98.3lm/W). ErP compliant."),
+      msg('yusuf','09:10', "UWB with PC window: detection range <strong>8.4m</strong> — exceeds spec. False positive rate: 2.1% (spec <5%). Presence detection latency: 120ms. ZigBee range: 28m in open air — well above 15m spec."),
+      msg('leila','09:20', "No battery in this product! But I've been helping with the UPS buffer cap design for brownout protection. The 1000μF bulk cap provides 50ms hold-up during mains dips — sufficient for Zigbee graceful disconnect.", null, ['💡 4']),
+    ],
+    pvt: [
+      day('Week 16 — PVT: CE Marking & Production'),
+      msg('frank','09:00', "<strong>PVT yield: 98.1%</strong> across 300 units. Failures: 1.9% LED driver output voltage OOT due to inductor tolerance. Specifying tighter tolerance inductors (5% → 1%) for production. CE marking pre-scan: PASS. LVD and EMC directives met."),
+      msg('sarah','09:10', "Excellent. Lumen Smart Pendant approved for production. Final CoC package submitted. Well done everyone.", null, ['🎉 8']),
+    ],
+  },
+
+  p8: {
+    evt: [
+      day('Week 1 — EVT: GuardEye Doorbell Camera'),
+      msg('sarah','09:00', "GuardEye EVT underway. 4K camera with on-device ML (person/package/vehicle detection), dual-band Wi-Fi, solar assist charging, and IP65. Main concerns: ML inference latency and solar charging performance in northern latitudes."),
+      msg('james','09:10', "ML team: person detection latency on the NPU: <strong>85ms per frame</strong> (spec <100ms). False positive rate: 3.2% (spec <5%). Model is MobileNetV3 INT8 quantized. Happy with EVT performance — need to validate in real outdoor conditions with varied lighting."),
+      msg('leila','09:18', "Solar EVT: 2W mono-Si panel, 450mAh LiPo buffer. In Berlin winter conditions (1.8 kWh/m²/day), solar generates ~0.6Wh/day. Device consumes ~1.2Wh/day at typical door activity. <strong>Solar offsets 50% of consumption — 100% USB top-up still needed monthly in winter.</strong> Marketing has been briefed."),
+      msg('yusuf','09:25', "Wi-Fi EVT: 2.4GHz range adequate at 40m. 5GHz more selective — 18m max with obstructed wall. The external Wi-Fi antenna is well-positioned. BT for pairing works at 3m nominal range. No coexistence issues detected yet."),
+    ],
+    dvt: [
+      day('Week 9 — DVT: IP65, Drop & ML Performance'),
+      msg('ryan','09:00', "IP65 hose-test: <strong>all 40 units pass</strong> water ingress. The nozzle seal over the camera lens is the trickiest feature — Tom's gasket design held up. Good news."),
+      msg('tom','09:08', "Thermal DVT: device in direct sun at 50°C ambient. SoC temp: 78°C (limit 85°C). The white front fascia helps — reflective. Camera module: 52°C. IR cut filter switching correctly with light level. No thermal issues flagged."),
+      msg('nadia','09:15', "ML accuracy DVT with 500-image real-world validation set: person detection 96.2% AP, vehicle 94.8% AP, package 91.3% AP. <strong>Night-time IR detection AP drops to 88% — below spec 90%.</strong> Retraining model with 2000 IR-domain images. Luke, schedule GPU cluster time."),
+      msg('luke','09:20', "GPU cluster booked for this weekend. Model retrain ETA: Tuesday. Expect 2–3% AP improvement in IR domain.", null, ['🤖 6']),
+    ],
+    pvt: [
+      day('Week 18 — PVT: Production Yield'),
+      msg('frank','09:00', "<strong>PVT Day 1 yield: 94.8%</strong> (284/300 units). Failures: 3.4% camera module IR auto-focus failure — CMO supplier batch issue; 1.8% Wi-Fi TX power low — same PA tuning issue as Nexus Hub, already have the fix."),
+      msg('sarah','09:10', "Camera supplier batch issue flagged to procurement. Defective units returned. New batch incoming with CoC. PA tuning fix already validated from Nexus Hub program — direct port to GuardEye. <strong>Expecting Day 3 yield >98%.</strong>", null, ['✅ 7', '📷 4']),
+    ],
+  },
+
+  p9: {
+    evt: [
+      day('Week 1 — EVT: DockCore Thunderbolt 5 Hub'),
+      msg('sarah','09:00', "DockCore EVT. TB5 is our first product on the 120Gbps standard. The signal integrity challenge is significant — 3 PCIe Gen 5 lanes at 32GT/s each. David, SI simulation status?"),
+      msg('david','09:10', "SI simulations: <strong>pre-layout eye diagrams open at 24dB margin.</strong> With the routed layout, estimated margin drops to 18dB — still above the 15dB TB5 requirement. However the TB5 controller and USB4 gen4 re-timer are very close and I'm seeing trace coupling. Kevin, please add ground shielding between those two ICs."),
+      msg('kevin','09:18', "Guard vias and ground fills added. Re-simulating now — margin recovers to 22dB. <strong>Differential pair length matching within 5mil on all critical pairs.</strong>"),
+      msg('leila','09:25', "Power delivery: 140W PD3.1. The PD controller and MOSFET switch combination is dissipating 3.4W at 140W output — surface temp on top case reaches 62°C. Not a safety issue but it'll be noticeable to touch. Rachel, is there room for a thermal pad to the bottom chassis?"),
+      msg('rachel','09:32', "There's 8mm of vertical clearance below the PD MOSFET. A 1mm Bergquist gap pad to the bottom aluminum case will halve the thermal resistance. Case surface temp will drop to ~48°C — still warm but acceptable."),
+    ],
+    dvt: [
+      day('Week 9 — DVT: TB5 Certification & Compatibility'),
+      msg('amanda','09:00', "TB5 compatibility matrix: tested with 47 host devices. <strong>PASS rate: 93.6%</strong>. Failures: 3 legacy TB3 MacBooks see negotiation timeout; 1 Dell XPS 15 shows intermittent 5K display flicker at 60Hz."),
+      msg('james','09:10', "TB3 timeout: our firmware is sending USB4 Gen3 capabilities before the TB3 fallback negotiation completes. Adding a 500ms delay before capability advertisement. Emma, implement and test with the failing MacBook models."),
+      msg('emma','09:15', "Fix implemented in FW v1.4. Testing on MacBook Pro 2019 (TB3): negotiation successful in 2.1s. <strong>Issue resolved.</strong>"),
+      msg('kevin','09:20', "Dell XPS flicker: DPLL locking issue at 5K/60Hz. Changing DPLL startup sequence in the DP1.4 IP. Zoe, flash FW v1.5 to the Dell test unit.", null, ['✅ 5']),
+    ],
+    pvt: [
+      day('Week 17 — PVT: Production & Intel TB5 Logo'),
+      msg('frank','09:00', "<strong>PVT yield: 96.4%.</strong> TB5 EOL test station validates all 47 compatibility profiles automatically. Failures: 3.6% HDMI 2.1 cable equalization — EQ coefficients need tuning for 2m cables. Aisha, adjust EQ pre-set in the FW config table."),
+      msg('sarah','09:10', "Intel TB5 Logo testing: all test vectors passing. Certificate issued. DockCore cleared for production and TB5 logo use. Outstanding work from EE and SW teams on SI and firmware.", null, ['🎉 12', '✅ 9']),
+    ],
+  },
+
+  p10: {
+    evt: [
+      day('Week 1 — EVT: MedPatch Cardiac Monitor'),
+      msg('sarah','09:00', "MedPatch EVT. This is a <strong>510(k) FDA submission device</strong> — disposable 14-day ECG patch. Quality system requirements are stringent. Every engineering decision is a regulatory decision. Design freeze target: Week 16."),
+      msg('david','09:10', "ECG front-end EVT: CMRR of the instrumentation amp: <strong>92dB at 50/60Hz</strong> — spec requires 90dB minimum. Good start. Motion artifact rejection is the harder problem — we're seeing 200–500μV artifacts from arm movement. The electrode impedance mismatch during motion is the root cause."),
+      msg('rachel','09:18', "Mechanical/adhesive: the patch adhesive is 3M 1522H medical hydrocolloid. Initial skin adhesion excellent. However <strong>water resistance test (shower simulation: 10 min warm water)</strong> shows adhesive edge lifting on 4/20 test patches. The perimeter seal needs a thicker backing film."),
+      msg('felix','09:25', "ID: the patch shape is designed for the sub-clavicular placement per AHA recommendation. The peel tab is too stiff for elderly patients — 3N pull force to initiate. Reducing tab stiffness by 40% through a different backing laminate. Usability study planned for DVT."),
+      msg('leila','09:32', "Battery: 155mAh primary lithium manganese dioxide coin cell (CR2430). <strong>14-day continuous ECG at 256Hz, BLE beacons every 5min:</strong> calculated drain 10.8μA average. CR2430 capacity: 270mAh. Life = 1040h = 43 days — 3× over the 14-day requirement. Good margin for temperature derating."),
+    ],
+    dvt: [
+      day('Week 9 — DVT: Clinical Performance & Biocomp'),
+      msg('amanda','09:00', "Clinical performance DVT: 30-patient study at the partner hospital. ECG quality assessment by 3 cardiologists. <strong>Mean signal quality score: 4.3/5.0.</strong> Motion artifact remaining in 18% of recordings — mainly during vigorous activity. We need the adaptive filtering from James's team."),
+      msg('james','09:10', "Adaptive motion artifact rejection (AMAR) algorithm: using 3-axis accelerometer data to estimate and subtract motion-correlated noise from ECG. Ben and Zoe have been training this on the clinical dataset. Ben, post the latest benchmark."),
+      msg('ben','09:18', "AMAR v2.3 benchmark: motion artifact reduction 68% during walking, 74% during stairs, 81% during cycling. Signal quality score with AMAR: <strong>4.7/5.0.</strong> Pushing this FW to all DVT units now."),
+      msg('maria','09:25', "Biocompatibility: all materials cleared for ISO 10993. The silver chloride electrode passed 96h cytotoxicity — pass. No sensitization signals. Skin irritation patch test on 20 volunteers: no adverse reactions at 14 days. <strong>Biocomp cleared.</strong>", null, ['✅ 8', '❤️ 6']),
+    ],
+    pvt: [
+      day('Week 18 — PVT: 510(k) Submission Build'),
+      msg('frank','09:00', "<strong>PVT build 200 units — 510(k) submission lot.</strong> Yield Day 1: 96.8%. Failures: 3.2% electrode impedance OOT — silver chloride deposition thickness variation at the CM electrode vendor. Requesting incoming QC SPC on electrode resistance."),
+      msg('amanda','09:10', "510(k) performance data package complete: 30 patients × 14 days = 420 patient-days. Arrhythmia detection sensitivity: 97.4%, specificity: 99.1%. Algorithm performance validated against Holter gold standard. <strong>Submitting 510(k) package to FDA this sprint.</strong>"),
+      msg('sarah','09:20', "This has been a textbook DFM program for a medical device. Clean design history file, all risk mitigations documented, ISO 13485 QMS maintained throughout. Congratulations to the entire team. Awaiting FDA response in ~90 days.", null, ['🎉 18', '❤️ 12', '✅ 10']),
+    ],
+  },
+
+};
+
+// ────────────────────────────────────────────────────────────
+// TEAM ROSTER PER PRODUCT
+// ────────────────────────────────────────────────────────────
+
+const PRODUCT_TEAMS = {
+  p1:  ['sarah','marcus','rachel','tom','lisa_m','alex','jamie','chris_p','dana','david','maria','kevin','tyler','priya','sam_r','ash','james','nadia','luke','emma','carlos','zoe','ben','amanda','ryan','sophie','matt','ines','josh','lily','frank','helen','diego','aisha','pete','mia','jack','yusuf','chloe','andre','fatima','owen','nina','max_c','leila','carlos_v','mei','sam_b','ava','raj','ella','felix','priya_id','sophie_id','oliver','luna'],
+  p2:  ['sarah','marcus','rachel','tom','lisa_m','alex','chris_p','david','maria','kevin','priya','james','nadia','luke','emma','ben','amanda','ryan','sophie','matt','ines','frank','helen','diego','mia','leila','carlos_v','mei','sam_b','raj','ella'],
+  p3:  ['sarah','marcus','rachel','alex','jamie','david','maria','kevin','tyler','sam_r','james','luke','emma','carlos','amanda','ryan','matt','ines','frank','helen','diego','pete','mia','jack'],
+  p4:  ['sarah','marcus','rachel','tom','david','maria','kevin','james','nadia','luke','emma','carlos','zoe','ben','amanda','ryan','sophie','frank','helen','pete','yusuf','chloe','andre','fatima','owen','nina','max_c'],
+  p5:  ['sarah','marcus','rachel','tom','lisa_m','alex','chris_p','david','maria','james','nadia','emma','carlos','ben','amanda','ryan','sophie','matt','frank','helen','diego','leila','carlos_v','mei','sam_b','ava','raj','felix','priya_id'],
+  p6:  ['sarah','marcus','rachel','alex','david','maria','james','luke','emma','amanda','ryan','matt','frank','helen','diego','aisha','pete','yusuf','chloe','andre','leila','sam_b','ava'],
+  p7:  ['sarah','marcus','rachel','tom','felix','david','kevin','tyler','james','nadia','luke','amanda','ryan','matt','frank','helen','mia','yusuf','chloe','leila','carlos_v'],
+  p8:  ['sarah','marcus','rachel','tom','david','kevin','james','nadia','luke','emma','ben','amanda','ryan','matt','frank','helen','aisha','yusuf','leila','sam_b','felix'],
+  p9:  ['sarah','marcus','david','maria','kevin','james','nadia','emma','zoe','amanda','ryan','frank','helen','aisha','leila'],
+  p10: ['sarah','marcus','rachel','tom','david','maria','james','ben','zoe','emma','amanda','ryan','sophie','matt','frank','helen','mia','leila','carlos_v','felix','priya_id'],
+};
+
+// ────────────────────────────────────────────────────────────
+// STATE
+// ────────────────────────────────────────────────────────────
+
+let currentProduct = null;
+let currentStage   = 'evt';
+
+// ────────────────────────────────────────────────────────────
+// RENDER HELPERS
+// ────────────────────────────────────────────────────────────
+
+function teamColor(teamKey) {
+  const map = {
+    pm:'var(--c-pm)', mech:'var(--c-mech)', ee:'var(--c-ee)',
+    sw:'var(--c-sw)', tv:'var(--c-tv)', mfg:'var(--c-mfg)',
+    rf:'var(--c-rf)', bat:'var(--c-bat)', id:'var(--c-id)',
+  };
+  return map[teamKey] || 'var(--text-dim)';
+}
+
+function renderMessage(item) {
+  const m   = MEMBERS[item.who];
+  if (!m) return '';
+  const tc  = teamColor(m.team);
+  const bg  = `${tc.replace(')', ',0.14)').replace('var(','')} `;
+
+  let reactionsHTML = '';
+  if (item.reactions) {
+    reactionsHTML = `<div class="msg-reaction">${item.reactions.map(r=>`<span class="reaction">${r.replace(/(\d+)$/,'<span class="reaction-count">$1</span>')}</span>`).join('')}</div>`;
+  }
+
+  let attachHTML = '';
+  if (item.attach) {
+    attachHTML = `<div class="msg-attachment" style="border-left-color:${tc}">
+      <div class="attach-title">${item.attach.title}</div>
+      <div class="attach-body">${item.attach.body}</div>
+    </div>`;
+  }
+
+  return `<div class="message">
+    <div class="msg-avatar" style="background:${tc}22;border:1px solid ${tc}44;color:${tc}" data-role-short="${TEAMS[m.team].short}">
+      ${m.initials}
+    </div>
+    <div class="msg-body">
+      <div class="msg-header">
+        <span class="msg-name">${m.name}</span>
+        <span class="msg-role-badge" style="border-color:${tc}55;color:${tc}">${m.rank}</span>
+        <span class="msg-time">${item.time}</span>
+      </div>
+      <div class="msg-text">${item.text}</div>
+      ${attachHTML}
+      ${reactionsHTML}
+    </div>
+  </div>`;
+}
+
+function renderIssue(item) {
+  return `<div class="issue-card">
+    <div class="issue-sev sev-${item.sev}"></div>
+    <div class="issue-content">
+      <div class="issue-title">${item.title}</div>
+      <div class="issue-body">${item.body}</div>
+      <div class="issue-tags">${item.tags.map(t=>`<span class="issue-tag">${t}</span>`).join('')}</div>
+    </div>
+  </div>`;
+}
+
+function renderDay(item) {
+  return `<div class="thread-day-divider">
+    <div class="thread-day-line"></div>
+    <div class="thread-day-label">${item.label}</div>
+    <div class="thread-day-line"></div>
+  </div>`;
+}
+
+const STAGE_META = {
+  evt: { label:'Engineering Verification Test', icon:'🔬',  desc:'First functional prototypes. Verify core engineering assumptions, identify design risks, and close fundamental feasibility issues.', cls:'evt-bg' },
+  dvt: { label:'Design Verification Test',      icon:'📐',  desc:'Refined prototype. Verify against full product specification. Qualify reliability, safety standards and regulatory compliance.', cls:'dvt-bg' },
+  pvt: { label:'Production Verification Test',  icon:'🏭',  desc:'Production tooling and processes. Verify assembly yield, quality gates, and release criteria before mass production launch.', cls:'pvt-bg' },
+};
+
+function renderConversation(productId, stage) {
+  const thread = CONVERSATIONS[productId]?.[stage];
+  if (!thread || thread.length === 0) {
+    return `<div style="padding:40px;text-align:center;color:var(--text-dim)">
+      <div style="font-size:32px;margin-bottom:12px">📋</div>
+      <div style="font-size:14px">Conversations for this stage are being compiled…</div>
+    </div>`;
+  }
+
+  const meta = STAGE_META[stage];
+  let html = `<div class="stage-desc-bar ${stage}">
+    <div class="stage-desc-icon ${meta.cls}">${meta.icon}</div>
+    <div class="stage-desc-text">
+      <div class="stage-desc-label">${stage.toUpperCase()} · ${meta.label}</div>
+      <div class="stage-desc-body">${meta.desc}</div>
+    </div>
+  </div>`;
+
+  for (const item of thread) {
+    if (item.type === 'day')   html += renderDay(item);
+    else if (item.type === 'issue') html += renderIssue(item);
+    else html += renderMessage(item);
+  }
+  return html;
+}
+
+function renderTeamPane(productId) {
+  const memberIds = PRODUCT_TEAMS[productId] || [];
+  const byTeam = {};
+  for (const id of memberIds) {
+    const m = MEMBERS[id];
+    if (!m) continue;
+    if (!byTeam[m.team]) byTeam[m.team] = [];
+    byTeam[m.team].push({ id, ...m });
+  }
+
+  const teamOrder = ['pm','mech','ee','sw','tv','mfg','rf','bat','id'];
+  let html = `<div style="padding:8px 16px 4px;font-family:var(--font-mono);font-size:9px;letter-spacing:.2em;color:var(--text-dim);text-transform:uppercase">Project Team</div>`;
+
+  for (const tk of teamOrder) {
+    if (!byTeam[tk]) continue;
+    const tc = teamColor(tk);
+    const members = byTeam[tk];
+    const online = members.filter((_,i) => i % 3 !== 2).length;
+
+    html += `<div class="team-section open">
+      <div class="team-section-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="team-color-bar" style="background:${tc}"></div>
+        <div class="team-section-name" style="color:${tc}">${TEAMS[tk].name}</div>
+        <div class="team-count">${members.length}</div>
+        <div class="team-chevron">▾</div>
+      </div>
+      <div class="team-members">
+        ${members.map((m,i) => `<div class="team-member">
+          <div class="tm-avatar" style="background:${tc}22;color:${tc};border:1px solid ${tc}44">${m.initials}</div>
+          <div class="tm-info">
+            <div class="tm-name">${m.name}</div>
+            <div class="tm-rank">${m.rank}</div>
+          </div>
+          <div class="${i%3!==2?'online-dot':'offline-dot'}"></div>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  }
+  return html;
+}
+
+// ────────────────────────────────────────────────────────────
+// PRODUCT LIST
+// ────────────────────────────────────────────────────────────
+
+function buildProductList() {
+  const list = document.getElementById('product-list');
+  const stageColors = { EVT: 'pending', DVT: 'active-dot', PVT: 'done' };
+
+  list.innerHTML = PRODUCTS.map(p => {
+    const sc = stageColors[p.stage] || 'pending';
+    const stages = ['EVT','DVT','PVT'];
+    const stageIdx = stages.indexOf(p.stage);
+    const dots = stages.map((s,i) => {
+      let cls = 'stage-dot';
+      if (i < stageIdx) cls += ' done';
+      else if (i === stageIdx) cls += ' active-dot';
+      return `<div class="${cls}"></div>`;
+    }).join('');
+
+    return `<div class="product-item" id="pi-${p.id}" onclick="selectProduct('${p.id}')">
+      <div class="product-icon">${p.icon}</div>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div class="product-meta">
+          <div style="margin-bottom:3px">${p.category}</div>
+          <div class="stage-dots">${dots}<span style="font-size:8px;margin-left:4px;color:var(--text-dim)">${p.stage}</span></div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ────────────────────────────────────────────────────────────
+// NAVIGATION
+// ────────────────────────────────────────────────────────────
+
+function selectProduct(id) {
+  // Deselect old
+  if (currentProduct) {
+    document.getElementById(`pi-${currentProduct}`)?.classList.remove('active');
+  }
+  currentProduct = id;
+  currentStage   = 'evt';
+
+  document.getElementById(`pi-${id}`)?.classList.add('active');
+  document.getElementById('welcome-screen').classList.add('hidden');
+
+  const detail = document.getElementById('product-detail');
+  detail.classList.remove('hidden');
+
+  const p = PRODUCTS.find(x => x.id === id);
+
+  // Header
+  document.getElementById('pd-icon').textContent     = p.icon;
+  document.getElementById('pd-category').textContent = p.category;
+  document.getElementById('pd-title').textContent    = p.name;
+  document.getElementById('pd-desc').textContent     = p.desc;
+
+  const badgesEl = document.getElementById('pd-badges');
+  const bColors = ['badge-blue','badge-green','badge-orange'];
+  badgesEl.innerHTML = p.badges.map((b,i) => `<span class="badge ${bColors[i%3]}">${b}</span>`).join('');
+
+  // Stage tabs
+  document.querySelectorAll('.stage-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector('.stage-tab.evt').classList.add('active');
+
+  // Conversation
+  document.getElementById('conversation-pane').innerHTML = renderConversation(id, 'evt');
+
+  // Team pane
+  document.getElementById('team-pane').innerHTML = renderTeamPane(id);
+}
+
+function switchStage(stage) {
+  currentStage = stage;
+  document.querySelectorAll('.stage-tab').forEach(t => t.classList.remove('active'));
+  document.querySelector(`.stage-tab.${stage}`).classList.add('active');
+  document.getElementById('conversation-pane').innerHTML = renderConversation(currentProduct, stage);
+  document.getElementById('conversation-pane').scrollTop = 0;
+}
+
+// ────────────────────────────────────────────────────────────
+// INIT
+// ────────────────────────────────────────────────────────────
+
+buildProductList();
+document.getElementById('footer-year').textContent = new Date().getFullYear();
+</script>
+
+<!-- ABOUT SECTION -->
+<section id="about" style="position:relative;z-index:1;border-top:1px solid var(--border)">
+  <div style="max-width:1200px;margin:0 auto;padding:64px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px">
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 24px;transition:border-color .2s">
+      <div style="font-size:28px;margin-bottom:14px">🔬</div>
+      <h3 style="font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--text-bright);margin-bottom:10px;letter-spacing:0.02em">What Is DFM?</h3>
+      <p style="font-size:13px;color:var(--text-dim);line-height:1.75">Design for Manufacturability is the engineering discipline of designing products so they can be manufactured efficiently, reliably, and at scale. DFM conversations happen between teams throughout EVT, DVT and PVT — resolving tolerance stack-ups, yield issues, regulatory compliance, and supply chain risks before mass production begins.</p>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 24px">
+      <div style="font-size:28px;margin-bottom:14px">📐</div>
+      <h3 style="font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--text-bright);margin-bottom:10px;letter-spacing:0.02em">The Three Build Stages</h3>
+      <p style="font-size:13px;color:var(--text-dim);line-height:1.75">
+        <strong style="color:var(--stage-evt)">EVT</strong> — Engineering Verification Test. First functional prototypes. Engineers verify core design assumptions and identify fundamental risks.<br><br>
+        <strong style="color:var(--stage-dvt)">DVT</strong> — Design Verification Test. Refined designs tested against full product specification, regulatory standards, and reliability requirements.<br><br>
+        <strong style="color:var(--stage-pvt)">PVT</strong> — Production Verification Test. Production tooling and processes validated for yield, quality, and unit economics.
+      </p>
+    </div>
+
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 24px">
+      <div style="font-size:28px;margin-bottom:14px">👥</div>
+      <h3 style="font-family:var(--font-head);font-size:18px;font-weight:700;color:var(--text-bright);margin-bottom:10px;letter-spacing:0.02em">Who's In The Room?</h3>
+      <p style="font-size:13px;color:var(--text-dim);line-height:1.75">Hardware development involves <strong style="color:var(--text-bright)">cross-functional teams</strong> working in parallel: Mechanical, Electrical, Software, RF/Antenna, Battery, Test &amp; Verification, Manufacturing Engineering, and Industrial Design — coordinated by a Program Manager and Technical Program Manager. DFM Insights shows what all of them say to each other.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="contact" style="position:relative;z-index:1;background:var(--bg2);border-top:1px solid var(--border)">
+  <div style="max-width:1200px;margin:0 auto;padding:0 32px">
+
+    <div style="display:flex;gap:48px;padding:48px 0 40px;border-bottom:1px solid var(--border);flex-wrap:wrap">
+
+      <div style="flex:2;min-width:200px">
+        <a href="/" style="font-family:var(--font-head);font-size:22px;font-weight:800;color:var(--text-bright);letter-spacing:0.04em;display:flex;align-items:center;gap:10px;margin-bottom:14px;text-decoration:none">
+          DFM<span style="color:var(--accent)">·</span>INSIGHTS
+        </a>
+        <p style="font-size:13px;color:var(--text-dim);line-height:1.7;max-width:340px">Design for Manufacturability intelligence. Showing how real hardware products are engineered — from first prototype to mass production.</p>
+      </div>
+
+      <div style="flex:1;min-width:140px">
+        <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px">Platform</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+          <li><a href="#projects" style="font-size:13px;color:var(--text);text-decoration:none">Live Projects</a></li>
+          <li><a href="#about" style="font-size:13px;color:var(--text);text-decoration:none">About DFM</a></li>
+          <li><a href="#hero" style="font-size:13px;color:var(--text);text-decoration:none">Build Stages</a></li>
+        </ul>
+      </div>
+
+      <div style="flex:1;min-width:140px">
+        <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px">Engineering Teams</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+          <li><a href="#projects" style="font-size:13px;color:var(--text);text-decoration:none">Mechanical</a></li>
+          <li><a href="#projects" style="font-size:13px;color:var(--text);text-decoration:none">Electrical</a></li>
+          <li><a href="#projects" style="font-size:13px;color:var(--text);text-decoration:none">RF / Antenna</a></li>
+          <li><a href="#projects" style="font-size:13px;color:var(--text);text-decoration:none">Battery</a></li>
+        </ul>
+      </div>
+
+      <div style="flex:1;min-width:140px">
+        <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px">Company</div>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+          <li><a href="/cdn-cgi/l/email-protection#026a676e6e6d4266646f6b6c716b656a762c616d6f" style="font-size:13px;color:var(--text);text-decoration:none"><span class="__cf_email__" data-cfemail="91f9f4fdfdfed1f5f7fcf8ffe2f8f6f9e5bff2fefc">[email&#160;protected]</span></a></li>
+          <li><a href="https://github.com/dfminsights" target="_blank" rel="noopener noreferrer" style="font-size:13px;color:var(--text);text-decoration:none">GitHub</a></li>
+          <li><a href="https://linkedin.com/company/dfminsights" target="_blank" rel="noopener noreferrer" style="font-size:13px;color:var(--text);text-decoration:none">LinkedIn</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 0;flex-wrap:wrap;gap:12px">
+      <div style="font-family:var(--font-mono);font-size:10px;letter-spacing:0.08em;color:var(--text-dim)">
+        &copy; <span id="footer-year"></span> DFM Insights. Built for hardware engineers.
+      </div>
+      <div style="display:flex;gap:8px">
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:3px;border:1px solid var(--border2);color:var(--text-dim)">GitHub Pages</span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:3px;border:1px solid var(--border2);color:var(--text-dim)">Open Source</span>
+        <span style="font-family:var(--font-mono);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;padding:3px 8px;border-radius:
