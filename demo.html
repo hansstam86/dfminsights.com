@@ -50,24 +50,24 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23080c14'/%3E%3Crect x='4' y='4' width='24' height='24' rx='3' fill='none' stroke='%232d7adb' stroke-width='1.5'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='14' font-weight='700' fill='%232d7adb' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='36' fill='%23080c14'/%3E%3Crect x='20' y='20' width='140' height='140' rx='18' fill='none' stroke='%232d7adb' stroke-width='8'/%3E%3Ctext x='90' y='120' font-family='monospace' font-size='80' font-weight='700' fill='%232d7adb' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #080c14;
-    --bg2: #0c1220;
-    --bg3: #111827;
-    --surface: #131d30;
-    --surface2: #182237;
-    --border: #1e2d4a;
-    --border2: #243452;
-    --text: #c6d8ea;
-    --text-dim: #708fac;
-    --text-bright: #ddeeff;
-    --accent: #2d7adb;
-    --accent-glow: rgba(45,122,219,0.18);
+    --bg: #faf8f4;
+    --bg2: #f4f1eb;
+    --bg3: #eeeae2;
+    --surface: #ffffff;
+    --surface2: #f4f1eb;
+    --border: #e0ddd8;
+    --border2: #ece9e2;
+    --text: #2a2a2a;
+    --text-dim: #666666;
+    --text-bright: #0a0a0a;
+    --accent: #e8a43b;
+    --accent-glow: rgba(232,164,59,0.15);
 
     /* Team colors */
-    --c-pm:     #e2b854;
+    --c-pm:     #c8841a;
     --c-mech:   #5ba4e8;
     --c-ee:     #5eca82;
     --c-sw:     #b07ade;
@@ -77,16 +77,16 @@
     --c-bat:    #7dcfa0;
     --c-id:     #e06b6b;
 
-    --stage-plan: #a78bfa;
+    --stage-plan: #9b7fe8;
     --stage-evt: #e8a43b;
-    --stage-dvt: #5ba4e8;
-    --stage-pvt: #5eca82;
+    --stage-dvt: #1a6fbf;
+    --stage-pvt: #2d7a4f;
 
     --radius: 6px;
     --radius-lg: 10px;
-    --font-head: 'Barlow Condensed', sans-serif;
-    --font-body: 'Barlow', sans-serif;
-    --font-mono: 'Fira Code', monospace;
+    --font-head: 'Instrument Serif', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --font-mono: 'DM Mono', monospace;
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -108,8 +108,8 @@
     content:'';
     position:fixed; inset:0; pointer-events:none; z-index:0;
     background-image:
-      linear-gradient(rgba(45,122,219,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(45,122,219,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,0,0,0.04) 1px, transparent 1px);
     background-size: 40px 40px;
   }
 
@@ -136,7 +136,7 @@
 
   .logo-badge {
     background: var(--accent);
-    color: #fff;
+    color: var(--text-bright);
     font-size: 9px; font-weight: 700;
     letter-spacing: 0.12em;
     padding: 2px 6px;
@@ -170,12 +170,12 @@
   }
   .status-dot {
     width: 6px; height: 6px; border-radius: 50%;
-    background: #5eca82;
+    background: #e8a43b;
     animation: pulse-dot 2s infinite;
   }
   @keyframes pulse-dot {
-    0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(94,202,130,0.4); }
-    50% { opacity:0.7; box-shadow: 0 0 0 4px rgba(94,202,130,0); }
+    0%,100% { opacity:1; box-shadow: 0 0 0 0 rgba(232,164,59,0.4); }
+    50% { opacity:0.7; box-shadow: 0 0 0 4px rgba(232,164,59,0); }
   }
 
   /* ── HERO ── */
@@ -269,7 +269,7 @@
   }
 
   .sidebar::-webkit-scrollbar { width: 4px; }
-  .sidebar::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
+  .sidebar::-webkit-scrollbar-thumb { background: #c8bfb0; border-radius: 2px; }
 
   .sidebar-section-label {
     font-family: var(--font-mono);
@@ -647,7 +647,7 @@
     width: 6px; border-radius: 3px;
     flex-shrink: 0; align-self: stretch;
   }
-  .sev-high { background: #e05a5a; }
+  .sev-high { background: #b83232; }
   .sev-med  { background: var(--stage-evt); }
   .sev-low  { background: var(--stage-pvt); }
 
@@ -768,6 +768,10 @@
 <body>
 
 <!-- HEADER -->
+<div style="background:var(--accent);color:var(--text-bright);text-align:center;padding:9px 20px;font-family:var(--font-mono);font-size:11px;letter-spacing:0.12em;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
+  <span>This is the <strong>free demo</strong> — 10 example hardware programs</span>
+  <a href="/" style="background:var(--text-bright);color:var(--surface);padding:4px 14px;border-radius:4px;text-decoration:none;font-weight:700;font-size:10px;letter-spacing:0.1em;white-space:nowrap">← Back to DFM Insights</a>
+</div>
 <header>
   <a class="logo" href="#">
     <span>DFM<span style="color:var(--accent)">·</span>INSIGHTS</span>
@@ -1480,7 +1484,7 @@ function renderConversation(productId, stage) {
   if (gateThread && gateThread.length) {
     html += `<div class="thread-day-divider" style="margin:28px 0 20px">
       <div class="thread-day-line"></div>
-      <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(45,122,219,0.5);padding:3px 12px;border-radius:10px;white-space:nowrap">Stage Gate Review</div>
+      <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(232,164,59,0.5);padding:3px 12px;border-radius:10px;white-space:nowrap">Stage Gate Review</div>
       <div class="thread-day-line"></div>
     </div>`;
     for (const item of gateThread) {
