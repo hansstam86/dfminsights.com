@@ -60,8 +60,8 @@
     --surface2: #182237;
     --border: #1e2d4a;
     --border2: #243452;
-    --text: #b8cce0;
-    --text-dim: #5a7090;
+    --text: #c6d8ea;
+    --text-dim: #708fac;
     --text-bright: #ddeeff;
     --accent: #2d7adb;
     --accent-glow: rgba(45,122,219,0.18);
@@ -77,6 +77,7 @@
     --c-bat:    #7dcfa0;
     --c-id:     #e06b6b;
 
+    --stage-plan: #a78bfa;
     --stage-evt: #e8a43b;
     --stage-dvt: #5ba4e8;
     --stage-pvt: #5eca82;
@@ -304,7 +305,7 @@
 
   .product-info { min-width: 0; }
   .product-name {
-    font-size: 12px; font-weight: 600;
+    font-size: 13px; font-weight: 600;
     color: var(--text); white-space: nowrap;
     overflow: hidden; text-overflow: ellipsis;
     margin-bottom: 2px;
@@ -501,7 +502,7 @@
   .evt .stage-desc-label { color: var(--stage-evt); }
   .dvt .stage-desc-label { color: var(--stage-dvt); }
   .pvt .stage-desc-label { color: var(--stage-pvt); }
-  .stage-desc-body { font-size: 12px; color: var(--text-dim); }
+  .stage-desc-body { font-size: 13px; color: var(--text-dim); }
 
   /* Thread / Messages */
   .thread-day-divider {
@@ -575,8 +576,8 @@
   }
 
   .msg-text {
-    font-size: 13px; color: var(--text);
-    line-height: 1.65;
+    font-size: 14.5px; color: var(--text);
+    line-height: 1.78;
   }
 
   .msg-text code {
@@ -800,7 +801,7 @@
       <span class="hero-stat-label">Live Products</span>
     </div>
     <div class="hero-stat">
-      <span class="hero-stat-num">87</span>
+      <span class="hero-stat-num">30</span>
       <span class="hero-stat-label">Engineers</span>
     </div>
     <div class="hero-stat">
@@ -847,7 +848,10 @@
           </div>
         </div>
         <div class="stage-tabs" id="stage-tabs">
-          <div class="stage-tab evt active" onclick="switchStage('evt')">
+          <div class="stage-tab plan active" onclick="switchStage('plan')">
+            <div class="stage-dot-tab"></div>Planning
+          </div>
+          <div class="stage-tab evt" onclick="switchStage('evt')">
             <div class="stage-dot-tab"></div>EVT
           </div>
           <div class="stage-tab dvt" onclick="switchStage('dvt')">
@@ -885,71 +889,36 @@ const TEAMS = {
 };
 
 const MEMBERS = {
-  // PM / TPM
-  sarah:   { name:'Sarah Chen',       team:'pm',   rank:'PM',          initials:'SC' },
-  marcus:  { name:'Marcus Johnson',   team:'pm',   rank:'TPM',         initials:'MJ' },
-  // Mechanical
-  rachel:  { name:'Dr. Rachel Kim',   team:'mech', rank:'Lead ME',     initials:'RK' },
-  tom:     { name:'Tom Patterson',    team:'mech', rank:'Sr. ME',      initials:'TP' },
-  lisa_m:  { name:'Lisa Wong',        team:'mech', rank:'Sr. ME',      initials:'LW' },
-  alex:    { name:'Alex Rivera',      team:'mech', rank:'ME',          initials:'AR' },
-  jamie:   { name:'Jamie Lee',        team:'mech', rank:'ME',          initials:'JL' },
-  chris_p: { name:'Chris Park',       team:'mech', rank:'ME',          initials:'CP' },
-  dana:    { name:'Dana Smith',       team:'mech', rank:'ME',          initials:'DS' },
-  // Electrical
-  david:   { name:'David Osei',       team:'ee',   rank:'Lead EE',     initials:'DO' },
-  maria:   { name:'Maria Santos',     team:'ee',   rank:'Sr. EE',      initials:'MS' },
-  kevin:   { name:'Kevin Zhao',       team:'ee',   rank:'Sr. EE',      initials:'KZ' },
-  tyler:   { name:'Tyler Brown',      team:'ee',   rank:'EE',          initials:'TB' },
-  priya:   { name:'Priya Patel',      team:'ee',   rank:'EE',          initials:'PP' },
-  sam_r:   { name:'Sam Rodriguez',    team:'ee',   rank:'EE',          initials:'SR' },
-  ash:     { name:'Ash Williams',     team:'ee',   rank:'EE',          initials:'AW' },
-  // Software
-  james:   { name:"James O'Brien",    team:'sw',   rank:'Lead SW',     initials:'JO' },
-  nadia:   { name:'Nadia Hassan',     team:'sw',   rank:'Sr. SW',      initials:'NH' },
-  luke:    { name:'Luke Turner',      team:'sw',   rank:'Sr. SW',      initials:'LT' },
-  emma:    { name:'Emma Davis',       team:'sw',   rank:'SW',          initials:'ED' },
-  carlos:  { name:'Carlos Mendez',    team:'sw',   rank:'SW',          initials:'CM' },
-  zoe:     { name:'Zoe Chen',         team:'sw',   rank:'SW',          initials:'ZC' },
-  ben:     { name:'Ben Taylor',       team:'sw',   rank:'SW',          initials:'BT' },
-  // Test & Verification
-  amanda:  { name:'Dr. Amanda Foster',team:'tv',   rank:'Lead TV',     initials:'AF' },
-  ryan:    { name:'Ryan Mills',       team:'tv',   rank:'Sr. TV',      initials:'RM' },
-  sophie:  { name:'Sophie Laurent',   team:'tv',   rank:'Sr. TV',      initials:'SL' },
-  matt:    { name:'Matt Kim',         team:'tv',   rank:'TV',          initials:'MK' },
-  ines:    { name:'Ines Ferreira',    team:'tv',   rank:'TV',          initials:'IF' },
-  josh:    { name:'Josh Cohen',       team:'tv',   rank:'TV',          initials:'JC' },
-  lily:    { name:'Lily Zhang',       team:'tv',   rank:'TV',          initials:'LZ' },
-  // Manufacturing
-  frank:   { name:'Frank Nakamura',   team:'mfg',  rank:'Lead MFG',    initials:'FN' },
-  helen:   { name:'Helen Park',       team:'mfg',  rank:'Sr. MFG',     initials:'HP' },
-  diego:   { name:'Diego Cruz',       team:'mfg',  rank:'Sr. MFG',     initials:'DC' },
-  aisha:   { name:'Aisha Okonkwo',    team:'mfg',  rank:'MFG',         initials:'AO' },
-  pete:    { name:'Pete Larsson',     team:'mfg',  rank:'MFG',         initials:'PL' },
-  mia:     { name:'Mia Torres',       team:'mfg',  rank:'MFG',         initials:'MT' },
-  jack:    { name:'Jack Wu',          team:'mfg',  rank:'MFG',         initials:'JW' },
-  // RF / Antenna
-  yusuf:   { name:'Dr. Yusuf Al-Rashid',team:'rf', rank:'Lead RF',     initials:'YA' },
-  chloe:   { name:'Chloe Martin',     team:'rf',   rank:'Sr. RF',      initials:'ChM' },
-  andre:   { name:'Andre Petrov',     team:'rf',   rank:'Sr. RF',      initials:'AP' },
-  fatima:  { name:'Fatima Hassan',    team:'rf',   rank:'RF',          initials:'FH' },
-  owen:    { name:'Owen Davies',      team:'rf',   rank:'RF',          initials:'OD' },
-  nina:    { name:'Nina Patel',       team:'rf',   rank:'RF',          initials:'NP' },
-  max_c:   { name:'Max Chen',         team:'rf',   rank:'RF',          initials:'MC' },
-  // Battery
-  leila:   { name:'Dr. Leila Ahmadi', team:'bat',  rank:'Lead BAT',    initials:'LA' },
-  carlos_v:{ name:'Carlos Vega',      team:'bat',  rank:'Sr. BAT',     initials:'CV' },
-  mei:     { name:'Mei Tanaka',       team:'bat',  rank:'Sr. BAT',     initials:'MiT' },
-  sam_b:   { name:'Sam Brooks',       team:'bat',  rank:'BAT',         initials:'SaB' },
-  ava:     { name:'Ava Johnson',      team:'bat',  rank:'BAT',         initials:'AJ' },
-  raj:     { name:'Raj Sharma',       team:'bat',  rank:'BAT',         initials:'RS' },
-  ella:    { name:'Ella Murphy',      team:'bat',  rank:'BAT',         initials:'EM' },
-  // Industrial Design
-  felix:   { name:'Felix Reyes',      team:'id',   rank:'Lead ID',     initials:'FR' },
-  priya_id:{ name:'Priya Nair',       team:'id',   rank:'Sr. ID',      initials:'PN' },
-  sophie_id:{name:'Sophie Blanc',     team:'id',   rank:'Sr. ID',      initials:'SB' },
-  oliver:  { name:'Oliver Grant',     team:'id',   rank:'ID',          initials:'OG' },
-  luna:    { name:'Luna Kim',         team:'id',   rank:'ID',          initials:'LK' },
+  sarah:   { name:'Sarah Chen',          team:'pm',   rank:'PM',       initials:'SC' },
+  marcus:  { name:'Marcus Johnson',      team:'pm',   rank:'TPM',      initials:'MJ' },
+  rachel:  { name:'Dr. Rachel Kim',      team:'mech', rank:'Lead ME',  initials:'RK' },
+  tom:     { name:'Tom Patterson',       team:'mech', rank:'Sr. ME',   initials:'TP' },
+  alex:    { name:'Alex Rivera',         team:'mech', rank:'ME',       initials:'AR' },
+  jamie:   { name:'Jamie Lee',           team:'mech', rank:'ME',       initials:'JL' },
+  david:   { name:'David Osei',          team:'ee',   rank:'Lead EE',  initials:'DO' },
+  maria:   { name:'Maria Santos',        team:'ee',   rank:'Sr. EE',   initials:'MS' },
+  kevin:   { name:'Kevin Zhao',          team:'ee',   rank:'Sr. EE',   initials:'KZ' },
+  tyler:   { name:'Tyler Brown',         team:'ee',   rank:'EE',       initials:'TB' },
+  james:   { name:"James O'Brien",       team:'sw',   rank:'Lead SW',  initials:'JO' },
+  nadia:   { name:'Nadia Hassan',        team:'sw',   rank:'Sr. SW',   initials:'NH' },
+  luke:    { name:'Luke Turner',         team:'sw',   rank:'Sr. SW',   initials:'LT' },
+  emma:    { name:'Emma Davis',          team:'sw',   rank:'SW',       initials:'ED' },
+  amanda:  { name:'Dr. Amanda Foster',   team:'tv',   rank:'Lead TV',  initials:'AF' },
+  ryan:    { name:'Ryan Mills',          team:'tv',   rank:'Sr. TV',   initials:'RM' },
+  sophie:  { name:'Sophie Laurent',      team:'tv',   rank:'Sr. TV',   initials:'SL' },
+  matt:    { name:'Matt Kim',            team:'tv',   rank:'TV',       initials:'MK' },
+  frank:   { name:'Frank Nakamura',      team:'mfg',  rank:'Lead MFG', initials:'FN' },
+  helen:   { name:'Helen Park',          team:'mfg',  rank:'Sr. MFG',  initials:'HP' },
+  diego:   { name:'Diego Cruz',          team:'mfg',  rank:'Sr. MFG',  initials:'DC' },
+  aisha:   { name:'Aisha Okonkwo',       team:'mfg',  rank:'MFG',      initials:'AO' },
+  yusuf:   { name:'Dr. Yusuf Al-Rashid', team:'rf',   rank:'Lead RF',  initials:'YA' },
+  chloe:   { name:'Chloe Martin',        team:'rf',   rank:'Sr. RF',   initials:'CM' },
+  andre:   { name:'Andre Petrov',        team:'rf',   rank:'Sr. RF',   initials:'AP' },
+  leila:   { name:'Dr. Leila Ahmadi',    team:'bat',  rank:'Lead BAT', initials:'LA' },
+  carlos_v:{ name:'Carlos Vega',         team:'bat',  rank:'Sr. BAT',  initials:'CV' },
+  mei:     { name:'Mei Tanaka',          team:'bat',  rank:'Sr. BAT',  initials:'MiT'},
+  felix:   { name:'Felix Reyes',         team:'id',   rank:'Lead ID',  initials:'FR' },
+  priya_id:{ name:'Priya Nair',          team:'id',   rank:'Sr. ID',   initials:'PN' },
 };
 
 // ────────────────────────────────────────────────────────────
@@ -1366,16 +1335,16 @@ const CONVERSATIONS = {
 // ────────────────────────────────────────────────────────────
 
 const PRODUCT_TEAMS = {
-  p1:  ['sarah','marcus','rachel','tom','lisa_m','alex','jamie','chris_p','dana','david','maria','kevin','tyler','priya','sam_r','ash','james','nadia','luke','emma','carlos','zoe','ben','amanda','ryan','sophie','matt','ines','josh','lily','frank','helen','diego','aisha','pete','mia','jack','yusuf','chloe','andre','fatima','owen','nina','max_c','leila','carlos_v','mei','sam_b','ava','raj','ella','felix','priya_id','sophie_id','oliver','luna'],
-  p2:  ['sarah','marcus','rachel','tom','lisa_m','alex','chris_p','david','maria','kevin','priya','james','nadia','luke','emma','ben','amanda','ryan','sophie','matt','ines','frank','helen','diego','mia','leila','carlos_v','mei','sam_b','raj','ella'],
-  p3:  ['sarah','marcus','rachel','alex','jamie','david','maria','kevin','tyler','sam_r','james','luke','emma','carlos','amanda','ryan','matt','ines','frank','helen','diego','pete','mia','jack'],
-  p4:  ['sarah','marcus','rachel','tom','david','maria','kevin','james','nadia','luke','emma','carlos','zoe','ben','amanda','ryan','sophie','frank','helen','pete','yusuf','chloe','andre','fatima','owen','nina','max_c'],
-  p5:  ['sarah','marcus','rachel','tom','lisa_m','alex','chris_p','david','maria','james','nadia','emma','carlos','ben','amanda','ryan','sophie','matt','frank','helen','diego','leila','carlos_v','mei','sam_b','ava','raj','felix','priya_id'],
-  p6:  ['sarah','marcus','rachel','alex','david','maria','james','luke','emma','amanda','ryan','matt','frank','helen','diego','aisha','pete','yusuf','chloe','andre','leila','sam_b','ava'],
-  p7:  ['sarah','marcus','rachel','tom','felix','david','kevin','tyler','james','nadia','luke','amanda','ryan','matt','frank','helen','mia','yusuf','chloe','leila','carlos_v'],
-  p8:  ['sarah','marcus','rachel','tom','david','kevin','james','nadia','luke','emma','ben','amanda','ryan','matt','frank','helen','aisha','yusuf','leila','sam_b','felix'],
-  p9:  ['sarah','marcus','david','maria','kevin','james','nadia','emma','zoe','amanda','ryan','frank','helen','aisha','leila'],
-  p10: ['sarah','marcus','rachel','tom','david','maria','james','ben','zoe','emma','amanda','ryan','sophie','matt','frank','helen','mia','leila','carlos_v','felix','priya_id'],
+  p1:  ['sarah','marcus','rachel','tom','alex','jamie','david','maria','kevin','tyler','james','nadia','luke','emma','amanda','ryan','sophie','matt','frank','helen','diego','aisha','yusuf','chloe','andre','leila','carlos_v','mei','felix','priya_id'],
+  p2:  ['sarah','marcus','rachel','tom','david','maria','kevin','james','nadia','emma','amanda','ryan','sophie','matt','frank','helen','diego','leila','carlos_v','felix','priya_id'],
+  p3:  ['sarah','marcus','rachel','alex','jamie','david','maria','kevin','tyler','james','luke','emma','amanda','ryan','matt','frank','helen','diego','aisha'],
+  p4:  ['sarah','marcus','rachel','david','maria','kevin','james','nadia','luke','emma','amanda','ryan','frank','helen','yusuf','chloe','andre'],
+  p5:  ['sarah','marcus','rachel','tom','alex','david','maria','james','nadia','emma','amanda','ryan','sophie','matt','frank','helen','leila','carlos_v','felix'],
+  p6:  ['sarah','marcus','rachel','alex','david','james','luke','amanda','ryan','matt','frank','helen','diego','yusuf','chloe','andre','leila'],
+  p7:  ['sarah','marcus','rachel','tom','felix','david','kevin','james','nadia','luke','amanda','ryan','matt','frank','helen','yusuf','chloe','leila'],
+  p8:  ['sarah','marcus','rachel','tom','david','kevin','james','nadia','luke','emma','amanda','ryan','matt','frank','helen','yusuf','leila'],
+  p9:  ['sarah','marcus','david','maria','kevin','james','nadia','emma','amanda','ryan','frank','helen','aisha','leila'],
+  p10: ['sarah','marcus','rachel','tom','david','maria','james','emma','amanda','ryan','sophie','matt','frank','helen','leila','carlos_v','felix','priya_id'],
 };
 
 // ────────────────────────────────────────────────────────────
@@ -1454,12 +1423,36 @@ function renderDay(item) {
 }
 
 const STAGE_META = {
+  plan: { label:'Program Planning & Critical Path', icon:'🎯', desc:'Team kickoff — leads align on priorities, identify critical path, assign ownership, and agree on what is explicitly out of scope for this program.', cls:'plan-bg' },
   evt: { label:'Engineering Verification Test', icon:'🔬',  desc:'First functional prototypes. Verify core engineering assumptions, identify design risks, and close fundamental feasibility issues.', cls:'evt-bg' },
   dvt: { label:'Design Verification Test',      icon:'📐',  desc:'Refined prototype. Verify against full product specification. Qualify reliability, safety standards and regulatory compliance.', cls:'dvt-bg' },
   pvt: { label:'Production Verification Test',  icon:'🏭',  desc:'Production tooling and processes. Verify assembly yield, quality gates, and release criteria before mass production launch.', cls:'pvt-bg' },
 };
 
 function renderConversation(productId, stage) {
+  if (stage === 'plan') {
+    const planThread = PLANNING_CONVERSATIONS[productId];
+    if (!planThread || !planThread.length) {
+      return `<div style="padding:40px;text-align:center;color:var(--text-dim)">
+        <div style="font-size:32px;margin-bottom:12px">🎯</div>
+        <div style="font-size:14px">Planning session not yet available for this product.</div>
+      </div>`;
+    }
+    const meta = STAGE_META['plan'];
+    let html = `<div class="stage-desc-bar plan">
+      <div class="stage-desc-icon ${meta.cls}">${meta.icon}</div>
+      <div class="stage-desc-text">
+        <div class="stage-desc-label">Planning · ${meta.label}</div>
+        <div class="stage-desc-body">${meta.desc}</div>
+      </div>
+    </div>`;
+    for (const item of planThread) {
+      if (item.type === 'day')        html += renderDay(item);
+      else if (item.type === 'issue') html += renderIssue(item);
+      else                            html += renderMessage(item);
+    }
+    return html;
+  }
   const thread = CONVERSATIONS[productId]?.[stage];
   if (!thread || thread.length === 0) {
     return `<div style="padding:40px;text-align:center;color:var(--text-dim)">
@@ -1481,6 +1474,20 @@ function renderConversation(productId, stage) {
     if (item.type === 'day')   html += renderDay(item);
     else if (item.type === 'issue') html += renderIssue(item);
     else html += renderMessage(item);
+  }
+
+  const gateThread = GATE_CONVERSATIONS?.[productId]?.[stage];
+  if (gateThread && gateThread.length) {
+    html += `<div class="thread-day-divider" style="margin:28px 0 20px">
+      <div class="thread-day-line"></div>
+      <div style="font-family:var(--font-mono);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);border:1px solid rgba(45,122,219,0.5);padding:3px 12px;border-radius:10px;white-space:nowrap">Stage Gate Review</div>
+      <div class="thread-day-line"></div>
+    </div>`;
+    for (const item of gateThread) {
+      if (item.type === 'day')        html += renderDay(item);
+      else if (item.type === 'issue') html += renderIssue(item);
+      else                            html += renderMessage(item);
+    }
   }
   return html;
 }
@@ -1568,7 +1575,7 @@ function selectProduct(id) {
     document.getElementById(`pi-${currentProduct}`)?.classList.remove('active');
   }
   currentProduct = id;
-  currentStage   = 'evt';
+  currentStage   = 'plan';
 
   document.getElementById(`pi-${id}`)?.classList.add('active');
   document.getElementById('welcome-screen').classList.add('hidden');
@@ -1590,10 +1597,10 @@ function selectProduct(id) {
 
   // Stage tabs
   document.querySelectorAll('.stage-tab').forEach(t => t.classList.remove('active'));
-  document.querySelector('.stage-tab.evt').classList.add('active');
+  document.querySelector('.stage-tab.plan').classList.add('active');
 
   // Conversation
-  document.getElementById('conversation-pane').innerHTML = renderConversation(id, 'evt');
+  document.getElementById('conversation-pane').innerHTML = renderConversation(id, 'plan');
 
   // Team pane
   document.getElementById('team-pane').innerHTML = renderTeamPane(id);
@@ -1610,6 +1617,601 @@ function switchStage(stage) {
 // ────────────────────────────────────────────────────────────
 // INIT
 // ────────────────────────────────────────────────────────────
+
+
+
+const PLANNING_CONVERSATIONS = {
+
+  p1: [
+    {type:'day',label:'Program Kickoff · Week -3 · Aurora TWS Earbuds'},
+    {who:'sarah',time:'09:00',text:'Good morning everyone. Today we set priorities for the Aurora TWS program. I'll be direct about constraints: <strong>we have 22 weeks to PVT gate, a $4.2M NRE budget, and a CM slot locked for Week 18.</strong> Missing that slot means a 10-week delay and a rebooking penalty. Everything we decide today is framed by that reality. Marcus, walk us through the critical path as you see it.'},
+    {who:'marcus',time:'09:05',text:'I've modelled three risk scenarios. The schedule collapses in two places: <strong>(1) PCBA layout — if we spin more than twice before RF sign-off, we burn 6 weeks.</strong> (2) Acoustic tuning — it's always the last thing and it's always late. My recommendation: lock the RF keep-outs before any layout starts. That is the critical path item. Everything else is in parallel.'},
+    {who:'yusuf',time:'09:10',text:'RF agrees that keep-outs need to be locked first. My biggest concern is the Qi coil placement. Right now the coil is floating in the CAD — wherever it lands affects the BT antenna, the NFC if we add it, and the charging efficiency all at once. <strong>I need a coil position decision from ID and ME in this meeting, or I can't start my simulation work.</strong>'},
+    {who:'felix',time:'09:14',text:'ID has three coil positions modelled — I'll send the CAD to Yusuf today. The trade-off is that the ergonomically ideal coil position for the case puts it within 4mm of where BT naturally wants to be. We may need to accept a slightly off-centre coil for RF reasons. That's an aesthetic compromise I can live with if the RF margin is real.'},
+    {who:'rachel',time:'09:18',text:'Mechanical's P0 is the hinge. If the hinge tolerance stack isn't solved at EVT-1, every subsequent build has a rattle problem that cascades into acoustic and IP failures. <strong>I'm putting hinge as the single highest-priority ME item</strong> — above the case drop geometry, above the vent placement. Yusuf, I need your keep-out map before I can finalise the hinge bracket CAD.'},
+    {who:'david',time:'09:22',text:'EE perspective: the BMS firmware is the wildcard. The Qi charging and the BT coexistence share the same ground plane. If we don't define the BMS polling interval before PCBA layout, we'll find out about the self-discharge problem in EVT and lose 3 weeks. <strong>I want BMS firmware architecture signed off at this meeting — not in EVT.</strong>'},
+    {who:'james',time:'09:26',text:'Agreed on BMS. SW's P0 items are: (1) BMS polling architecture — agree today. (2) ANC DSP tuning pipeline — I need the target acoustic enclosure geometry from Rachel before I can start filter design. These two block everything else. What's explicitly <em>not</em> our priority right now: the companion app. It's decoupled from hardware. We'll start that in DVT.'},
+    {who:'amanda',time:'09:30',text:'Test and Verification: I need to flag that IP54 testing has a 3-week lead time at the external lab. <strong>If we don't book the lab slot today for Week 7, we will be waiting for a cancellation in DVT.</strong> Budget is $18k for the full IP54 qualification run. I'm asking for approval to book now.'},
+    {who:'sarah',time:'09:33',text:'Approved on the lab booking. Marcus, action that today. IP54 slot is non-negotiable — it's a spec requirement, not a nice-to-have. What are people saying is explicitly out of scope for EVT?'},
+    {who:'leila',time:'09:36',text:'Battery: the 500-cycle retention test takes 8 weeks to run. We cannot start it at EVT-1 and have results before DVT gate. <strong>Decision needed: do we start the cycle test on EVT-1 cells in parallel with EVT testing, accepting that the data lags the gate?</strong> My recommendation is yes — start immediately, report at DVT. Otherwise we have no data at DVT gate.'},
+    {who:'marcus',time:'09:39',text:'Agreed. Start cycle test on EVT-1 cells immediately. We'll gate DVT on interim data at cycle 200 — that's 4 weeks in — with a conditional proceed if trend is nominal. Rachel, one more structural question: the 4.8g weight target. Is it a hard spec or a marketing aspiration?'},
+    {who:'felix',time:'09:42',text:'It was in the product brief from marketing as a "target." I'd call it a strong preference, not a spec limit. If the rib pattern for drop performance adds 0.2g, we're at 5.0g — I can defend that to marketing. What I <em>cannot</em> defend is a unit that cracks on a 1.2m drop. <strong>I'm recommending we set the formal spec at 5.2g max</strong> and design to 4.9g nominal.'},
+    {who:'sarah',time:'09:46',text:'Agreed. 5.2g hard limit, 4.9g target. I'll update the product spec today. Let's confirm the priority stack before we close.'},
+    {type:'issue',sev:'low',title:'Program Priority Decision — Aurora TWS',body:'P0 (blocks everything): (1) RF keep-out map + coil position — Yusuf + Felix, by Day 3. (2) BMS polling architecture — James + David, agreed today: 60s wake interval. (3) Hinge tolerance stack-up — Rachel, submit to team by Week 1 end.
+P1 (must close in EVT): (4) PCBA layout spin — max 2 spins before DVT. (5) IP54 lab slot booked — Marcus, today. (6) Acoustic vent placement — Rachel, locked after RF keep-outs.
+P2 (DVT scope): (7) ANC DSP tuning — James, starts DVT-1. (8) Companion app — deferred to DVT.
+Explicitly out of scope for EVT: NFC pairing, companion app, colour variants.',tags:['planning','priorities','critical-path','p0','p1']},
+    {who:'marcus',time:'09:52',text:'Priority stack is locked. I'll have the updated Gantt to everyone by EOD. Critical path: RF keep-outs → PCBA layout → EVT-1 build → acoustic tuning → DVT. If RF keep-outs slip, everything slips. Yusuf — that's on you.'},
+    {who:'yusuf',time:'09:54',text:'Understood. Simulation starts the moment I have the coil position CAD from Felix. Felix — I need it by 5pm today.',null,['✅ 6']},
+  ],
+
+  p2: [
+    {type:'day',label:'Program Kickoff · Week -4 · Pulse Health Band'},
+    {who:'sarah',time:'09:00',text:'Before I say anything else: this is a <strong>FDA Class II medical device program.</strong> Every decision we make today has a regulatory consequence. The DHF opens today. The 510(k) submission target is Week 40. Working backwards from that, our DVT gate must close by Week 22 with biocompatibility and clinical data in hand. Marcus, what does the schedule look like?'},
+    {who:'marcus',time:'09:05',text:'The schedule has two hard walls: <strong>(1) Clinical study start — we need DVT-1 hardware in the hands of the clinical team by Week 12.</strong> (2) 510(k) submission — Week 40. Between those two dates sits ISO 10993 biocompatibility (8-week lab turnaround), the full DHF review, and the regulatory writing. There is essentially zero float in this program after Week 12.'},
+    {who:'david',time:'09:10',text:'EE's biggest concern is ECG signal quality. The 25dB SNR spec is aggressive — I've seen devices miss this and burn two PCBA spins trying to recover it. <strong>My P0 is getting the instrumentation amp layout right on the first spin.</strong> That means we need the electrode geometry from Mechanical locked before layout starts. I cannot emphasise this enough — a second PCBA spin costs us 5 weeks and probably breaks the clinical study timeline.'},
+    {who:'rachel',time:'09:14',text:'Mechanical is aligned. Electrode geometry is tied to the adhesive design — I need a biocompatibility pre-assessment on the adhesive material before I lock the geometry. The 3M 1522H hydrocolloid is our baseline, but I want a backup material identified before EVT in case it fails ISO 10993. Amanda, can your lab give us a preliminary cytotoxicity assessment in Week 2?'},
+    {who:'amanda',time:'09:18',text:'Yes, we can run a preliminary in-house cytotoxicity screen in Week 2 — it's not the full ISO 10993 but it will flag obvious failures. <strong>The formal ISO 10993 test at the external lab takes 8 weeks — I need to send samples by the end of Week 4 at the absolute latest.</strong> That means we need production-representative materials from the CM by Week 3. Frank, is that achievable?'},
+    {who:'frank',time:'09:22',text:'Week 3 for representative adhesive and strap samples — yes, if we place the CM order today. The strap silicone pigment is the one I'm nervous about. The red pigment is a non-standard formulation and I've seen it cause issues before. <strong>I'd recommend we spec medical-grade certified pigment from day one rather than qualifying a standard pigment and potentially failing ISO 10993 mid-program.</strong> Cost delta is about $0.40 per unit.'},
+    {who:'sarah',time:'09:26',text:'Approved. Medical-grade pigment from the start — we are not risking an ISO 10993 failure at DVT on a $0.40 difference. Leila, battery question: the 72h runtime target. How confident are you?'},
+    {who:'leila',time:'09:29',text:'At 95mAh, 72h is achievable if the AFE current is managed correctly. The risk is the ECG sampling rate during sleep mode — if it stays at 512Hz, we lose 3-4h of runtime. <strong>I need a power architecture agreement with James: what is the minimum acceptable ECG sample rate during inactivity?</strong> That decision affects my cell selection.'},
+    {who:'james',time:'09:33',text:'Clinically, 128Hz during inactivity is acceptable — the cardiologists on our advisory board confirmed this. We can motion-trigger back to 512Hz in under 200ms. <strong>I'm committing to adaptive sample rate in FW v0.1.</strong> Leila — design to 128Hz sleep mode, 512Hz active. That should give you the runway you need.'},
+    {who:'leila',time:'09:35',text:'With 128Hz sleep and 512Hz active at 8h/day usage, I can confirm 95mAh is sufficient for 78h. That gives us 6h of margin above spec. Cell selection is locked.',null,['✅ 5']},
+    {who:'amanda',time:'09:38',text:'Clinical study planning: I'm proposing 30 patients, 14 days continuous wear, at our partner hospital. That gives us 420 patient-days of data — sufficient for a 510(k) with a predicate device. <strong>The question is whether we want to run 50 patients for stronger statistical power.</strong> 50 patients adds 4 weeks to the study and approximately $180k in clinical costs.'},
+    {who:'sarah',time:'09:42',text:'30 patients. Our predicate device cleared on 28 patients and a similar endpoint. We go with 30 and keep the schedule. If FDA asks for more data in the review cycle, we run a supplemental study. Marcus — what is explicitly out of scope for EVT?'},
+    {who:'marcus',time:'09:45',text:'Out of scope for EVT: SpO2 algorithm optimisation (we have the hardware, but we're not tuning the algorithm until DVT), the companion app, and Bluetooth range testing beyond 3m. <strong>In scope for EVT: ECG SNR, strap durability, adhesion in shower conditions, and BMS self-discharge.</strong> Those four items are the gate criteria for EVT.'},
+    {type:'issue',sev:'low',title:'Program Priority Decision — Pulse Health Band',body:'P0 (program-critical): (1) ECG SNR ≥25dB — PCBA layout first spin must achieve this. David, electrode geometry locked before layout. (2) ISO 10993 samples to lab by Week 4 — Frank, CM order today. (3) Clinical study start Week 12 — DVT-1 hardware must be ready.
+P1 (EVT must-close): (4) Strap lug durability — Rachel, press-fit design by Week 2. (5) Adhesive shower simulation — 20 units, EVT Week 4. (6) Adaptive sample rate FW — James, v0.1.
+P2 (DVT scope): (7) SpO2 algorithm tuning. (8) Companion app.
+Explicitly deferred: NFC pairing, consumer firmware features, colour variants.',tags:['planning','priorities','critical-path','medical','510k']},
+    {who:'sarah',time:'09:50',text:'Priority stack locked. DHF entries must be filed for every P0 and P1 item by end of Week 1 — that is non-negotiable on a Class II device. Marcus, DHF structure review with QA lead Thursday morning.'},
+  ],
+
+  p3: [
+    {type:'day',label:'Program Kickoff · Week -3 · VoltPath EV Charger'},
+    {who:'sarah',time:'09:00',text:'VoltPath is our first mains-connected product and our most safety-critical program to date. I want to be clear at the start: <strong>safety is not a priority — it is a precondition.</strong> If at any point a safety item is amber at a gate, we hold the program. No exceptions. Marcus, schedule overview.'},
+    {who:'marcus',time:'09:05',text:'UL 2594 listing is the gate to market. The UL witness test requires a fully passing unit — no conditional passes. UL lead time after application is 8-10 weeks. <strong>That means we need to submit the UL application package by Week 16 at the latest.</strong> Working backwards: EMC pre-compliance must pass by Week 12, thermal validation by Week 11, all safety circuit testing by Week 8. This is a tight program.'},
+    {who:'david',time:'09:09',text:'EE's P0 is AFCI. Arc-fault detection must trip within half a cycle per UL 2594 — that's 8.3ms. We've never built an AFCI circuit before. <strong>I want to use a dedicated Littelfuse AFCI IC rather than implement it in firmware on the main MCU.</strong> It adds $2.20 BOM cost but eliminates the risk of a software-dependent safety function. I need a cost decision now — if we go custom, the development timeline changes.'},
+    {who:'sarah',time:'09:13',text:'Approved. Dedicated AFCI IC — $2.20 is trivial against the risk of a recall. What else is on the safety list?'},
+    {who:'david',time:'09:15',text:'RCD at 30mA, OVP at 280VAC, NTC thermal cutout at 90°C, ground fault detection. All standard and well-understood. The one that worries me more than AFCI is actually the <strong>thermal design at 48A continuous.</strong> The relay is going to run hot. We need to know the relay junction temperature before we can design the thermal management.'},
+    {who:'frank',time:'09:19',text:'Manufacturing concern: the GFCI calibration. Right now the spec has a PCB trimmer for the trip current. Every unit needs manual calibration. That's $1.20 in labour cost per unit and a yield risk if operators drift. <strong>I'm recommending a laser-trimmed resistor — $0.45 per unit, eliminates the calibration step entirely.</strong> Net saving at 10k units is around $7,500. But I need to flag it now so it's in the EVT BOM.'},
+    {who:'sarah',time:'09:23',text:'Good catch Frank. Laser-trimmed resistor — approved. Gets it in the EVT BOM. Kevin, EMC — where do you see the risk?'},
+    {who:'kevin',time:'09:26',text:'The DC-DC converter is the main EMC risk. Switching at 100kHz, we'll see harmonics at 200kHz, 300kHz — right in the FCC Part 15B Class B problem zone. <strong>I want to run an EMC pre-scan in Week 8 — even a table-top scan gives us enough signal to know if we have a problem.</strong> If we wait until DVT for EMC we'll have no time to iterate.'},
+    {who:'james',time:'09:30',text:'Software priority: OCPP 2.0 is on the product brief, but our backend partner's OCPP 2.0 server isn't production-ready until Q3. <strong>My recommendation: EVT and DVT validate OCPP 1.6 J — we add OCPP 2.0 as a firmware update post-launch.</strong> Attempting OCPP 2.0 in EVT with an unfinished backend is a distraction from the safety work. Sarah, I need a call on this.'},
+    {who:'sarah',time:'09:33',text:'OCPP 2.0 deferred to post-launch firmware update. OCPP 1.6 J must pass in EVT. That's final — update the product spec. Amanda, test priorities?'},
+    {who:'amanda',time:'09:36',text:'Test priorities in order: (1) AFCI trip time — this is the UL gate, must be confirmed in EVT-1. (2) RCD trip time. (3) Thermal at 48A. (4) EMC pre-scan. <strong>I'm not running drop or environmental until DVT — they're not on the UL critical path and they'll consume test resource we need for safety.</strong>'},
+    {who:'marcus',time:'09:40',text:'One explicit scope decision: the 7.5m cable option. Product brief lists both 5m and 7.5m SKUs. <strong>I'm recommending we validate the 5m SKU only through PVT and add the 7.5m cable as a post-launch variant.</strong> Two cable lengths means two sets of strain relief qualification, two EMC scans, potentially two UL applications. The 7.5m adds 6 weeks we don't have.'},
+    {who:'sarah',time:'09:43',text:'5m cable for launch, 7.5m as a post-launch variant. Agreed. Let's lock the priority stack.'},
+    {type:'issue',sev:'low',title:'Program Priority Decision — VoltPath EV Charger',body:'P0 (safety-critical, UL gate): (1) AFCI trip time ≤8.3ms — dedicated Littelfuse IC confirmed. (2) RCD trip ≤30ms. (3) OVP and NTC thermal cutout verified. (4) UL 2594 application by Week 16.
+P1 (DVT must-close): (5) EMC pre-scan Week 8 — Kevin. (6) Thermal validation at 48A/50°C ambient. (7) OCPP 1.6 J backend validation.
+P2 (post-launch): (8) OCPP 2.0 firmware update. (9) 7.5m cable SKU.
+Explicitly deferred: 7.5m cable variant, OCPP 2.0, LTE modem option.',tags:['planning','priorities','critical-path','safety','UL']},
+    {who:'sarah',time:'09:48',text:'Priority stack locked. David — AFCI prototype circuit on my desk by end of Week 2. That is the item that determines whether this program makes its UL slot.'},
+  ],
+
+  p4: [
+    {type:'day',label:'Program Kickoff · Week -3 · Nexus Smart Hub'},
+    {who:'sarah',time:'09:00',text:'Nexus Smart Hub is our most complex radio product — five protocols in one box. The product brief calls for Matter, Thread, Wi-Fi 6, Zigbee 3.0, and Z-Wave. <strong>Before I open the planning session, I want everyone to know that Z-Wave is under review.</strong> The Z-Wave Alliance certification adds $45k in fees and 10 weeks. I need a business case from the team for keeping it. Marcus, schedule first.'},
+    {who:'marcus',time:'09:05',text:'With all five radios, PCB layout is the critical path item — five antenna keep-outs on a 120×80mm board is a complex constraint optimisation problem. <strong>Layout cannot start until RF has published all five keep-out zones.</strong> That means Yusuf's work is literally on the critical path before any physical prototypes exist. I've scheduled 3 weeks for layout with one spin allowed before DVT — any more and we miss the CM slot.'},
+    {who:'yusuf',time:'09:09',text:'I'll be direct: putting five radios on this footprint is achievable but the coexistence problem is harder than the layout problem. <strong>The Qorvo QPG7015M arbiter chip is the solution — it time-slots BT, Zigbee and Thread with the Wi-Fi MAC.</strong> Without it, we'll have 20%+ BT packet loss during Zigbee activity. I'm recommending we commit to the arbiter chip today and include it in the EVT BOM. It's $3.80 and it's not optional.'},
+    {who:'david',time:'09:13',text:'Committed to arbiter — agreed. My concern is the PCB layer count. To route five RF front-ends cleanly with proper ground isolation, <strong>I need a 6-layer board.</strong> Our CM quoted the 4-layer at $8.20 per unit, 6-layer is $13.40. The delta is $5.20 per unit — on a product with a $149 retail price that's acceptable. But I need approval today before layout starts.'},
+    {who:'sarah',time:'09:16',text:'6-layer board approved. The RF performance risk of cutting to 4-layer is not worth $5.20. What's the Z-Wave case?'},
+    {who:'yusuf',time:'09:19',text:'Z-Wave is the only protocol that covers the US smart home installed base of older devices — specifically locks and thermostats. Without Z-Wave, we can't claim backward compatibility with roughly 40% of existing smart home installations. I recommend keeping it. The 868MHz antenna is small and doesn't conflict with the 2.4GHz cluster.'},
+    {who:'james',time:'09:23',text:'Software concern: Matter SDK is still evolving. The Discriminator encoding changed between SDK versions in the last 6 months. <strong>My P0 is locking on a Matter SDK version before EVT and not upgrading mid-program unless there's a security fix.</strong> SDK version churn killed two of our competitors' Matter programs. I want a formal SDK freeze decision today.'},
+    {who:'sarah',time:'09:26',text:'Agreed — SDK version freeze once we select it for EVT. James, which version? '},
+    {who:'james',time:'09:28',text:'Matter SDK 1.1.0.0. It has the Discriminator fix and Apple HomeKit compatibility. Frozen as of today.',null,['✅ 5']},
+    {who:'nadia',time:'09:31',text:'Edge AI priority question: the product brief says "edge AI voice assistant" but doesn't spec the latency or accuracy. <strong>I'm proposing we define the spec as: wake-word detection <300ms, <2% false positive rate.</strong> If we don't define it now, we'll be chasing a moving target in DVT. Also — we need to decide: NPU or CPU? NPU hits <200ms but requires model quantisation work. CPU is simpler but will likely land at 300-350ms.'},
+    {who:'james',time:'09:34',text:'NPU. The CPU approach won't make the 300ms spec — I've already modelled it. Carlos will own the NPU quantisation work starting in EVT. It's a 2-week effort per model iteration.'},
+    {who:'marcus',time:'09:37',text:'On the ErP idle power requirement — EU mandate is <0.5W at idle. This is a legal requirement for EU market access, not a nice-to-have. <strong>James, I need idle power on your P0 list from day one.</strong> We failed this on a previous product and it cost us 4 weeks to fix in DVT. Don't let it sneak up on us.'},
+    {who:'james',time:'09:39',text:'Adding ErP idle power to P0. I'll have a power budget spreadsheet by end of Week 1 with projections for each radio's idle contribution.'},
+    {type:'issue',sev:'low',title:'Program Priority Decision — Nexus Smart Hub',body:'P0 (blocks DVT entry): (1) 5-radio keep-out map — Yusuf, complete before layout. (2) QPG7015M arbiter — committed, in EVT BOM. (3) 6-layer PCB — approved. (4) Matter SDK 1.1.0.0 — frozen. (5) ErP idle power budget — James, Week 1 deliverable.
+P1 (EVT must-close): (6) BT/Zigbee coexistence validation with arbiter. (7) NPU wake-word latency <300ms. (8) Z-Wave certification application — $45k approved.
+P2 (DVT scope): (9) Thread mesh performance at scale. (10) Matter multi-admin.
+Explicitly deferred: LTE/cellular fallback, USB-A charging port.',tags:['planning','priorities','critical-path','radios','Matter']},
+    {who:'sarah',time:'09:45',text:'Priority stack locked. Z-Wave stays in. Yusuf — keep-out map by Friday. That is the single item that determines whether this program starts on time.'},
+  ],
+
+  p5: [
+    {type:'day',label:'Program Kickoff · Week -4 · Prism Handheld Console'},
+    {who:'sarah',time:'09:00',text:'Prism is the most thermally aggressive product we've ever built. An x86 SoC at up to 28W TDP in a 270g handheld. The product brief lists two modes: 15W balanced and 28W performance. <strong>I want to open this meeting with a direct question: should we ship 28W at launch, or ship 15W and add 28W in a firmware update once thermal is validated?</strong> Rachel, what does Mechanical say?'},
+    {who:'rachel',time:'09:05',text:'Mechanical says: 28W at launch is a high-risk decision. At 28W TDP, junction temp is modelled at 94°C — 6°C from the 100°C limit with no margin for manufacturing variation in the vapor chamber. If the vapor chamber quality varies by ±5% across production units, some will throttle under gaming load. <strong>My recommendation: design to 28W, validate in EVT, and make the go/no-go decision at EVT gate. Don't commit to 28W in marketing until we have hardware data.</strong>'},
+    {who:'sarah',time:'09:09',text:'Agreed — 28W is a validated-at-EVT feature. Marketing will be briefed: 15W is the spec, 28W is conditional. Marcus, what does this do to the critical path?'},
+    {who:'marcus',time:'09:12',text:'Thermal is the critical path — it drives everything. DPTF tuning, battery runtime modelling, active vs passive cooling decision. <strong>The vapor chamber supplier has a 10-week lead time for custom dimensions.</strong> We need to place that order today — before EVT, before any hardware. If we miss this order, we delay the program by 10 weeks. I need the vapor chamber dimensions from Rachel by end of today.'},
+    {who:'rachel',time:'09:15',text:'I have three vapor chamber geometries modelled. I'll send the preferred option to Marcus by 3pm today. The constraint is the chassis Z-height — we have 3.8mm available and the VC needs to be 0.4mm. That's tight but manufacturable.',null,['✅ 4']},
+    {who:'leila',time:'09:18',text:'Battery planning: 5000mAh is near the maximum we can physically fit. At 28W gaming, that gives us under 2 hours. <strong>The product brief says "up to 8 hours" — that's only achievable in media playback mode at 6W.</strong> We need to agree on how we communicate runtime on the box. If we say "8 hours" without qualification, we'll get review sites calling it misleading. I'd rather set an honest spec now than manage a PR problem at launch.'},
+    {who:'sarah',time:'09:22',text:'Runtime spec on box: "up to 8 hours (media playback) / 2 hours (performance gaming)." That's honest and defensible. Update the product brief. What's the active cooling decision?'},
+    {who:'rachel',time:'09:25',text:'I modelled two options: (A) passive-only with a vapor chamber — junction 94°C at 28W, acceptable if DPTF is tuned correctly. (B) Active fan — junction 78°C at 28W with more headroom, but adds noise, weight (15g), and a failure point. <strong>My recommendation is passive-only for EVT, with fan mounts included in the chassis as a fallback.</strong> If EVT thermal data shows we're too close to the limit, we activate the fan option without a tooling change.'},
+    {who:'sarah',time:'09:29',text:'Good insurance policy. Passive primary, fan mounts in the chassis. Approved. James, software priorities?'},
+    {who:'james',time:'09:32',text:'DPTF (Dynamic Platform and Thermal Framework) tuning is my P0 — it is the bridge between Rachel's thermal hardware and the battery team's runtime targets. <strong>The DPTF policy as shipped by Intel is conservative — it throttles at 80°C when the hardware can safely sustain 90°C.</strong> Getting the trip points right requires thermal measurement data from Rachel. My work cannot start until Week 3 when we have real hardware measurements. Emma and Carlos are on standby.'},
+    {who:'amanda',time:'09:35',text:'Test priority: I want thermal logging instrumented from EVT Day 1 — junction temp, case surface temp, battery temp, all at 1-second intervals under standardised gaming workloads. <strong>I'm defining three test workloads: 3DMark Wildlife (GPU-heavy), Cinebench (CPU-heavy), and a custom mixed workload.</strong> Sophie will own thermal data collection. This data feeds Rachel's team and James's DPTF tuning — it's a shared deliverable.'},
+    {who:'marcus',time:'09:38',text:'Display decision: the brief says 7" AMOLED at 90Hz. Amanda has flagged that 90Hz vs 60Hz has a meaningful battery impact — roughly 15% more display power at 90Hz. <strong>Do we ship 90Hz or 60Hz?</strong>'},
+    {who:'nadia',time:'09:41',text:'90Hz is table stakes for the gaming market we're targeting — competitors are at 120Hz. Dropping to 60Hz to save battery at launch would hurt our reviews. I'd rather have 90Hz and be honest about the battery trade-off. And we can add a 60Hz power-saver mode in firmware for users who want it.'},
+    {who:'sarah',time:'09:43',text:'90Hz confirmed, with a firmware-selectable 60Hz power mode. Agreed. Let's close the priority stack.'},
+    {type:'issue',sev:'low',title:'Program Priority Decision — Prism Handheld Console',body:'P0 (order today / blocks everything): (1) Vapor chamber order — Rachel dimensions to Marcus by 3pm today, order placed today. (2) Thermal validation at 28W — EVT gate decision on 28W mode.
+P1 (EVT must-close): (3) DPTF tuning — James, starts Week 3 with thermal data. (4) Runtime confirmed ≥2h at 28W, ≥8h media. (5) Active fan mounts in chassis (passive primary, fan fallback).
+P2 (DVT scope): (6) Drop test with AMOLED panel. (7) 90Hz power optimisation. (8) Active fan decision based on EVT data.
+Explicitly deferred: Active cooling fan activation (only if EVT thermal fails), 120Hz display, LTE modem.',tags:['planning','priorities','critical-path','thermal','gaming']},
+    {who:'marcus',time:'09:48',text:'Priority stack locked. One more time: <strong>vapor chamber order goes out today.</strong> Rachel, I need those dimensions. This is the single item that can kill this program before it starts.'},
+  ],
+
+  p6: [
+    {type:'day',label:'Program Kickoff · Week -3 · FieldSense Industrial IoT Node'},
+    {who:'sarah',time:'09:00',text:'FieldSense targets industrial predictive maintenance — oil and gas, manufacturing floors, utilities. The requirements are brutal: IP67, -40°C to +85°C, 10-year battery life on primary cells, and LoRa range of 5km urban. <strong>The 10-year battery life is our most constrained requirement. Everything else bends around it.</strong> Leila, start us off.'},
+    {who:'leila',time:'09:04',text:'10 years at 1 message per minute on a 19Ah lithium thionyl chloride cell. That works out to a budget of 120μA average current — including everything: MCU, radio, sensors, housekeeping. That is a very tight budget. <strong>Every peripheral that isn't off in sleep mode is a threat to this requirement.</strong> I need an agreement today: no peripheral is enabled by default at sleep. Every team's firmware contribution must include an explicit power state specification.'},
+    {who:'james',time:'09:08',text:'Agreed. SW commits to: every peripheral clock-gated before sleep entry, verified by current measurement on EVT-1 units, target <5μA total system sleep. The LoRa radio in sleep mode is about 1.2μA — that's our baseline. MCU sleep must be under 2μA. Anything else draws from a fixed budget.'},
+    {who:'yusuf',time:'09:12',text:'LoRa WAN range: 5km urban is achievable but antenna design is critical. <strong>The PCB antenna ground plane is the most common failure mode I see in LoRa designs — too small and you lose 3-4dB of effective range.</strong> I need a minimum 15mm keepout from the antenna element to any ground copper. That constraint must be in the enclosure design brief before Mechanical starts CAD.'},
+    {who:'rachel',time:'09:16',text:'IP67 is my P0 — it's the hardest mechanical requirement. <strong>The failure mode I'm most worried about is the cable gland at -30°C.</strong> Standard polyamide glands crack at low temperature. We need either glass-filled PA or metal glands from the start. The metal gland is $0.80 more per unit but eliminates a failure mode I'd otherwise be worrying about through the entire program. I'm recommending metal glands in the EVT BOM.'},
+    {who:'frank',time:'09:20',text:'Manufacturing note on IP67: assembly sequence matters. I've seen IP67 products fail certification because the O-ring installation procedure had a step out of order. <strong>I want to define the O-ring installation SOP and include it in the EVT build notes — not figure it out at PVT.</strong> Also, the cable gland torque specification needs to be on the assembly traveller from day one.'},
+    {who:'sarah',time:'09:24',text:'Both agreed — metal glands in EVT BOM, O-ring SOP in EVT build notes. What's the radio decision: LoRa WAN only, or do we support NB-IoT or LTE-M as a variant?'},
+    {who:'yusuf',time:'09:27',text:'My recommendation: LoRa WAN only for the initial product. NB-IoT and LTE-M require a SIM, a modem, a data plan, and completely different power budgeting — it's effectively a different product. <strong>We can offer a cellular variant in 12-18 months once the core platform is proven.</strong> Trying to do both at launch would kill the battery life story and delay certification.'},
+    {who:'sarah',time:'09:30',text:'LoRa WAN only for launch. Cellular deferred to v2. Agreed. Amanda, test priorities?'},
+    {who:'amanda',time:'09:33',text:'IEC 60068 environmental qualification — thermal cycling, vibration, humidity — these are 8-12 week test campaigns. <strong>I need to start EVT environmental testing on Day 1 of EVT, not at the end.</strong> We run qualification in parallel with engineering debugging. If we wait until DVT to start environmental, we won't have results before PVT gate.'},
+    {who:'marcus',time:'09:36',text:'One scope question: the -40°C lower operating limit. Standard industrial is -20°C. -40°C requires specialised cell chemistry, different component grades, and significantly more expensive enclosure sealing. <strong>Does our target market actually need -40°C?</strong>'},
+    {who:'sarah',time:'09:39',text:'Our two anchor customers are in the North Sea oil sector and a Canadian mining company. Both explicitly require -40°C. It stays in the spec. No debate.'},
+    {type:'issue',sev:'low',title:'Program Priority Decision — FieldSense IoT Node',body:'P0 (non-negotiable spec): (1) ≤120μA average current budget — every team signs off on power state spec. (2) IP67 with metal cable glands — in EVT BOM. (3) LoRa range ≥5km urban — antenna keepout 15mm minimum.
+P1 (EVT must-close): (4) MCU sleep current <2μA — James, verified on EVT-1. (5) O-ring assembly SOP — Frank, written before EVT build. (6) IEC 60068 environmental testing starts EVT Day 1 — Amanda.
+P2 (post-launch): (7) NB-IoT/LTE-M cellular variant. (8) Modbus/RS-485 wired option.
+Explicitly deferred: Cellular variant, wired comms option, cloud dashboard.',tags:['planning','priorities','critical-path','industrial','battery','IP67']},
+    {who:'marcus',time:'09:44',text:'Priority stack locked. The 10-year battery life is the product. If we miss it, we miss the market. Leila — current budget spreadsheet to all leads by end of Week 1.'},
+  ],
+
+  p7: [
+    {type:'day',label:'Program Kickoff · Week -3 · Lumen Smart Pendant'},
+    {who:'sarah',time:'09:00',text:'Lumen Smart Pendant — smart home lighting with UWB presence detection and Zigbee. This is a 230VAC mains-connected product, which means it's subject to EU LVD directive and CE marking. <strong>CE marking is the gate to our primary market — without it we cannot ship to EU.</strong> Marcus, what does CE marking do to the schedule?'},
+    {who:'marcus',time:'09:04',text:'CE marking requires LVD safety testing and EMC testing — both from an accredited notified body. Combined lead time is 6-8 weeks once we submit the product and documentation. <strong>We need to submit by Week 14 at the latest to hit our target ship date.</strong> That means our DVT-1 units must be functionally complete and passing internal tests by Week 10. The CE marking timeline is the schedule constraint, not our EVT iteration count.'},
+    {who:'david',time:'09:08',text:'My P0 concern is the flicker specification. IEEE 1789 requires a Flicker Index below 0.10 for "no observable effect." A basic buck converter LED driver typically produces a Flicker Index of 0.18-0.22 at 100Hz mains ripple — we're starting above spec. <strong>The fix is a second-stage LC filter plus increasing the switching frequency to 200kHz.</strong> I need to validate this approach on an eval board before EVT. If it doesn't work, we need to change the driver topology — which is a 4-week delay.'},
+    {who:'sarah',time:'09:12',text:'David — flicker validation on eval board is your P0 deliverable. What's the timeline?'},
+    {who:'david',time:'09:14',text:'Eval board is on my bench. I'll have a flicker measurement by end of Week 1. If the LC filter approach achieves FI < 0.08, we're good for EVT. If not, I'll escalate immediately.',null,['✅ 4']},
+    {who:'yusuf',time:'09:17',text:'UWB presence detection: the brief says "8m detection range." In a typical room with furniture, 8m is achievable, but the antenna has to be on the pendant body — not inside the metal canopy. <strong>The metal canopy will block 40-60% of UWB signal, dropping range to 4-5m.</strong> Felix, I need a non-conductive window in the canopy design. It can be invisible from below — a polycarbonate insert works. But it must be in the CAD before tooling.'},
+    {who:'felix',time:'09:21',text:'I can add a PC window — it's a clean design solution. The canopy is the key aesthetic element so I want to keep the window minimal. I'm proposing a 20mm diameter PC disc flush-mounted in the canopy top — invisible from any normal viewing angle. I'll have the CAD update by tomorrow.'},
+    {who:'sarah',time:'09:24',text:'Good solution. Felix — CAD update by tomorrow, Yusuf reviews the aperture size. Is UWB a hard requirement or could we use PIR presence detection instead?'},
+    {who:'yusuf',time:'09:27',text:'PIR has false positives from pets and HVAC airflow, and it can't detect stationary presence — someone sitting still reading a book. UWB detects micro-movements, so it handles stationary occupancy. <strong>For a smart pendant that turns off when the room is empty, PIR false-negatives are a user experience problem.</strong> UWB stays. The cost delta is $4.20 per unit for the UWB IC — it's justified.'},
+    {who:'frank',time:'09:31',text:'Manufacturing concern: 230VAC wiring assembly. This requires trained operators, specific tooling, and a defined inspection step. <strong>I want a high-voltage wiring SOP written and signed off before EVT build — not during it.</strong> We also need a hipot test at EOL. Kevin, the hipot test needs to be in the EVT test plan from Day 1.'},
+    {who:'amanda',time:'09:35',text:'Agreed. Hipot test goes in the EVT test plan. The IEEE 1789 flicker measurement will be my P0 test — I'm setting up the flicker measurement rig this week so it's ready the moment David has EVT units. LVD safety tests will run concurrently with DVT qualification.'},
+    {who:'marcus',time:'09:38',text:'One scope question: RGB vs tunable white. The brief has both. RGB adds three LED channels and a colour management algorithm. Does this product actually need RGB?'},
+    {who:'felix',time:'09:41',text:'The target retail price of $89 positions this as a premium product — RGB is expected at that price point. But if RGB is jeopardising the schedule, I'd rather ship tunable white at $89 than miss the CE marking window. It's a business trade-off, not a technical one.'},
+    {who:'sarah',time:'09:44',text:'RGB stays. We ship with the full feature set. But it goes to P2 priority — flicker compliance and UWB detection are P0. If we're running short on schedule, RGB algorithm optimisation is the thing that slips, not the safety work.'},
+    {type:'issue',sev:'low',title:'Program Priority Decision — Lumen Smart Pendant',body:'P0 (CE marking critical path): (1) Flicker fix validation on eval board — David, Week 1. (2) UWB PC window in canopy CAD — Felix, tomorrow. (3) HV wiring SOP — Frank, before EVT build. (4) CE marking submission by Week 14.
+P1 (EVT must-close): (5) Flicker Index <0.08 confirmed on EVT-1 hardware. (6) UWB range ≥8m confirmed. (7) Hipot test at EOL from EVT Day 1.
+P2 (can slip to DVT): (8) RGB colour algorithm optimisation.
+Explicitly deferred: HomeKit integration (post-launch), voice control.',tags:['planning','priorities','critical-path','CE-marking','mains','flicker']},
+    {who:'sarah',time:'09:49',text:'Priority stack locked. CE marking is the clock we're running against. David — flicker on eval board by Friday. If it fails, this meeting reconvenes Monday.'},
+  ],
+
+  p8: [
+    {type:'day',label:'Program Kickoff · Week -3 · GuardEye Doorbell Camera'},
+    {who:'sarah',time:'09:00',text:'GuardEye is our first computer vision product. The on-device ML for person, vehicle, and package detection is the differentiator — cloud ML is table stakes, but on-device means privacy and zero latency. <strong>The ML chip selection is the most important decision of this program and we're making it today.</strong> James, where are we on the NPU decision?'},
+    {who:'james',time:'09:04',text:'We've evaluated three options: (A) Ambarella CV25 — dedicated CV SoC, best accuracy but $18.50 unit cost and 16-week lead time. (B) Add-on NPU co-processor — $4.20, 8-week lead time, adequate for our model sizes. (C) Run on the main SoC CPU — free but latency is 180-220ms per frame, above our 100ms target. <strong>My recommendation is option B — the add-on NPU.</strong> It hits our latency target, the BOM cost is manageable, and the lead time doesn't kill our schedule.'},
+    {who:'sarah',time:'09:09',text:'Option B — NPU co-processor. Approved. What's the training data situation?'},
+    {who:'nadia',time:'09:12',text:'We have 50,000 labelled day-time images — sufficient for the day-time model. The gap is night-time IR images. <strong>We have fewer than 2,000 IR domain images, and I need at least 15,000 to hit the 90% AP target.</strong> I'm proposing we partner with a data annotation firm and acquire 15,000 IR images over the next 6 weeks — cost is approximately $22k. Without this, our night-time accuracy will miss spec and we won't know until DVT.'},
+    {who:'sarah',time:'09:15',text:'$22k for the IR dataset — approved. This is cheaper than a DVT failure. Marcus, get that purchase order raised today. Yusuf, Wi-Fi planning?'},
+    {who:'yusuf',time:'09:18',text:'Dual-band Wi-Fi is the spec. The 5GHz band gives us the throughput for 4K streaming but range through walls drops to 15-20m. The 2.4GHz band is more robust at range. <strong>The critical thing for a doorbell is that it must maintain a reliable connection with the Wi-Fi AP — typically located 10-15m away through 1-2 walls.</strong> I'm optimising the antenna placement for 2.4GHz robustness, not 5GHz peak throughput.'},
+    {who:'rachel',time:'09:22',text:'IP65 is the mechanical P0. This is a permanently outdoor-mounted device — it will see rain, ice, direct sun. <strong>The nozzle gasket over the camera lens is the hardest sealing problem.</strong> The lens needs to be optically clear (no gasket obscuring it) while still being IP65 rated. I have a custom optical gasket design that achieves this — it's in the CAD. But it requires a precision injection mould that's $12k more than a standard gasket tool.'},
+    {who:'sarah',time:'09:26',text:'$12k on the optical gasket tool — approved. IP65 failure on a doorbell camera is a warranty catastrophe. Leila, solar charging?'},
+    {who:'leila',time:'09:29',text:'I need to be honest about solar: in northern Europe, a 2W panel will offset roughly 50% of daily consumption in winter. <strong>This device requires a USB-C top-up approximately once a month in winter conditions.</strong> That is not a product failure — it's physics. But marketing needs to communicate this accurately. If we position it as "solar-powered," we'll have problems. If we position it as "solar-assisted," we're fine.'},
+    {who:'sarah',time:'09:33',text:'"Solar-assisted charging" in all marketing materials. I'm updating the brief now. That's a non-negotiable language change — "solar-powered" is not accurate and not defensible. Amanda, test priorities?'},
+    {who:'amanda',time:'09:36',text:'P0: ML accuracy validation at EVT. I want to run the model against our full 50,000-image test set on EVT-1 units — real hardware, real NPU inference. <strong>If the NPU quantisation degrades accuracy by more than 2% AP versus the float model, we need to know in EVT, not DVT.</strong> Sophie will own the ML accuracy test campaign. The IP65 hose test is P1 — it can wait until DVT-1 units since IP testing doesn't require tuned hardware.'},
+    {who:'marcus',time:'09:40',text:'4K resolution is on the spec but it needs to be stated clearly: 4K at the sensor, processed on-device, streamed at 4K to the app over Wi-Fi. <strong>4K streaming requires ~25Mbps bandwidth — that's only reliable on a strong 5GHz connection.</strong> Should we default to 1080p streaming and offer 4K as a setting? That prevents support tickets from users with 2.4GHz-only coverage.'},
+    {who:'nadia',time:'09:43',text:'Default 1080p streaming, 4K as an "ultra" setting. The adaptive bitrate algorithm adjusts automatically. Most users won't notice the difference and those who want 4K will find the setting. Agreed.'},
+    {type:'issue',sev:'low',title:'Program Priority Decision — GuardEye Doorbell Camera',body:'P0 (product-defining): (1) NPU co-processor — option B confirmed. (2) IR training dataset — 15,000 images, $22k, order today. (3) Optical lens gasket tool — $12k approved. (4) "Solar-assisted" language locked in all marketing.
+P1 (EVT must-close): (5) ML accuracy on-device NPU — day-time ≥96% AP, night IR ≥90% AP. (6) IP65 hose test — DVT-1. (7) Default 1080p, 4K as user setting.
+P2 (DVT scope): (8) Package detection model refinement. (9) Local storage option.
+Explicitly deferred: Facial recognition (privacy/regulatory risk), local NVR, 4K default streaming.',tags:['planning','priorities','critical-path','ML','camera','solar']},
+    {who:'sarah',time:'09:49',text:'Priority stack locked. Nadia — I want to see IR accuracy numbers on the first model iteration before EVT-1 hardware arrives. Train the model, run it on CPU simulation, give me the number. We need a data point before we commit the hardware.'},
+  ],
+
+  p9: [
+    {type:'day',label:'Program Kickoff · Week -2 · DockCore Thunderbolt 5 Hub'},
+    {who:'sarah',time:'09:00',text:'DockCore is our first Thunderbolt 5 product — 120Gbps, 140W Power Delivery, dual 8K display output. The most important thing I need everyone to understand: <strong>Intel controls whether this product ships.</strong> The TB5 Logo certification is mandatory — without it we cannot use "Thunderbolt" in the product name, the retailer listings, or the box. Intel's certification timeline is 6-8 weeks. Marcus, how does that fit?'},
+    {who:'marcus',time:'09:04',text:'Intel pre-certification testing must start in DVT — that means we need a stable firmware candidate by Week 10. <strong>The compatibility matrix is the risk: 47 host devices must all pass Intel's test suite.</strong> We cannot hire 47 laptops and workstations — we need a sourcing plan for the test fleet. I'm estimating $85k for the test lab setup including device procurement and the Intel certification fee.'},
+    {who:'sarah',time:'09:07',text:'$85k for the Intel certification test fleet — approved. This is the cost of doing business with TB5. David, signal integrity first.'},
+    {who:'david',time:'09:10',text:'SI is the engineering core of this product. PCIe Gen 5 at 32GT/s, USB4 Gen 3, DP 2.1 — all running over the same connector. <strong>Pre-layout eye diagrams must show ≥20dB margin before we cut the first board.</strong> If we find an SI problem in EVT, a second PCB spin costs 6 weeks and probably misses the Intel certification window. I'm requiring a 3D EM simulation sign-off on the layout before we go to manufacture.'},
+    {who:'kevin',time:'09:14',text:'3D EM simulation agreed — I'll run it. The specific risk I'm watching is the TB5 controller to USB4 re-timer coupling. They share a very short channel and the signal crosstalk can degrade eye opening. I need a 10-layer PCB to route this correctly with proper ground shielding between those two ICs. David, are we aligned on 10-layer?'},
+    {who:'david',time:'09:17',text:'10-layer is overkill — we can achieve the isolation with a 8-layer board using split planes. But I'd rather agree on 8-layer now than compromise on 10-layer at PVT. 8-layer is my final answer.',null,['✅ 3']},
+    {who:'leila',time:'09:20',text:'140W Power Delivery: this is the highest PD power we've ever shipped. The PD controller and the MOSFET switch will dissipate meaningful heat at full load. <strong>I'm modelling 3-4W dissipation at 140W output — that's enough to make the case surface noticeably warm.</strong> We need a thermal path from the PD components to the chassis. Rachel, is there a metal chassis area we can use as a heatsink?'},
+    {who:'rachel',time:'09:24',text:'The bottom aluminium shell is 2mm thick and has direct air contact. I'm reserving a 40×30mm area directly below the PD MOSFET for a thermal pad to the chassis. That should keep the case surface below 50°C. Felix, the bottom of the dock will be warm to touch — does ID have a problem with that?'},
+    {who:'felix',time:'09:27',text:'Below 50°C is fine — that's within consumer electronics norms and below the IEC 62368-1 touch temperature limit of 60°C for regularly touched surfaces. I'd avoid putting a text label or logo in that area since warm surfaces show fingerprints more.'},
+    {who:'james',time:'09:30',text:'Software: the 47-host compatibility matrix is my biggest concern. I've seen TB3 docks fail certification because of a negotiation timing assumption that worked with 80% of hosts but failed with HP ThinkPads. <strong>I'm proposing we test against 10 high-risk hosts in EVT — the hosts most likely to expose edge cases in the link training sequence.</strong> The full 47-device matrix is a DVT task. Emma and Zoe will own the compatibility testing from EVT.'},
+    {who:'amanda',time:'09:34',text:'Test priority: SI eye diagram validation in EVT is my P0. I want a real-time oscilloscope measurement on EVT-1 units — not just simulation. If we see an eye margin below 15dB on any lane, I'm calling a hold immediately. The second P0 is power delivery validation — 140W at 48V/20V/15V PPS, all three voltage levels, sustained for 2 hours.'},
+    {who:'marcus',time:'09:38',text:'Backward compatibility decision: the brief says "TB5, TB4, TB3 compatible." TB3 backward compatibility requires a firmware negotiation fallback that is notoriously finicky — it caused problems for three major dock vendors at TB3 launch. <strong>Do we support TB3 at launch or limit to TB4/TB5?</strong>'},
+    {who:'james',time:'09:41',text:'We must support TB3 — a huge portion of the installed MacBook Pro base is TB3. Cutting TB3 support would make this product useless for a significant portion of the market. I'll own the TB3 fallback firmware. It's 2 weeks of work but it's not negotiable from a market perspective.'},
+    {type:'issue',sev:'low',title:'Program Priority Decision — DockCore Thunderbolt 5 Hub',body:'P0 (Intel certification path): (1) 8-layer PCB confirmed. (2) Pre-layout 3D EM SI simulation — David + Kevin, sign-off before board order. (3) Intel pre-cert test fleet — $85k approved, sourcing starts today. (4) TB3 backward compatibility — James, 2-week firmware task.
+P1 (EVT must-close): (5) Eye margin ≥15dB on all lanes — real oscilloscope measurement. (6) 140W PD sustained 2h test. (7) 10 high-risk host EVT compatibility pass.
+P2 (DVT scope): (8) Full 47-host compatibility matrix. (9) Intel Logo certification submission.
+Explicitly deferred: TB3-only mode without TB5 controller (unnecessary), 10-layer PCB (overkill).',tags:['planning','priorities','critical-path','TB5','Intel','SI']},
+    {who:'sarah',time:'09:47',text:'Priority stack locked. David — SI simulation sign-off is the gate to board ordering. No simulation sign-off, no order. That's my rule for this program.'},
+  ],
+
+  p10: [
+    {type:'day',label:'Program Kickoff · Week -4 · MedPatch Cardiac Monitor'},
+    {who:'sarah',time:'09:00',text:'MedPatch is our most regulated product ever — a 510(k) FDA submission device. I want to open by reading from the FDA's own guidance: "The sponsor is responsible for ensuring that the device is safe and effective." <strong>That means us.</strong> Every decision in this meeting today becomes part of the Design History File. Marcus is recording. Let's start with the regulatory strategy.'},
+    {who:'marcus',time:'09:05',text:'510(k) requires a predicate device with "substantial equivalence." Our predicate is the Zio Patch by iRhythm — cleared in 2013 for continuous ECG monitoring up to 14 days. <strong>Our critical path: clinical study → biocompatibility → DHF completion → 510(k) submission → FDA 90-day review → clearance.</strong> The longest lead time item is the clinical study — 30 patients × 14 days = 420 patient-days. We cannot compress this. Study start is Week 12 and it cannot move.'},
+    {who:'david',time:'09:09',text:'ECG performance is the product. The specification I'm proposing is: CMRR ≥90dB at 50/60Hz, SNR ≥25dB, bandwidth 0.5-150Hz per AHA recommendations. <strong>The hardest of these is SNR ≥25dB in a real-world environment with powerline interference and electrode motion.</strong> I need Rachel to lock the electrode geometry and adhesive before I can finalise the instrumentation amp layout. If the layout has to change after the first PCB spin, we lose 4 weeks.'},
+    {who:'rachel',time:'09:13',text:'Electrode geometry is locked to the predicate — sub-clavicular placement, 35mm inter-electrode spacing, Ag/AgCl electrodes. What is not locked is the adhesive. <strong>I'm strongly recommending 3M 1522H medical hydrocolloid — it's ISO 10993 pre-cleared and has a 14-day wear precedent in the literature.</strong> Using a non-cleared adhesive would add 10 weeks to biocompatibility testing. David, I can have the electrode layout to you by end of Week 1.'},
+    {who:'amanda',time:'09:17',text:'Clinical study design: I'm proposing 30 patients, continuous 14-day wear, ECG classified by three independent cardiologists as gold standard. <strong>The primary endpoint is arrhythmia detection sensitivity and specificity — this is what FDA will scrutinise.</strong> We need a clinical study protocol approved by our IRB before Week 10. The IRB review takes 4-6 weeks — I need to submit the protocol by Week 4 at the latest.'},
+    {who:'sarah',time:'09:21',text:'Clinical protocol to IRB by Week 4 — that is a hard deadline. Amanda, what do you need from the engineering team to write the protocol?'},
+    {who:'amanda',time:'09:24',text:'I need: (1) Final device specification — to describe what we're testing. (2) Electrode placement diagram. (3) Adverse event monitoring procedure from Frank. These three items must be in my hands by Week 2.',null,['✅ 4']},
+    {who:'james',time:'09:27',text:'Algorithms: the 510(k) predicate detects AFib and bradycardia. I'm proposing we match the predicate exactly for submission — same arrhythmia classes, same algorithm architecture. <strong>Scope creep in the algorithm is a regulatory risk — every new arrhythmia class we add requires its own clinical validation.</strong> We build for AFib, bradycardia, and pause. Nothing else ships in v1.'},
+    {who:'leila',time:'09:31',text:'14-day battery life on a CR2430 coin cell is achievable — I've modelled it at 10.8μA average current and we have 270mAh capacity. The margin is 3x. <strong>The risk is if James's algorithm requires more compute cycles than planned — each additional processing step adds current draw.</strong> I need a current budget from James for the algorithm running at 256Hz sample rate.'},
+    {who:'james',time:'09:34',text:'Algorithm current budget: the AMAR motion artifact rejection adds approximately 0.8μA — I've profiled it. Total MCU active current including ECG sampling and algorithm: 8.2μA. That leaves Leila plenty of headroom on a 10.8μA system budget.',null,['✅ 3']},
+    {who:'frank',time:'09:37',text:'Manufacturing has two concerns: (1) The electrode silver chloride deposition must be within a tight thickness tolerance — variation causes impedance issues that directly affect ECG quality. <strong>I'm proposing incoming QC SPC on every electrode batch from day one.</strong> (2) The disposable patch adhesive must be applied in a controlled environment — humidity affects the adhesive bond strength. I need a humidity-controlled assembly area specification before EVT build.'},
+    {who:'sarah',time:'09:41',text:'Both approved. SPC on electrodes from EVT, humidity-controlled assembly. Frank — write the assembly environment spec this week. One final question: 510(k) vs De Novo regulatory pathway. De Novo would give us a broader indication but takes 18 months vs 12. What's the call?'},
+    {who:'marcus',time:'09:44',text:'510(k) via substantial equivalence to the Zio Patch predicate. The predicate match is strong — same indication, same technology, same duration. De Novo is not justified given how close we are to the predicate. <strong>510(k) is the faster path and the lower risk path for this device.</strong>'},
+    {type:'issue',sev:'low',title:'Program Priority Decision — MedPatch Cardiac Monitor',body:'P0 (regulatory-critical, immovable): (1) IRB protocol submission by Week 4 — Amanda. (2) Clinical study start Week 12 — DVT-1 hardware ready. (3) ISO 10993 samples to external lab by Week 4 — Frank. (4) DHF open from today — every decision has a DHF entry.
+P1 (EVT must-close): (5) ECG SNR ≥25dB on first PCB spin. (6) 14-day adhesion in shower simulation. (7) Electrode incoming QC SPC — from EVT Day 1.
+P2 (DVT scope): (8) Motion artifact rejection algorithm validation on clinical population. (9) BLE companion app.
+Arrhythmia algorithm scope (hard limit): AFib, bradycardia, pause only. No additional classes for v1.',tags:['planning','priorities','critical-path','medical','510k','FDA','DHF']},
+    {who:'sarah',time:'09:50',text:'Priority stack locked. DHF entry for this entire meeting to be filed by Marcus by EOD. Every word spoken in this room today is part of our regulatory record. Amanda — IRB protocol. Week 4. No slip.'},
+  ],
+
+};
+
+const GATE_CONVERSATIONS = {
+
+  p1: {
+    evt: [
+      {type:'day',label:'Week 6 — EVT Gate Review'},
+      {who:'marcus',time:'10:00',text:'Opening the EVT gate for Aurora TWS. Each lead gives a Red / Amber / Green — decision is Pass, Conditional Pass, or Hold. Rachel, Mechanical first.'},
+      {who:'rachel',time:'10:02',text:'Mechanical: <strong>AMBER.</strong> Leaf spring fix tooled, arriving Thursday. Vent jig CM corrective action committed for EVT-2. No blockers to proceeding.'},
+      {who:'david',time:'10:04',text:'Electrical: <strong>AMBER.</strong> Qi/BT coupling is highest-severity open item — layout fix engineered and submitted, not yet on hardware. Solution is defined and low-risk.'},
+      {who:'yusuf',time:'10:06',text:'RF: confirms AMBER. 1.5mm coil shift recovers range to 10.4m in simulation. Fix is clear, just needs EVT-2 boards.'},
+      {who:'amanda',time:'10:08',text:'Test &amp; Verification: <strong>AMBER.</strong> SPL variance tied to vent jig fix, carries to EVT-2. Touch endurance and wear: GREEN. No safety blockers.'},
+      {who:'leila',time:'10:10',text:'Battery: <strong>GREEN.</strong> Self-discharge at 0.9%/week — inside spec. BMS FW fix confirmed. Capacity and cycle data nominal.'},
+      {who:'frank',time:'10:12',text:'Manufacturing: <strong>AMBER.</strong> Two CM corrective actions in flight with written commitments. Yield data available at DVT entry.'},
+      {type:'issue',sev:'med',title:'EVT Gate: CONDITIONAL PASS → DVT',body:'3 carry-forward items: Qi/BT layout fix (solution defined, EVT-2 PCBA), vent jig pin (CM committed), gasket compound (BOM corrected). DVT entry approved Week 8.',tags:['gate','EVT','conditional-pass']},
+      {who:'sarah',time:'10:15',text:'<strong>Conditional Pass to DVT.</strong> All carry-forward items have owners and committed dates. Marcus, gate package to VP Hardware by EOD. Good work everyone.'},
+    ],
+    dvt: [
+      {type:'day',label:'Week 14 — DVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'DVT gate review for Aurora TWS. A Hold requires VP override. Leads only — status and blockers. Rachel, Mechanical.'},
+      {who:'rachel',time:'09:02',text:'Mechanical: <strong>GREEN.</strong> Ribbed shell tooling confirmed — drop test 30/30 on printed mockups. Hinge spring zero rattle complaints. Leaf spring supplier qualified.'},
+      {who:'david',time:'09:04',text:'Electrical: <strong>GREEN.</strong> BT range 10.4m confirmed. IP54 re-test PASS with correct 70A gasket. PCBA first-pass yield 96.2%.'},
+      {who:'james',time:'09:06',text:'Software: <strong>GREEN.</strong> ANC notch filter validated across all 6 head-forms. FW v1.1 feature-complete. BMS v0.9 pending PVT lock.'},
+      {who:'amanda',time:'09:08',text:'Test &amp; Verification: <strong>AMBER.</strong> IP54 and touch endurance PASS. Drop test passes on printed mockups — need re-confirmation on production tool parts before PVT build start.'},
+      {who:'frank',time:'09:10',text:'Manufacturing: <strong>AMBER.</strong> Cycle time 28s vs 22s target — UV lamp replacement underway. DVT yield 94%, improving with process stabilisation. Not a design blocker.'},
+      {who:'leila',time:'09:12',text:'Battery: <strong>GREEN.</strong> 6.3h earbud, 31.1h case — both above spec. 300-cycle retention 89%. Cell qualification complete.'},
+      {type:'issue',sev:'low',title:'DVT Gate: CONDITIONAL PASS → PVT',body:'2 amber carry-forwards: (1) Drop — reconfirm on production tool parts before PVT sign-off. (2) Cycle time — UV lamp fix must hit 22s before PVT build start. PVT entry approved Week 17.',tags:['gate','DVT','conditional-pass']},
+      {who:'sarah',time:'09:16',text:'<strong>Conditional Pass to PVT.</strong> Both ambers are process issues, not design issues. Tom — drop on real tool parts is Day 1 PVT task. Frank — cycle time must be green before the build starts.'},
+    ],
+    pvt: [
+      {type:'day',label:'Week 21 — PVT Gate Review (MP Release)'},
+      {who:'marcus',time:'14:00',text:'Mass Production release review. A Pass here authorises the CM to build against firm POs. I need a verbal GREEN from every lead before Sarah signs the release memo.'},
+      {who:'rachel',time:'14:02',text:'Mechanical: <strong>GREEN.</strong> Drop test PASS on production tool parts — 30/30. All tooling qualified. Zero open mechanical defects.'},
+      {who:'david',time:'14:04',text:'Electrical: <strong>GREEN.</strong> PCBA yield 99.3% after reflow profile fix. All protective circuits functional. BOM locked, no open substitutions.'},
+      {who:'amanda',time:'14:06',text:'Test &amp; Verification: <strong>GREEN.</strong> Full qualification suite complete — IP54, drop, touch endurance, ANC, audio all PASS. EOL test station validated.'},
+      {who:'frank',time:'14:08',text:'Manufacturing: <strong>GREEN.</strong> Cycle time 21.8s — under 22s target. Line yield Day 3: 99.1%. CM has signed the production control plan.'},
+      {who:'leila',time:'14:10',text:'Battery: <strong>GREEN.</strong> BMS FW v1.3.1 production-locked. All cell batches cleared by incoming QC. Full sign-off confirmed.'},
+      {who:'james',time:'14:12',text:'Software: <strong>GREEN.</strong> FW v1.3.1 production-locked, matches BMS. EOL stations updated and verified. OTA infrastructure live.'},
+      {type:'issue',sev:'low',title:'PVT Gate: PASS — Authorised for Mass Production',body:'All teams GREEN. Zero open defects above LOW severity. Yield 99.1% on 500-unit PVT build. Battery, software, and regulatory all signed off. CM authorised to proceed to MP against PO-2026-441.',tags:['gate','PVT','pass','MP-release']},
+      {who:'sarah',time:'14:15',text:'<strong>Aurora TWS is released to Mass Production.</strong> Signing the MP release memo now. Marcus, distribute to CM and procurement. Exceptional program — congratulations to the whole team. 🎉'},
+    ],
+  },
+
+  p2: {
+    evt: [
+      {type:'day',label:'Week 5 — EVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'EVT gate for Pulse Health Band. Reminder: this is a Class II medical device — all open items must carry a risk classification per ISO 14971. DHF entry required for every carry-forward. Rachel, Mechanical.'},
+      {who:'rachel',time:'09:02',text:'Mechanical: <strong>AMBER.</strong> Strap lug press-fit design complete — tooling ordered. Adhesive edge-lifting fix (thicker backing film) in design review. No functional safety risk.'},
+      {who:'david',time:'09:04',text:'Electrical: <strong>AMBER.</strong> ECG SNR at 22dB vs 25dB spec — layout revision submitted with feedback resistor moved to bottom layer. FW notch filter provides interim improvement. Not a safety blocker.'},
+      {who:'leila',time:'09:06',text:'Battery: <strong>GREEN.</strong> 98.2mAh first cycle, 48h temp soak in progress — no swelling observed. Runtime calculation on track for 72h target.'},
+      {who:'amanda',time:'09:08',text:'Test &amp; Verification: <strong>AMBER.</strong> ECG quality score 3.8/5 on current hardware — expected to improve with layout fix. Motion artifact rejection needs firmware work. No safety signal detected.'},
+      {who:'frank',time:'09:10',text:'Manufacturing: <strong>AMBER.</strong> Strap lug weld supplier change in progress. DHF entry filed for press-fit design change DC-004. No production blockers.'},
+      {type:'issue',sev:'med',title:'EVT Gate: CONDITIONAL PASS → DVT',body:'2 carry-forwards with DHF entries: (1) ECG SNR — layout fix ordered, expect 26dB on EVT-2. (2) Strap lug — press-fit tooling in progress. ISO 14971 risk assessments filed for both items. DVT entry approved Week 8.',tags:['gate','EVT','conditional-pass','medical']},
+      {who:'sarah',time:'09:13',text:'<strong>Conditional Pass to DVT.</strong> Both carry-forwards have DHF entries and risk assessments. Marcus, ensure all gate documents are in the DHF before EOD — regulatory requires a complete audit trail.'},
+    ],
+    dvt: [
+      {type:'day',label:'Week 11 — DVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'DVT gate for Pulse Health Band. We are tracking to 510(k) submission — any Hold here shifts the regulatory timeline by a minimum of 6 weeks. Leads, status and blockers.'},
+      {who:'rachel',time:'09:02',text:'Mechanical: <strong>GREEN.</strong> Press-fit lug insert validated — 50,000 flex cycles, zero failures. Adhesive backing film upgraded — shower simulation PASS on all 20 units.'},
+      {who:'david',time:'09:04',text:'Electrical: <strong>GREEN.</strong> ECG SNR 26dB on DVT-1 layout — exceeds 25dB spec. Powerline noise floor cleared. CMRR 92dB at 50/60Hz.'},
+      {who:'amanda',time:'09:06',text:'Test &amp; Verification: <strong>AMBER.</strong> Biocompatibility: all materials PASS except red silicone pigment — borderline cytotoxicity at >0.5%. Frank has a certified replacement incoming. Not a blocker if resolved for DVT-2.'},
+      {who:'leila',time:'09:08',text:'Battery: <strong>AMBER.</strong> 72h runtime — currently 69.4h, 3.6% short. Adaptive sample rate firmware fix estimated to recover to 78h. James has the FW ready for bench test today.'},
+      {who:'frank',time:'09:10',text:'Manufacturing: <strong>AMBER.</strong> Pigment swap requires qualification run — $3.2k, 2-week lead. DHF entry filed. No tool change needed.'},
+      {type:'issue',sev:'med',title:'DVT Gate: CONDITIONAL PASS → PVT',body:'2 carry-forwards: (1) Pigment biocomp — Clariant medical-grade replacement qualified, DVT-2 strap run scheduled. (2) Runtime — adaptive sample rate FW fix modelled to achieve 78h; bench validation required. PVT entry approved Week 18.',tags:['gate','DVT','conditional-pass','medical']},
+      {who:'sarah',time:'09:14',text:'<strong>Conditional Pass to PVT.</strong> Both items have defined solutions. DHF entries must be approved by the QA lead before PVT build start — no exceptions on a Class II device.'},
+    ],
+    pvt: [
+      {type:'day',label:'Week 22 — PVT Gate Review (Regulatory Release)'},
+      {who:'marcus',time:'10:00',text:'PVT gate for Pulse Health Band. Pass here authorises 510(k) submission and CM release. QA lead is joining today to co-sign the DHF release package.'},
+      {who:'rachel',time:'10:02',text:'Mechanical: <strong>GREEN.</strong> All mechanical qualification complete. Strap lug: 50,000 cycles PASS. Adhesive: 14-day wear simulation PASS. Peel tab usability study: PASS on elderly user cohort.'},
+      {who:'david',time:'10:04',text:'Electrical: <strong>GREEN.</strong> ECG SNR 26dB across all 300 PVT units. PA tuning cap batch issue resolved — 100% incoming inspection on passives implemented. Yield 98.2%.'},
+      {who:'amanda',time:'10:06',text:'Test &amp; Verification: <strong>GREEN.</strong> 510(k) performance data complete — 30 patients, 420 patient-days. ECG classification accuracy 97.8% vs cardiologist gold standard. All ISO 60601 electrical safety tests PASS.'},
+      {who:'frank',time:'10:08',text:'Manufacturing: <strong>GREEN.</strong> Pigment qualification complete — biocomp re-test PASS. Line yield 98.2%. DHF production records complete.'},
+      {who:'leila',time:'10:10',text:'Battery: <strong>GREEN.</strong> Runtime 78h confirmed with adaptive FW. 0.9%/week self-discharge. All cell batches cleared.'},
+      {type:'issue',sev:'low',title:'PVT Gate: PASS — 510(k) Submission Authorised',body:'All teams GREEN. DHF version-locked with QA approval signatures. 510(k) performance package complete. CM authorised to build against submission lot. Regulatory submission target: end of sprint.',tags:['gate','PVT','pass','510k','medical']},
+      {who:'sarah',time:'10:14',text:'<strong>Pulse Health Band PVT PASS.</strong> DHF is locked. Submitting 510(k) to FDA this sprint. Marcus, notify the CM and procurement. Excellent discipline on the regulatory process throughout — this is how medical device programs should run.'},
+    ],
+  },
+
+  p3: {
+    evt: [
+      {type:'day',label:'Week 5 — EVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'EVT gate for VoltPath EV Charger. This is a 240VAC mains-connected product — any safety-related open item is automatically a HOLD until resolved. David, Electrical first.'},
+      {who:'david',time:'09:02',text:'Electrical: <strong>GREEN on safety.</strong> AFCI trip time 8.3ms — PASS. RCD trip 28ms — PASS. OVP and thermal cutout both functional. SAFETY-001 is formally closed. Remaining electrical items: AMBER — OCPP backoff fix in firmware, low risk.'},
+      {who:'rachel',time:'09:04',text:'Mechanical: <strong>AMBER.</strong> Strain relief overmould cracking at -10°C — Santoprene 101-55 TPE replacement ordered, sample arriving this week. No functional impact at normal operating temperatures.'},
+      {who:'james',time:'09:06',text:'Software: <strong>AMBER.</strong> OCPP exponential backoff fix implemented in FW v0.3 — bench-tested against all 5 backend servers, all passing. Connector lock-on-offline fix also included.'},
+      {who:'amanda',time:'09:08',text:'Test &amp; Verification: <strong>GREEN.</strong> All safety protection circuits independently verified. Thermal cutout at 88°C — within spec. No safety or reliability blockers.'},
+      {who:'frank',time:'09:10',text:'Manufacturing: <strong>AMBER.</strong> Cable gland material change requires supplier qualification. Lead time 3 weeks. No impact to EVT-2 build schedule.'},
+      {type:'issue',sev:'low',title:'EVT Gate: CONDITIONAL PASS → DVT',body:'2 carry-forwards: (1) Strain relief material change — Santoprene 101-55 samples for destructive test. (2) Cable gland supplier qualification in progress. All safety items GREEN and closed. DVT entry approved Week 9.',tags:['gate','EVT','conditional-pass','safety']},
+      {who:'sarah',time:'09:13',text:'<strong>Conditional Pass to DVT.</strong> Safety gate is clean — AFCI, RCD, OVP all confirmed. Material changes carry forward with owners and timelines. Good work on the safety review.'},
+    ],
+    dvt: [
+      {type:'day',label:'Week 12 — DVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'DVT gate for VoltPath. We need UL 2594 witness test readiness at PVT. Any open EMC or thermal item must be resolved or have a defined fix on DVT-2. Kevin, EMC first.'},
+      {who:'kevin',time:'09:02',text:'Electrical/EMC: <strong>AMBER.</strong> Pre-scan failing FCC Part 15B at 150MHz and 300MHz. Ferrite clamp fix (TDK ZCAT3035) designed and validated in simulation — 22dB reduction. DVT-2 BOM updated. Not on hardware yet.'},
+      {who:'david',time:'09:04',text:'Electrical/Thermal: <strong>AMBER.</strong> Relay contacts at 82°C vs 85°C limit — Bergquist GP3000 thermal pad fix reduces junction to 71°C. ECN-067 filed. DVT-2 parts ordered.'},
+      {who:'james',time:'09:06',text:'Software: <strong>GREEN.</strong> OCPP 2.0 upgrade validated against 5 backend servers — all handshakes passing within 3s. Load balancing algorithm verified at 48A continuous.'},
+      {who:'amanda',time:'09:08',text:'Test &amp; Verification: <strong>AMBER.</strong> Cannot run final EMC scan until ferrite fix is on hardware. Thermal re-test pending pad swap. All other electrical safety tests GREEN.'},
+      {who:'frank',time:'09:10',text:'Manufacturing: <strong>GREEN.</strong> GFCI trimmer identified as calibration risk — recommending laser-trimmed resistor for PVT. Santoprene strain relief supplier qualified.'},
+      {type:'issue',sev:'med',title:'DVT Gate: CONDITIONAL PASS → PVT',body:'2 amber items must be green on DVT-2 before PVT build starts: (1) EMC — ferrite fix on hardware + full re-scan. (2) Thermal — relay pad swap + temperature re-test at 48A/50°C. PVT entry approved Week 17 subject to DVT-2 results.',tags:['gate','DVT','conditional-pass']},
+      {who:'sarah',time:'09:14',text:'<strong>Conditional Pass to PVT, subject to DVT-2 EMC and thermal confirmation.</strong> Kevin and David — I need written sign-off on both items before we cut the PVT build order. No exceptions on a mains-connected product.'},
+    ],
+    pvt: [
+      {type:'day',label:'Week 21 — PVT Gate Review (UL Listing)'},
+      {who:'marcus',time:'09:00',text:'PVT gate for VoltPath. Pass here triggers UL witness test scheduling and CM PO release. Ryan — UL readiness summary first.'},
+      {who:'ryan',time:'09:02',text:'Test &amp; Verification: <strong>GREEN.</strong> Electrical safety PASS on all 200 units. EMC re-scan with ferrite fix: PASS — FCC Part 15B Class B confirmed. Temperature rise test: PASS — relay junction 71°C at 48A continuous.'},
+      {who:'david',time:'09:04',text:'Electrical: <strong>GREEN.</strong> Yield 95.2% — GFCI laser-trimmed resistor eliminates calibration variation. All protection circuits verified. BOM locked.'},
+      {who:'frank',time:'09:06',text:'Manufacturing: <strong>GREEN.</strong> Line yield 95.2% — improving. GFCI resistor change approved, NRE $2k authorised. CM has signed the production control plan.'},
+      {who:'james',time:'09:08',text:'Software: <strong>GREEN.</strong> OCPP 2.0 FW v1.2 production-locked. OTA update channel tested. Load balancing algorithm validated across 48A range.'},
+      {who:'rachel',time:'09:10',text:'Mechanical: <strong>GREEN.</strong> Strain relief destrucive test at -40°C: PASS — Santoprene 101-55 confirmed. IP54 cable gland PASS. Enclosure IK08 impact rating PASS.'},
+      {type:'issue',sev:'low',title:'PVT Gate: PASS — UL Witness Test Authorised',body:'All teams GREEN. UL 2594 submission package complete — electrical safety, EMC, temperature rise. CM authorised to build against UL witness test lot. UL listing target: 6 weeks post-witness.',tags:['gate','PVT','pass','UL']},
+      {who:'sarah',time:'09:13',text:'<strong>VoltPath EV Charger released to UL witness testing.</strong> Excellent outcome on the safety and EMC campaigns. Marcus, schedule UL witness test for Monday and release the CM PO. Well done team.'},
+    ],
+  },
+
+  p4: {
+    evt: [
+      {type:'day',label:'Week 5 — EVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'EVT gate for Nexus Smart Hub. Five radios in one box — coexistence and RF are the make-or-break risks this stage. Yusuf, RF first.'},
+      {who:'yusuf',time:'09:02',text:'RF: <strong>AMBER.</strong> Worst-case coexistence — 22% BT packet loss during Zigbee broadcast. Qorvo QPG7015M arbiter chip selected and ordered. Layout space confirmed. Fix is engineered, not yet on hardware.'},
+      {who:'james',time:'09:04',text:'Software: <strong>AMBER.</strong> Matter SDK 1.0.0.2 has a Discriminator encoding bug on iOS 17.4 — upgrade to 1.1.0.0 in progress, test build in 2 hours. Low-risk fix.'},
+      {who:'david',time:'09:06',text:'Electrical: <strong>GREEN.</strong> All five radio front-ends functional. Power supply rails stable. Layout review complete — coexistence arbiter footprint reserved on next spin.'},
+      {who:'amanda',time:'09:08',text:'Test &amp; Verification: <strong>AMBER.</strong> Cannot run final coexistence validation until arbiter chip is on hardware. All other functional tests GREEN.'},
+      {who:'frank',time:'09:10',text:'Manufacturing: <strong>GREEN.</strong> BOM for EVT-2 with arbiter included. Component lead time 4 weeks — ordering today to protect schedule.'},
+      {type:'issue',sev:'med',title:'EVT Gate: CONDITIONAL PASS → DVT',body:'2 carry-forwards: (1) BT/Zigbee coexistence — QPG7015M arbiter ordered, DVT-1 layout updated. (2) Matter SDK Discriminator fix — upgrade in progress, bench-tested before DVT build. DVT entry approved Week 8.',tags:['gate','EVT','conditional-pass']},
+      {who:'sarah',time:'09:13',text:'<strong>Conditional Pass to DVT.</strong> Coexistence fix is well-defined — arbiter chip is the industry-standard solution. James, Matter SDK fix must be confirmed before DVT build order is cut.'},
+    ],
+    dvt: [
+      {type:'day',label:'Week 12 — DVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'DVT gate for Nexus Smart Hub. CE and ErP compliance required for EU launch. Leads — status and blockers.'},
+      {who:'yusuf',time:'09:02',text:'RF: <strong>GREEN.</strong> QPG7015M arbiter on DVT-1 — BT packet loss 0.8% during Zigbee broadcast, down from 22%. Wi-Fi throughput unaffected. Thread mesh formation under 2s. Coexistence resolved.'},
+      {who:'james',time:'09:04',text:'Software: <strong>GREEN.</strong> Matter SDK 1.1.0.0 — commissioning passes on iOS 17.4, Android 14, and 8 other devices. Edge AI wake-word latency 185ms on NPU — ahead of 300ms spec.'},
+      {who:'david',time:'09:06',text:'Electrical: <strong>AMBER.</strong> ErP idle power at 0.8W vs 0.5W spec. James has the kernel power governor fix modelled to bring it to 0.35W — needs overnight test to confirm.'},
+      {who:'amanda',time:'09:08',text:'Test &amp; Verification: <strong>AMBER.</strong> ErP idle power test blocking — need confirmed measurement before gate close. All RF regulatory pre-scans GREEN. CE EMC pre-compliance: PASS.'},
+      {who:'frank',time:'09:10',text:'Manufacturing: <strong>GREEN.</strong> BOM locked. Component availability confirmed for 3-month horizon. EOL station RF calibration plan ready.'},
+      {type:'issue',sev:'low',title:'DVT Gate: CONDITIONAL PASS → PVT',body:'1 carry-forward: ErP idle power — software fix modelled at 0.35W, overnight test running. Must confirm <0.5W before PVT build order. All RF coexistence and CE EMC items GREEN. PVT entry approved Week 15.',tags:['gate','DVT','conditional-pass']},
+      {who:'sarah',time:'09:13',text:'<strong>Conditional Pass to PVT.</strong> ErP is a software fix — James, I need the overnight test result by 8am tomorrow. If it shows 0.35W, we cut the PVT build order immediately.'},
+    ],
+    pvt: [
+      {type:'day',label:'Week 19 — PVT Gate Review (MP Release)'},
+      {who:'marcus',time:'09:00',text:'PVT gate for Nexus Smart Hub. All five radios must be calibrated and coexistence verified on the production line before I call this a Pass.'},
+      {who:'yusuf',time:'09:02',text:'RF: <strong>GREEN.</strong> All five radios calibrated at EOL — BT, Zigbee, Z-Wave, Thread, Wi-Fi 6. Coexistence verified on 10 production units. No degradation from EVT/DVT.'},
+      {who:'james',time:'09:04',text:'Software: <strong>GREEN.</strong> ErP idle power confirmed 0.32W — below 0.5W spec. FW production-locked. Matter re-certification submitted and returned PASS.'},
+      {who:'david',time:'09:06',text:'Electrical: <strong>GREEN.</strong> Yield Day 3: 98.4%. Wi-Fi and Z-Wave cal issues resolved — phase-stable SMA cables and 5°C EOL temperature offset. BOM locked.'},
+      {who:'amanda',time:'09:08',text:'Test &amp; Verification: <strong>GREEN.</strong> Full qualification suite PASS. CE marking issued. ErP measurement report signed off by test lab.'},
+      {who:'frank',time:'09:10',text:'Manufacturing: <strong>GREEN.</strong> Yield 98.4%. EOL station calibrating all 5 radios in 38s per unit — within cycle time budget. Production control plan signed.'},
+      {type:'issue',sev:'low',title:'PVT Gate: PASS — Authorised for Mass Production',body:'All teams GREEN. Five-radio coexistence verified on production line. CE marking issued. ErP 0.32W confirmed. Yield 98.4% on 200-unit build. CM authorised to proceed to MP.',tags:['gate','PVT','pass','MP-release']},
+      {who:'sarah',time:'09:13',text:'<strong>Nexus Smart Hub released to Mass Production.</strong> Five radios, one clean gate — that is an achievement. Marcus, release the CM PO. Congratulations to the RF and software teams especially.'},
+    ],
+  },
+
+  p5: {
+    evt: [
+      {type:'day',label:'Week 6 — EVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'EVT gate for Prism Handheld. Thermal and battery are our existential risks — both need a clear path forward before I approve DVT entry. Rachel, Mechanical/Thermal first.'},
+      {who:'rachel',time:'09:02',text:'Mechanical: <strong>AMBER.</strong> Vapor chamber at 28W TDP — junction temp 94°C, 6°C margin to limit. Tight but not failing. Airflow test rig data shows real-world variance could consume 3-4°C of that margin. Need DPTF tuning.'},
+      {who:'david',time:'09:04',text:'Electrical: <strong>GREEN.</strong> All power rails stable. x86 SoC boot reliable. Display MIPI interface functional. Battery charge circuit nominal.'},
+      {who:'leila',time:'09:06',text:'Battery: <strong>AMBER.</strong> Runtime at 28W: 1h 52min — 8 minutes short of 2h spec. Auto-dimming ambient light sensor solution modelled at +22min. Combined with CPU DPTF optimisation, projected runtime 2h 03min. Solution is designed, not yet validated.'},
+      {who:'james',time:'09:08',text:'Software: <strong>AMBER.</strong> DPTF policy too conservative — throttling before 80°C junction. Emma and Carlos are retuning trip points against Rachel's thermal model. FW v0.3 due tomorrow.'},
+      {who:'amanda',time:'09:10',text:'Test &amp; Verification: <strong>AMBER.</strong> Gaming performance at target 60fps. P99 frame time 28ms vs 25ms target — profiling underway. Thermal and battery tests pending firmware tuning.'},
+      {type:'issue',sev:'med',title:'EVT Gate: CONDITIONAL PASS → DVT',body:'3 carry-forwards: (1) Thermal — DPTF retuning + auto-dim solution to be validated on EVT-2. (2) Runtime — 2h target requires combined FW and HW fix, modelled at 2h 03min. (3) Frame time P99 — profiling in progress. DVT entry approved Week 9.',tags:['gate','EVT','conditional-pass']},
+      {who:'sarah',time:'09:13',text:'<strong>Conditional Pass to DVT.</strong> All three items have defined engineering paths. James — I want runtime validated on EVT-2 before DVT build order. If we miss 2h, we have a product positioning problem.'},
+    ],
+    dvt: [
+      {type:'day',label:'Week 13 — DVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'DVT gate for Prism Handheld. Drop test failures were a concern — Sophie, start with the structural update.'},
+      {who:'sophie',time:'09:02',text:'Test &amp; Verification (structural): <strong>AMBER.</strong> Screen crack fix — TPU bead and wider adhesive bond — passes on printed mockups 20/20. Need real tool samples to fully close. TOOL-044 mold modification has a 2-week lead.'},
+      {who:'rachel',time:'09:04',text:'Mechanical: <strong>GREEN.</strong> Vapor chamber at 28W: junction 91°C — 9°C margin after DPTF retuning. Airflow confirmed adequate in all grip orientations. Thermal design signed off.'},
+      {who:'leila',time:'09:06',text:'Battery: <strong>GREEN.</strong> Runtime 2h 03min at 28W with auto-dim and DPTF fix — confirmed on EVT-2 hardware. 300-cycle capacity retention 88% — above 85% floor. Cell qualification complete.'},
+      {who:'james',time:'09:08',text:'Software: <strong>GREEN.</strong> DPTF retuned — no thermal throttle before 88°C. Frame time P99 now 23ms — below 25ms target. FW v0.8 stable.'},
+      {who:'frank',time:'09:10',text:'Manufacturing: <strong>AMBER.</strong> Display probe contamination issue on ATE fixture — IPA wipe station being added. Cell grade sorting procedure drafted.'},
+      {type:'issue',sev:'low',title:'DVT Gate: CONDITIONAL PASS → PVT',body:'2 carry-forwards: (1) Drop test — must reconfirm on production tool parts from TOOL-044 mold. (2) ATE probe contamination — IPA wipe station must be in place before PVT build. PVT entry approved Week 18.',tags:['gate','DVT','conditional-pass']},
+      {who:'sarah',time:'09:13',text:'<strong>Conditional Pass to PVT.</strong> Battery and thermal are both clean — those were the existential risks. Screen drop is a process fix. Frank — ATE wipe station must be validated before Day 1 of PVT build.'},
+    ],
+    pvt: [
+      {type:'day',label:'Week 22 — PVT Gate Review (MP Release)'},
+      {who:'marcus',time:'09:00',text:'PVT gate for Prism Handheld. All carry-forward items must be confirmed GREEN before I approve MP release.'},
+      {who:'sophie',time:'09:02',text:'Test &amp; Verification: <strong>GREEN.</strong> Drop test on production tool parts — 20/20 PASS with TPU bead and wider adhesive bond. Screen qualification complete.'},
+      {who:'leila',time:'09:04',text:'Battery: <strong>GREEN.</strong> Cell grade sorting confirmed — all Grade A cells verified by capacity test at incoming QC. No Grade B cells in PVT build. Thermal at 28W: junction 91°C.'},
+      {who:'frank',time:'09:06',text:'Manufacturing: <strong>GREEN.</strong> IPA wipe station operational. Display test yield 99.4% after probe cleaning. Overall PVT yield Day 3: 97.6%. Cell sorting adds 45s to line cycle — within budget.'},
+      {who:'james',time:'09:08',text:'Software: <strong>GREEN.</strong> FW v1.0 production-locked. Gaming OS image validated. OTA channel live and tested.'},
+      {who:'amanda',time:'09:10',text:'Test &amp; Verification (full): <strong>GREEN.</strong> Full qualification suite PASS — thermal, drop, battery, display, gaming performance. FCC and CE regulatory certifications submitted.'},
+      {type:'issue',sev:'low',title:'PVT Gate: PASS — Authorised for Mass Production',body:'All teams GREEN. Drop test confirmed on production tooling. Yield 97.6% on 500-unit build. Battery runtime 2h 03min at 28W confirmed. CM authorised to proceed to MP.',tags:['gate','PVT','pass','MP-release']},
+      {who:'sarah',time:'09:13',text:'<strong>Prism Handheld Console released to Mass Production.</strong> From a thermal-critical EVT to a clean PVT — excellent engineering discipline. Marcus, release the CM PO and notify retail partners.'},
+    ],
+  },
+
+  p6: {
+    evt: [
+      {type:'day',label:'Week 5 — EVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'EVT gate for FieldSense IoT Node. IP67 and 10-year battery life are the two non-negotiables. Yusuf, RF range first.'},
+      {who:'yusuf',time:'09:02',text:'RF: <strong>AMBER.</strong> LoRa urban range 4.2km vs 5km spec — ground plane 8mm from antenna element, should be 15mm. Ground pour cut on 10 boards today recovers to 5.2km estimated. EVT-2 layout fix confirmed.'},
+      {who:'rachel',time:'09:04',text:'Mechanical: <strong>AMBER.</strong> IP67 failed at cable gland — polyamide cracking at -30°C. Glass-filled PA or metal gland body needed. Supplier contact made, samples due Thursday.'},
+      {who:'leila',time:'09:06',text:'Battery: <strong>GREEN.</strong> Peripheral clock gate fix implemented — average current now 115μA. 10-year life at 1 message/minute confirmed by calculation. Primary cell nominal.'},
+      {who:'james',time:'09:08',text:'Software: <strong>GREEN.</strong> Deep sleep firmware confirmed — MCU current 2μA in sleep. LoRa WAN join rate 94% in initial outdoor test. ADR functioning correctly.'},
+      {who:'amanda',time:'09:10',text:'Test &amp; Verification: <strong>AMBER.</strong> IP67 blocked by cable gland. All other EVT tests GREEN — vibration, thermal range, LoRa link budget.'},
+      {type:'issue',sev:'med',title:'EVT Gate: CONDITIONAL PASS → DVT',body:'2 carry-forwards: (1) LoRa antenna ground plane — layout fix confirmed, EVT-2 boards cut. (2) Cable gland material — metal/glass-filled PA samples for IP67 retest. DVT entry approved Week 8.',tags:['gate','EVT','conditional-pass','industrial']},
+      {who:'sarah',time:'09:13',text:'<strong>Conditional Pass to DVT.</strong> Battery life is confirmed — that was the hardest requirement. IP67 and range fixes are well understood. Frank, make sure the new cable gland is on the DVT-1 BOM.'},
+    ],
+    dvt: [
+      {type:'day',label:'Week 11 — DVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'DVT gate for FieldSense IoT Node. IEC 60068 environmental qualification must be complete or in-progress before I approve PVT entry.'},
+      {who:'amanda',time:'09:02',text:'Test &amp; Verification: <strong>GREEN.</strong> Thermal cycling -40°C to +85°C, 100 cycles — PASS on all 30 units. Vibration per IEC 60068-2-6: PASS. IP67 immersion 1m/30min: PASS on 29/30 — one cable gland batch issue (2024-C), not a design issue.'},
+      {who:'frank',time:'09:04',text:'Manufacturing: <strong>GREEN.</strong> Cable gland batch 2024-C quarantined — supplier confirmed tooling defect. Replacement batch 2024-D incoming and tested. All DVT-2 units use 2024-D.'},
+      {who:'yusuf',time:'09:06',text:'RF: <strong>GREEN.</strong> LoRa range with corrected ground plane: 5.4km urban, 16km line-of-sight — both above spec. Antenna VSWR across temperature range: within spec.'},
+      {who:'james',time:'09:08',text:'Software: <strong>GREEN.</strong> 50-node field pilot — join rate 98.4%. OTA firmware update over LoRa: 14 minutes for 64kB — acceptable for monthly cadence. ADR confirmed functional in real network.'},
+      {who:'leila',time:'09:10',text:'Battery: <strong>GREEN.</strong> 115μA average current confirmed in field pilot conditions. 10-year life calculation validated with temperature derating applied.'},
+      {type:'issue',sev:'low',title:'DVT Gate: PASS → PVT',body:'All teams GREEN. Full IEC 60068 environmental qualification complete. LoRa range, IP67, and 10-year battery life all confirmed. PVT entry approved Week 16.',tags:['gate','DVT','pass','industrial']},
+      {who:'sarah',time:'09:13',text:'<strong>Clean Pass to PVT.</strong> This is a well-executed industrial IoT program — environmental qualification complete at DVT, no major carry-forwards. Frank, PVT build order to CM today.'},
+    ],
+    pvt: [
+      {type:'day',label:'Week 19 — PVT Gate Review (MP Release)'},
+      {who:'marcus',time:'09:00',text:'PVT gate for FieldSense IoT Node. CE, FCC, and IC regulatory submissions must be ready to file alongside MP release. Ryan, yield summary.'},
+      {who:'ryan',time:'09:02',text:'Test &amp; Verification: <strong>GREEN.</strong> PVT yield 97.2% on 200 units. LoRa frequency tolerance failures resolved by EOL calibration procedure. All IP67 units passing with 2024-D cable glands.'},
+      {who:'frank',time:'09:04',text:'Manufacturing: <strong>GREEN.</strong> EOL calibration adds 22s per unit — within cycle time budget. 2024-D cable gland batch fully received and inspected. Production control plan signed.'},
+      {who:'leila',time:'09:06',text:'Battery: <strong>GREEN.</strong> Primary cell voltage at EOL: 3.67V — all units within spec. No cell swelling or anomalies detected.'},
+      {who:'james',time:'09:08',text:'Software: <strong>GREEN.</strong> FW production-locked. LoRa WAN network server integration tested with 3 commercial platforms. OTA update mechanism validated.'},
+      {who:'amanda',time:'09:10',text:'Regulatory: <strong>GREEN.</strong> CE marking package complete — RED directive and ETSI EN 300 220 test reports signed. FCC Part 15 and IC RSS-210 test reports complete. All three submissions ready to file.'},
+      {type:'issue',sev:'low',title:'PVT Gate: PASS — Authorised for Mass Production',body:'All teams GREEN. Yield 97.2%. CE/FCC/IC regulatory packages filed. 10-year battery life confirmed. CM authorised to proceed to MP.',tags:['gate','PVT','pass','MP-release','industrial']},
+      {who:'sarah',time:'09:13',text:'<strong>FieldSense IoT Node released to Mass Production.</strong> Regulatory filings submitted. Marcus, release the CM PO. This product hit every hard requirement — great program.'},
+    ],
+  },
+
+  p7: {
+    evt: [
+      {type:'day',label:'Week 5 — EVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'EVT gate for Lumen Smart Pendant. Mains-connected product — safety first, then flicker compliance and UWB. David, Electrical.'},
+      {who:'david',time:'09:02',text:'Electrical: <strong>GREEN on safety.</strong> All mains protection circuits functional — RCD, OVP, NTC thermal cutout all verified. Flicker index: <strong>AMBER</strong> — 0.18 vs IEEE 1789 limit of 0.10. LC filter fix designed and ready for bench validation.'},
+      {who:'yusuf',time:'09:04',text:'RF/UWB: <strong>AMBER.</strong> UWB presence detection range 6m vs 8m spec — metal canopy blocking signal. Polycarbonate window solution designed by Felix. No RF constraint prevents the fix.'},
+      {who:'felix',time:'09:06',text:'Industrial Design: <strong>AMBER.</strong> PC window in canopy maintains aesthetic — invisible from below. CAD update posted. Requires minor tooling modification, 1-week lead.'},
+      {who:'amanda',time:'09:08',text:'Test &amp; Verification: <strong>AMBER.</strong> Flicker test blocked pending LC filter. UWB range blocked pending PC window. LED colour and lumen output: GREEN — CRI 95, 1180lm at 12W.'},
+      {who:'frank',time:'09:10',text:'Manufacturing: <strong>GREEN.</strong> 230VAC wiring assembly procedure written and signed off. Safety inspection at line station documented.'},
+      {type:'issue',sev:'low',title:'EVT Gate: CONDITIONAL PASS → DVT',body:'2 carry-forwards: (1) Flicker — LC filter fix to bench-test this week, validate in DVT-1. (2) UWB range — PC window tooling mod 1-week lead, on DVT-1 units. DVT entry approved Week 8.',tags:['gate','EVT','conditional-pass']},
+      {who:'sarah',time:'09:13',text:'<strong>Conditional Pass to DVT.</strong> LED performance is excellent. Both amber items have clean engineering solutions. Kevin — flicker fix bench results to me by Thursday.'},
+    ],
+    dvt: [
+      {type:'day',label:'Week 11 — DVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'DVT gate for Lumen Smart Pendant. CE marking is required for EU launch — LVD and EMC directives must both be in the test queue before PVT entry.'},
+      {who:'david',time:'09:02',text:'Electrical: <strong>GREEN.</strong> Flicker index 0.042 at 50Hz — well below IEEE 1789 limit of 0.10. Power factor 0.96 — ErP compliant. LVD safety tests PASS.'},
+      {who:'yusuf',time:'09:04',text:'RF/UWB: <strong>GREEN.</strong> Detection range 8.4m with PC window — exceeds 8m spec. False positive rate 2.1% — below 5% spec. Zigbee range 28m open-air. No coexistence issues.'},
+      {who:'amanda',time:'09:06',text:'Test &amp; Verification: <strong>GREEN.</strong> CRI 95 at 3000K, CRI 93 at 6500K — both exceed spec. Lumen output 1180lm at 12W — 98.3 lm/W. Thermal at maximum drive: 52°C case surface — comfortable.'},
+      {who:'frank',time:'09:08',text:'Manufacturing: <strong>GREEN.</strong> PC window assembly step qualified. Wiring assembly SOP updated. Line yield on DVT run: 97.8%.'},
+      {who:'leila',time:'09:10',text:'Brownout protection: <strong>GREEN.</strong> 1000μF hold-up cap provides 50ms — sufficient for Zigbee graceful disconnect confirmed by test.'},
+      {type:'issue',sev:'low',title:'DVT Gate: PASS → PVT',body:'All teams GREEN. Flicker, UWB range, LVD safety, ErP all confirmed. CE marking pre-compliance scan scheduled for PVT-1 units. PVT entry approved Week 14.',tags:['gate','DVT','pass']},
+      {who:'sarah',time:'09:13',text:'<strong>Clean Pass to PVT.</strong> Both EVT carry-forwards resolved and confirmed. Fast, clean DVT — well done. Frank, cut the PVT build order today.'},
+    ],
+    pvt: [
+      {type:'day',label:'Week 17 — PVT Gate Review (CE Marking)'},
+      {who:'marcus',time:'09:00',text:'PVT gate for Lumen Smart Pendant. CE marking must be issued before MP release — test lab report is the gate criteria.'},
+      {who:'ryan',time:'09:02',text:'Test &amp; Verification: <strong>GREEN.</strong> PVT yield 98.1% on 300 units. LED driver voltage OOT resolved — 1% tolerance inductors on production BOM. CE marking EMC pre-scan: PASS. LVD test report: PASS.'},
+      {who:'frank',time:'09:04',text:'Manufacturing: <strong>GREEN.</strong> 1% tolerance inductor BOM change approved and received. Cycle time 18s per unit — within budget. Production control plan signed.'},
+      {who:'david',time:'09:06',text:'Electrical: <strong>GREEN.</strong> Flicker re-verified on PVT units — 0.044, within spec. Power factor 0.96. All 300 units pass electrical safety check.'},
+      {who:'yusuf',time:'09:08',text:'RF: <strong>GREEN.</strong> Zigbee and UWB calibrated at EOL. Detection range confirmed >8m on 10 sample units from PVT build.'},
+      {who:'amanda',time:'09:10',text:'Regulatory: <strong>GREEN.</strong> CE marking Declaration of Conformity signed. LVD directive and EMC directive both covered. Test lab reports attached to gate package.'},
+      {type:'issue',sev:'low',title:'PVT Gate: PASS — CE Marking Issued',body:'All teams GREEN. CE marking issued. Yield 98.1% on 300-unit build. Lumen output, flicker, UWB all confirmed. CM authorised to proceed to MP.',tags:['gate','PVT','pass','CE-marking']},
+      {who:'sarah',time:'09:13',text:'<strong>Lumen Smart Pendant released to Mass Production.</strong> CE marking in hand — clean gate. Marcus, release the CM PO and notify the retail channel. Good work everyone.'},
+    ],
+  },
+
+  p8: {
+    evt: [
+      {type:'day',label:'Week 5 — EVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'EVT gate for GuardEye Doorbell Camera. ML latency and solar performance are the two headline risks. James, ML first.'},
+      {who:'james',time:'09:02',text:'Software/ML: <strong>GREEN.</strong> Person detection latency 85ms on NPU — under 100ms spec. False positive rate 3.2% — under 5% spec. Day-time accuracy meets spec. Night-time IR accuracy at 88% AP — below 90% spec, model retrain planned.'},
+      {who:'leila',time:'09:04',text:'Battery/Solar: <strong>AMBER.</strong> Solar offsets 50% of consumption in northern European winter — USB top-up needed monthly. This is a positioning and marketing decision, not a design failure. Marketing team briefed and confirmed messaging.'},
+      {who:'yusuf',time:'09:06',text:'RF/Wi-Fi: <strong>GREEN.</strong> 2.4GHz range 40m, 5GHz range 18m through wall — both adequate. BT pairing at 3m nominal. No coexistence issues identified.'},
+      {who:'rachel',time:'09:08',text:'Mechanical: <strong>GREEN.</strong> IP65 nozzle seal gasket design passed hose test — all 20 EVT units. Housing fit and finish acceptable.'},
+      {who:'amanda',time:'09:10',text:'Test &amp; Verification: <strong>AMBER.</strong> IR night-time accuracy at 88% AP — model retrain with IR-domain training data will address. All other functional tests GREEN.'},
+      {type:'issue',sev:'low',title:'EVT Gate: CONDITIONAL PASS → DVT',body:'2 carry-forwards: (1) IR night-time ML accuracy — model retrain with 2000 IR images scheduled, targeting 91% AP. (2) Solar offset — accepted as product specification; marketing messaging confirmed. DVT entry approved Week 8.',tags:['gate','EVT','conditional-pass']},
+      {who:'sarah',time:'09:13',text:'<strong>Conditional Pass to DVT.</strong> Day-time ML performance is strong. IR retrain is a well-understood ML workflow. Leila — get marketing sign-off on the solar messaging in writing before DVT.'},
+    ],
+    dvt: [
+      {type:'day',label:'Week 12 — DVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'DVT gate for GuardEye. IR model retrain result is the key gate criteria — nadia, where are we?'},
+      {who:'nadia',time:'09:02',text:'Software/ML: <strong>GREEN.</strong> Model retrain complete — IR night-time AP: 92.1%, up from 88%. Day-time unaffected. Latency unchanged at 85ms on NPU. WER delta: -0.3% — acceptable.'},
+      {who:'rachel',time:'09:04',text:'Mechanical: <strong>GREEN.</strong> IP65 hose test PASS on all 40 DVT units. Thermal at 50°C ambient — SoC 78°C, within 85°C limit. White fascia reflectivity helping.'},
+      {who:'yusuf',time:'09:06',text:'RF: <strong>GREEN.</strong> Wi-Fi range confirmed in real outdoor conditions. Solar panel orientation tested across four mounting angles — output within 10% of spec in all orientations.'},
+      {who:'amanda',time:'09:08',text:'Test &amp; Verification: <strong>GREEN.</strong> IP65 PASS. Drop from mounting height (2.5m) PASS — 5/5 units. IR cut filter switching confirmed correct. All functional tests GREEN.'},
+      {who:'frank',time:'09:10',text:'Manufacturing: <strong>AMBER.</strong> CMO camera module IR auto-focus issue identified on one unit — supplier batch confirmed defective. Replacement batch incoming. Not a design issue.'},
+      {type:'issue',sev:'low',title:'DVT Gate: CONDITIONAL PASS → PVT',body:'1 carry-forward: Camera module batch replacement — new batch with CoC incoming, 100% incoming AF test at PVT. All other items GREEN. IR accuracy 92.1% confirmed. PVT entry approved Week 16.',tags:['gate','DVT','conditional-pass']},
+      {who:'sarah',time:'09:13',text:'<strong>Conditional Pass to PVT.</strong> IR accuracy resolved — excellent retrain result. Frank, I need 100% AF incoming test on every camera module before they go into PVT build. No batch surprises.'},
+    ],
+    pvt: [
+      {type:'day',label:'Week 20 — PVT Gate Review (MP Release)'},
+      {who:'marcus',time:'09:00',text:'PVT gate for GuardEye Doorbell Camera. Camera module AF issue was the outstanding carry-forward — Frank, status.'},
+      {who:'frank',time:'09:02',text:'Manufacturing: <strong>GREEN.</strong> New camera module batch received with CoC — 100% AF incoming test PASS. PVT yield Day 3: 98.2%. PA tuning fix ported from Nexus Hub — Wi-Fi TX power issue resolved. Production control plan signed.'},
+      {who:'nadia',time:'09:04',text:'Software/ML: <strong>GREEN.</strong> ML model v2.3 production-locked. On-device inference: person 96.2% AP, vehicle 94.8% AP, IR night 92.1% AP. FW OTA update channel tested and live.'},
+      {who:'yusuf',time:'09:06',text:'RF: <strong>GREEN.</strong> Wi-Fi TX power confirmed at EOL on all PVT units. BT pairing validated. No RF issues.'},
+      {who:'amanda',time:'09:08',text:'Test &amp; Verification: <strong>GREEN.</strong> Full qualification suite PASS — IP65, drop, ML accuracy, thermal. FCC Part 15 and CE marking documentation complete.'},
+      {who:'leila',time:'09:10',text:'Battery/Solar: <strong>GREEN.</strong> LiPo buffer cells all within capacity spec. Solar panel output confirmed at rated power. Low-battery alert FW functioning.'},
+      {type:'issue',sev:'low',title:'PVT Gate: PASS — Authorised for Mass Production',body:'All teams GREEN. Yield 98.2%. IR night-time ML accuracy 92.1%. Camera AF 100% incoming test passing. FCC and CE regulatory ready. CM authorised to proceed to MP.',tags:['gate','PVT','pass','MP-release']},
+      {who:'sarah',time:'09:13',text:'<strong>GuardEye Doorbell Camera released to Mass Production.</strong> ML performance landed well above spec. Excellent program recovery on the camera module issue. Marcus, release the CM PO.'},
+    ],
+  },
+
+  p9: {
+    evt: [
+      {type:'day',label:'Week 5 — EVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'EVT gate for DockCore Thunderbolt 5 Hub. This is our first TB5 product — Intel certification is the gate criteria at PVT. David, signal integrity first.'},
+      {who:'david',time:'09:02',text:'Electrical/SI: <strong>GREEN.</strong> Post-layout eye margin 22dB — above 15dB TB5 minimum. Differential pair matching within 5mil. TB5 controller and USB4 re-timer coupling resolved with guard vias. Comfortable entering DVT.'},
+      {who:'leila',time:'09:04',text:'Power Delivery: <strong>AMBER.</strong> PD MOSFET dissipating 3.4W at 140W output — top case surface 62°C. Bergquist gap pad fix reduces to 48°C. Thermal pad ordered, fix straightforward.'},
+      {who:'james',time:'09:06',text:'Software: <strong>GREEN.</strong> TB5 link establishment functional. USB4 Gen3 enumeration with 8 tested host devices — PASS. 140W PD negotiation functional.'},
+      {who:'amanda',time:'09:08',text:'Test &amp; Verification: <strong>AMBER.</strong> Full TB5 compatibility matrix needs 47 host devices — only 8 tested so far. Cannot close compatibility until DVT. SI eye diagrams above threshold on all tested links.'},
+      {who:'frank',time:'09:10',text:'Manufacturing: <strong>GREEN.</strong> PCBA assembly straightforward. EOL TB5 test station design underway — 47-device compatibility validation to be automated.'},
+      {type:'issue',sev:'low',title:'EVT Gate: CONDITIONAL PASS → DVT',body:'2 carry-forwards: (1) PD thermal — gap pad fix ordered, reduces case surface to 48°C. (2) TB5 compatibility — 39 host devices still to be tested in DVT. DVT entry approved Week 8.',tags:['gate','EVT','conditional-pass']},
+      {who:'sarah',time:'09:13',text:'<strong>Conditional Pass to DVT.</strong> SI margins are clean — that was the hardest engineering problem. James, I need the full 47-device compatibility matrix before DVT gate close.'},
+    ],
+    dvt: [
+      {type:'day',label:'Week 11 — DVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'DVT gate for DockCore. TB5 compatibility matrix and Intel pre-certification are the two items I need GREEN before approving PVT. James, compatibility results.'},
+      {who:'james',time:'09:02',text:'Software: <strong>AMBER.</strong> 47 host devices tested — 93.6% PASS rate. Failures: 3 TB3 MacBooks (negotiation timeout — FW v1.4 fix applied, now passing) and 1 Dell XPS 15 (5K flicker — FW v1.5 fix applied, now passing). All failures resolved with FW fix.'},
+      {who:'david',time:'09:04',text:'Electrical: <strong>GREEN.</strong> Thermal at 140W: case surface 46°C with gap pad — comfortable. 2.5GbE link stable. Dual 8K output confirmed. HDMI 2.1 cable EQ tuned for 2m cables.'},
+      {who:'amanda',time:'09:06',text:'Test &amp; Verification: <strong>GREEN.</strong> Updated FW re-test on all failed hosts: PASS. TB5 Intel pre-certification test vectors: PASS on all 3 test cycles. Certification body notified.'},
+      {who:'frank',time:'09:08',text:'Manufacturing: <strong>GREEN.</strong> EOL test station validates all 47 compatibility profiles automatically in 45s per unit. Yield on DVT run: 96.1%.'},
+      {who:'leila',time:'09:10',text:'Power Delivery: <strong>GREEN.</strong> 140W PD confirmed stable across all 47 hosts. Gap pad thermal solution validated over 4-hour soak at full load.'},
+      {type:'issue',sev:'low',title:'DVT Gate: CONDITIONAL PASS → PVT',body:'1 carry-forward: HDMI 2.1 EQ — cable EQ coefficients must be confirmed stable across production cable batches in PVT. All other items GREEN. Intel pre-certification test vectors PASS. PVT entry approved Week 15.',tags:['gate','DVT','conditional-pass']},
+      {who:'sarah',time:'09:13',text:'<strong>Conditional Pass to PVT.</strong> Compatibility matrix is clean after FW fixes. Intel pre-cert vectors passing — we are on track for TB5 logo. David — HDMI EQ is your PVT Day 1 confirmation task.'},
+    ],
+    pvt: [
+      {type:'day',label:'Week 19 — PVT Gate Review (Intel TB5 Certification)'},
+      {who:'marcus',time:'09:00',text:'PVT gate for DockCore. Intel TB5 certification is our launch-critical dependency. Amanda — certification status.'},
+      {who:'amanda',time:'09:02',text:'Test &amp; Verification: <strong>GREEN.</strong> Intel TB5 Logo test: all test vectors PASS — certificate issued. PVT yield 96.4%. HDMI 2.1 EQ coefficients confirmed stable across 3 cable batches from different manufacturers.'},
+      {who:'david',time:'09:04',text:'Electrical: <strong>GREEN.</strong> Yield 96.4% — HDMI EQ and DP1.4 link the only failures, all resolved by FW. BOM locked. No open substitutions.'},
+      {who:'james',time:'09:06',text:'Software: <strong>GREEN.</strong> FW v1.6 production-locked — all 47 host compatibility profiles validated. TB5 certification firmware hash registered with Intel.'},
+      {who:'frank',time:'09:08',text:'Manufacturing: <strong>GREEN.</strong> EOL station running all 47 profiles in 45s. Yield 96.4% — on target for >99% with process maturation. Production control plan signed.'},
+      {who:'leila',time:'09:10',text:'Power Delivery: <strong>GREEN.</strong> 140W PD stable across all tested host systems. No thermal anomalies in 8-hour production soak test.'},
+      {type:'issue',sev:'low',title:'PVT Gate: PASS — Intel TB5 Certification Issued',body:'All teams GREEN. Intel TB5 Logo Certificate in hand. Yield 96.4% on 200-unit build — improving. 47-device compatibility confirmed at EOL. CM authorised to proceed to MP.',tags:['gate','PVT','pass','TB5','Intel-cert']},
+      {who:'sarah',time:'09:13',text:'<strong>DockCore Thunderbolt 5 Hub released to Mass Production.</strong> Intel TB5 certificate in hand — we ship with the logo on box. Outstanding SI and firmware work. Marcus, release the CM PO and notify retail partners.'},
+    ],
+  },
+
+  p10: {
+    evt: [
+      {type:'day',label:'Week 5 — EVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'EVT gate for MedPatch Cardiac Monitor. Reminder: 510(k) submission requires a complete DHF — every carry-forward today needs a DHF entry and ISO 14971 risk classification before this meeting closes. Amanda, Test and Verification.'},
+      {who:'amanda',time:'09:02',text:'Test &amp; Verification: <strong>AMBER.</strong> ECG CMRR 92dB — above 90dB spec. Motion artifact rejection at 200-500μV during arm movement — below clinical threshold. Adaptive filtering algorithm in development. Signal quality score 3.9/5 — needs improvement.'},
+      {who:'david',time:'09:04',text:'Electrical: <strong>GREEN.</strong> ECG front-end functional. BLE 5.3 pairing confirmed. CMRR exceeds spec. Electrode impedance within acceptable range on dry skin.'},
+      {who:'rachel',time:'09:06',text:'Mechanical: <strong>AMBER.</strong> Adhesive edge-lifting on 4/20 shower simulation patches — backing film too thin. Thicker perimeter seal designed. DHF entry DC-MED-008 filed. No patient safety impact at this stage.'},
+      {who:'leila',time:'09:08',text:'Battery: <strong>GREEN.</strong> CR2430 life calculation: 43 days continuous ECG — 3x the 14-day requirement. Excellent safety margin. No temperature derating concerns.'},
+      {who:'frank',time:'09:10',text:'Manufacturing: <strong>AMBER.</strong> Electrode silver chloride deposition variance — incoming QC SPC procedure needed. Electrode resistance range flagged for tighter specification.'},
+      {type:'issue',sev:'med',title:'EVT Gate: CONDITIONAL PASS → DVT',body:'3 carry-forwards with DHF entries and ISO 14971 risk assessments: (1) Motion artifact rejection — AMAR algorithm in development. (2) Adhesive edge-lifting — perimeter seal redesign. (3) Electrode QC — SPC incoming inspection procedure. DVT entry approved Week 8.',tags:['gate','EVT','conditional-pass','medical','510k']},
+      {who:'sarah',time:'09:13',text:'<strong>Conditional Pass to DVT.</strong> Battery life margin is excellent. All carry-forwards have DHF entries — QA lead must review and approve all three risk assessments before EOD. No DHF gaps on a 510(k) device.'},
+    ],
+    dvt: [
+      {type:'day',label:'Week 12 — DVT Gate Review'},
+      {who:'marcus',time:'09:00',text:'DVT gate for MedPatch. Clinical performance data and biocompatibility are the two regulatory-critical items. Amanda — clinical study results.'},
+      {who:'amanda',time:'09:02',text:'Clinical Performance: <strong>GREEN.</strong> 30-patient study complete. Mean signal quality score 4.7/5 with AMAR v2.3 — up from 4.3/5 without. Arrhythmia detection sensitivity 97.4%, specificity 99.1% vs cardiologist gold standard. All primary endpoints met.'},
+      {who:'maria',time:'09:04',text:'Electrical/Biocomp: <strong>GREEN.</strong> ISO 10993 biocompatibility complete — all materials PASS. Silver chloride electrode: 96h cytotoxicity PASS. 20-volunteer skin irritation patch test: no adverse reactions at 14 days.'},
+      {who:'rachel',time:'09:06',text:'Mechanical: <strong>GREEN.</strong> Thicker backing film adhesive: shower simulation PASS on all 30 DVT units. Peel tab stiffness reduced — usability study PASS on elderly user cohort. DHF entries updated.'},
+      {who:'james',time:'09:08',text:'Software: <strong>GREEN.</strong> AMAR v2.3 in production build — 68% motion artifact reduction during walking, 81% cycling. BLE beacon PASS — 5-minute interval confirmed stable. FW feature-complete.'},
+      {who:'frank',time:'09:10',text:'Manufacturing: <strong>AMBER.</strong> Electrode SPC incoming inspection procedure implemented — first lot shows 3.2% electrode resistance OOT from one supplier. Tightening specification and qualifying a second supplier.'},
+      {type:'issue',sev:'low',title:'DVT Gate: CONDITIONAL PASS → PVT',body:'1 carry-forward: Electrode incoming QC — second supplier qualification required before PVT build. All clinical, biocomp, and adhesive items GREEN. DHF updated and QA-approved. PVT entry approved Week 16.',tags:['gate','DVT','conditional-pass','medical','510k']},
+      {who:'sarah',time:'09:13',text:'<strong>Conditional Pass to PVT.</strong> Clinical performance is excellent — 97.4% sensitivity is strong for a 510(k) submission. Frank, second electrode supplier must be qualified before PVT build order. Marcus, DHF version lock is your PVT gate entry criteria.'},
+    ],
+    pvt: [
+      {type:'day',label:'Week 20 — PVT Gate Review (510(k) Submission)'},
+      {who:'marcus',time:'09:00',text:'PVT gate for MedPatch. This meeting authorises 510(k) submission to FDA. DHF must be version-locked with QA signatures before this meeting ends. QA lead is co-signing the gate record.'},
+      {who:'amanda',time:'09:02',text:'Clinical/Regulatory: <strong>GREEN.</strong> 510(k) performance package complete — 30 patients, 420 patient-days, all primary endpoints met. ECG classification: sensitivity 97.4%, specificity 99.1%. ISO 60601-1 electrical safety PASS. All test reports signed by accredited lab.'},
+      {who:'frank',time:'09:04',text:'Manufacturing: <strong>GREEN.</strong> Second electrode supplier qualified — incoming QC PASS. PVT yield 98.1%. Electrode resistance OOT zero on second-supplier batch. Production control plan signed with QA approval.'},
+      {who:'david',time:'09:06',text:'Electrical: <strong>GREEN.</strong> ECG CMRR 93dB on all PVT units. BLE beacons confirmed at 5-minute interval. All units pass electrical safety check. BOM locked.'},
+      {who:'rachel',time:'09:08',text:'Mechanical: <strong>GREEN.</strong> Adhesive qualification complete — 14-day wear, shower simulation, peel tab usability — all PASS. Sub-clavicular placement guide validated with clinical partner.'},
+      {who:'leila',time:'09:10',text:'Battery: <strong>GREEN.</strong> CR2430 voltage at EOL: all units within spec. 43-day calculated life confirmed with temperature derating. No anomalies on PVT lot.'},
+      {type:'issue',sev:'low',title:'PVT Gate: PASS — 510(k) Submission Authorised',body:'All teams GREEN. DHF version-locked with QA signatures. 510(k) package submitted to FDA. Yield 98.1% on 200-unit submission lot. CM authorised to build submission units. FDA response expected in ~90 days.',tags:['gate','PVT','pass','510k','FDA','medical']},
+      {who:'sarah',time:'09:15',text:'<strong>MedPatch PVT PASS — 510(k) submitted to FDA.</strong> This has been a textbook medical device program. DHF complete, clinical data strong, biocomp clear. We wait for FDA. Marcus, notify the CM and our clinical partner. Exceptional work from the entire team — this device will help patients. 🎉'},
+    ],
+  },
+
+};
 
 buildProductList();
 document.getElementById('footer-year').textContent = new Date().getFullYear();
