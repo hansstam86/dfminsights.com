@@ -1,130 +1,96 @@
-# DFM Insights — Design for Manufacturability Platform
+# DFM Insights — Hardware Engineering Intelligence Platform
 
-A live, interactive platform showing how real hardware products are engineered — following team conversations across EVT, DVT, and PVT build stages.
+**Pre-launch landing page + free demo.**
 
-🌐 **Live site:** [www.dfminsights.com](https://www.dfminsights.com)
-
----
-
-## Hosting on GitHub Pages + GoDaddy Domain
-
-### Step 1 — Create a GitHub Repository
-
-1. Go to [github.com](https://github.com) and sign in (or create a free account).
-2. Click **New repository**.
-3. Name it `dfminsights.com` (or any name — e.g. `dfm-website`).
-4. Set it to **Public**.
-5. Click **Create repository**.
-
-### Step 2 — Upload the Website Files
-
-Upload these files to the root of your repository:
-```
-index.html      ← Main website
-404.html        ← Custom error page
-CNAME           ← Your custom domain
-robots.txt      ← SEO crawler instructions
-sitemap.xml     ← SEO sitemap
-README.md       ← This file
-```
-
-You can do this via:
-- **GitHub web UI:** Drag and drop files into the repository.
-- **Git CLI:** `git add . && git commit -m "Initial deploy" && git push`
-
-### Step 3 — Enable GitHub Pages
-
-1. In your repository, go to **Settings → Pages**.
-2. Under **Source**, select **Deploy from a branch**.
-3. Choose branch: **main**, folder: **/ (root)**.
-4. Click **Save**.
-
-GitHub will give you a URL like `https://yourusername.github.io/dfm-website/` — your site is live!
-
-### Step 4 — Connect Your GoDaddy Domain
-
-**In GitHub:**
-1. Go to **Settings → Pages → Custom domain**.
-2. Enter `www.dfminsights.com` (or your domain).
-3. Click **Save**. GitHub will verify the domain.
-4. Check **Enforce HTTPS** once the certificate is issued (takes ~30 min).
-
-**In GoDaddy:**
-1. Log in to your GoDaddy account.
-2. Go to **My Products → DNS** for your domain.
-3. Delete any existing `A` records and `CNAME` records for `www`.
-4. Add these **4 A records** (for the apex domain `@`):
-
-| Type | Name | Value           | TTL  |
-|------|------|-----------------|------|
-| A    | @    | 185.199.108.153 | 1 hr |
-| A    | @    | 185.199.109.153 | 1 hr |
-| A    | @    | 185.199.110.153 | 1 hr |
-| A    | @    | 185.199.111.153 | 1 hr |
-
-5. Add a **CNAME record** for `www`:
-
-| Type  | Name | Value                         | TTL  |
-|-------|------|-------------------------------|------|
-| CNAME | www  | yourusername.github.io        | 1 hr |
-
-> Replace `yourusername` with your actual GitHub username.
-
-6. **Save** all DNS changes.
-
-### Step 5 — Wait for DNS Propagation
-
-DNS changes take **15 minutes to 48 hours** to propagate globally. You can check status at [dnschecker.org](https://dnschecker.org).
-
-Once propagated, `https://www.dfminsights.com` will load your site with a valid SSL certificate.
+🌐 Live: [www.dfminsights.com](https://www.dfminsights.com)
+📧 Contact: hello@dfminsights.com
 
 ---
 
-## Updating the Site
+## Chairman Setup Checklist
 
-1. Edit `index.html` (or any file) locally.
-2. Push to GitHub: `git add . && git commit -m "Update" && git push`
-3. GitHub Pages automatically redeploys within ~60 seconds.
+### Step 1 — Set up Stripe Payment Link
+
+1. Go to [dashboard.stripe.com](https://dashboard.stripe.com) and log in with hans.stam@gmail.com
+2. Navigate to **Payment Links** → **+ New**
+3. Create a product: "DFM Insights – Founding Member"
+4. Set price: **$49 USD**, one-time payment
+5. Add description: "Founding member spot. 5 projects, 10 questions each. Early access when we launch."
+6. Enable: "Let customers adjust quantity" → OFF
+7. Click **Create link** — you get a URL like `https://buy.stripe.com/xxxxxxxxxxxx`
+8. Open `index.html` and replace **all 4 instances** of:
+   ```
+   https://buy.stripe.com/REPLACE_WITH_STRIPE_LINK
+   ```
+   with your actual Stripe link.
+9. Save and push to GitHub.
+
+### Step 2 — Update Founding Member Count
+
+Every time someone pays, update the counter:
+
+1. Open `index.html`
+2. Find this line near the bottom of the `<script>` block:
+   ```js
+   const SPOTS_TAKEN = 0;
+   ```
+3. Change `0` to the current number of paid signups
+4. Save and push to GitHub — the progress bar updates automatically
+
+### Step 3 — Upload to GitHub
+
+Files to upload (all in this folder):
+```
+index.html     ← Landing/marketing page (this is the homepage)
+demo.html      ← Free demo (linked from landing page)
+CNAME          ← Custom domain for GitHub Pages
+robots.txt     ← SEO
+sitemap.xml    ← SEO
+404.html       ← Error page
+README.md      ← This file
+```
 
 ---
 
 ## File Structure
 
-```
-/
-├── index.html      Main application (self-contained)
-├── 404.html        Custom 404 redirect page
-├── CNAME           Custom domain for GitHub Pages
-├── robots.txt      Search engine crawler rules
-├── sitemap.xml     XML sitemap for SEO
-└── README.md       This setup guide
-```
+| File | Purpose |
+|------|---------|
+| `index.html` | Commercial landing page with pre-launch Stripe |
+| `demo.html` | Free demo — 10 example hardware programs |
+| `CNAME` | Points GitHub Pages to dfminsights.com |
+| `robots.txt` | Search engine instructions |
+| `sitemap.xml` | SEO sitemap |
+| `404.html` | Custom error page |
 
 ---
 
-## Tech Stack
+## Pricing Tiers
 
-- **Zero dependencies** — pure HTML, CSS, and vanilla JavaScript
-- **Single file app** — all logic, data and styles in `index.html`
-- **Google Fonts CDN** — Barlow Condensed, Barlow, Fira Code
-- **GitHub Pages** — free static hosting with SSL
-- **GoDaddy** — custom domain DNS
-
----
-
-## Customising
-
-All product data, team members, and conversations live in the `<script>` section of `index.html` as clean JavaScript objects. To add a product:
-
-```javascript
-// Add to the PRODUCTS array:
-{ id:'p11', icon:'🔋', name:'Your Product Name', category:'Category', stage:'EVT',
-  desc:'Short product description.', badges:['Spec1','Spec2','Spec3'] }
-
-// Add conversations to CONVERSATIONS.p11 = { evt: [...], dvt: [...], pvt: [...] }
-// Add team members to PRODUCT_TEAMS.p11 = ['sarah','marcus', ...]
-```
+| Tier | Price | Status |
+|------|-------|--------|
+| Free Demo | $0 | Live — demo.html |
+| DFM Starter | $49/project | Pre-launch (Stripe) |
+| Expert Review | $500/project | Email enquiry |
+| PRD Builder | $49 + $500 review | Coming Q3 2026 |
 
 ---
 
-*Built to show the real conversations behind hardware engineering.*
+## Business Model
+
+- **Goal:** 10 founding members before building the paid platform
+- **Payment:** Stripe → hans.stam@gmail.com
+- **Refund policy:** Full refund if we don't hit 10 members in 90 days
+- **Build timeline:** 8 weeks from 10 members to beta access
+
+---
+
+## Management Team
+
+| Role | Name |
+|------|------|
+| Chairman | Hans Stam |
+| CEO | Claude (AI) |
+| CTO | Claude (AI) |
+| CFO | Claude (AI) |
+
