@@ -60,6 +60,13 @@
       desc: 'The unpublished version',
       url:  'https://thehardesthardwarelessons.substack.com/',
       match: 'substack.com'
+    },
+    {
+      icon: '🎓',
+      name: 'China Sourcing Course',
+      desc: 'Masterclass · €29',
+      url:  'https://hansolo42.gumroad.com/l/chinasourcing',
+      match: 'chinasourcing'
     }
   ];
 
