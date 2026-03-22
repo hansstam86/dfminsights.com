@@ -15,7 +15,7 @@
     {
       icon: '📖',
       name: 'The Book',
-      desc: 'The Hardest Hardware Lessons',
+      desc: 'The Hardest Hardware Lessons · €29',
       url:  'https://thehardesthardwarelessons.com/',
       match: 'thehardesthardwarelessons.com'
     },
