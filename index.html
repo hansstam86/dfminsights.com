@@ -3,6 +3,406 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expert Package — DFM Insights</title>
+<meta name="description" content="Apply for the DFM Insights Expert Package. Hans Stam personally reviews your PRD and BOM and delivers your FMEA, project charter, and build timeline with a 60-minute video walkthrough.">
+<link rel="canonical" href="https://www.dfminsights.com/expert-review">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0a'/%3E%3Crect x='4' y='4' width='24' height='24' rx='3' fill='none' stroke='%23e8a43b' stroke-width='1.5'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='13' font-weight='700' fill='%23e8a43b' text-anchor='middle'%3ED%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0a0a;--ink2:#1a1a1a;--mid:#666;--light:#999;
+  --border:#e0ddd8;--border2:#f0ede8;--cream:#faf8f4;--white:#fff;
+  --amber:#e8a43b;--amber2:#f0b84a;--amber-bg:#fdf6e8;
+  --green:#2d7a4f;--green-bg:#edf7f1;
+  --font-serif:'Instrument Serif',Georgia,serif;
+  --font-sans:'DM Sans',system-ui,sans-serif;
+  --font-mono:'DM Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--font-sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+
+/* NAV */
+nav{background:rgba(255,255,255,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 40px;display:flex;align-items:center;height:64px;gap:28px}
+.nav-logo{font-family:var(--font-serif);font-size:22px;color:var(--ink);text-decoration:none}
+.nav-logo em{font-style:italic;color:var(--amber)}
+.nav-back{margin-left:auto;font-size:13px;color:var(--mid);text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .15s}
+.nav-back:hover{color:var(--ink)}
+
+/* LAYOUT */
+.page{max-width:780px;margin:0 auto;padding:48px 40px 80px}
+
+/* HEADER */
+.page-tag{font-family:var(--font-mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.page-tag::after{content:'';flex:1;max-width:40px;height:1px;background:var(--border)}
+h1{font-family:var(--font-serif);font-size:clamp(28px,4vw,42px);line-height:1.15;letter-spacing:-.02em;margin-bottom:12px}
+h1 em{font-style:italic;color:var(--amber)}
+.page-sub{font-size:16px;color:var(--mid);line-height:1.72;max-width:560px;margin-bottom:32px}
+
+/* WHAT YOU GET */
+.deliverables{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:36px}
+.deliv{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:16px}
+.deliv-icon{font-size:20px;margin-bottom:8px}
+.deliv-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.deliv-desc{font-size:12px;color:var(--mid);line-height:1.55}
+
+/* PRICE STRIP */
+.price-strip{background:var(--ink);border-radius:10px;padding:20px 24px;display:flex;align-items:center;gap:20px;margin-bottom:36px;flex-wrap:wrap}
+.price-strip-price{font-family:var(--font-serif);font-size:36px;color:var(--white);flex-shrink:0}
+.price-strip-divider{width:1px;height:40px;background:rgba(255,255,255,.15);flex-shrink:0}
+.price-strip-items{display:flex;flex-wrap:wrap;gap:8px}
+.price-strip-item{display:flex;align-items:center;gap:5px;font-size:12px;color:rgba(255,255,255,.65)}
+.price-strip-item::before{content:'✓';color:var(--amber);font-weight:700;flex-shrink:0}
+
+/* FORM */
+.form-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:36px}
+.form-section{margin-bottom:28px}
+.form-section-title{font-family:var(--font-mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-row.full{grid-template-columns:1fr}
+.form-group{display:flex;flex-direction:column;gap:5px}
+label{font-size:12px;font-weight:600;color:var(--ink2);letter-spacing:.01em}
+label span{color:var(--amber);margin-left:2px}
+input,textarea,select{font-family:var(--font-sans);font-size:14px;color:var(--ink);background:var(--cream);border:1px solid var(--border);border-radius:6px;padding:10px 14px;outline:none;transition:border-color .15s,background .15s;width:100%;-webkit-appearance:none}
+input:focus,textarea:focus,select:focus{border-color:var(--amber);background:var(--white)}
+input::placeholder,textarea::placeholder{color:var(--light)}
+textarea{resize:vertical;min-height:80px}
+select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23999'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px}
+select option{background:var(--white);color:var(--ink)}
+
+/* CHECKBOXES */
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.check-option{display:flex;align-items:center;gap:8px;cursor:pointer}
+.check-option input[type=checkbox]{width:16px;height:16px;accent-color:var(--amber);flex-shrink:0;cursor:pointer}
+.check-option span{font-size:13px;color:var(--ink)}
+
+/* RADIO */
+.radio-grid{display:flex;flex-wrap:wrap;gap:8px}
+.radio-pill{display:flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid var(--border);border-radius:20px;cursor:pointer;transition:all .15s;background:var(--cream)}
+.radio-pill:has(input:checked){background:var(--amber-bg);border-color:var(--amber)}
+.radio-pill input[type=radio]{width:14px;height:14px;accent-color:var(--amber);flex-shrink:0;cursor:pointer}
+.radio-pill span{font-size:13px;color:var(--ink)}
+
+/* FEE NOTE */
+.fee-note{background:var(--amber-bg);border:1px solid #f0c878;border-radius:8px;padding:14px 18px;font-size:13px;color:#7a5c1a;line-height:1.65;margin-bottom:24px}
+.fee-note strong{color:var(--ink)}
+
+/* SUBMIT */
+.form-submit{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.btn-submit{background:var(--amber);color:var(--ink);padding:14px 32px;border-radius:8px;font-size:15px;font-weight:700;border:none;cursor:pointer;font-family:var(--font-sans);transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-submit:hover{background:var(--amber2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(232,164,59,.35)}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.submit-note{font-size:12px;color:var(--light)}
+
+/* SUCCESS */
+.success{display:none;background:var(--green-bg);border:1px solid #b8ddc8;border-radius:10px;padding:28px 32px;text-align:center}
+.success h3{font-family:var(--font-serif);font-size:22px;color:var(--ink);margin-bottom:8px}
+.success p{font-size:14px;color:var(--mid);line-height:1.65}
+
+/* HANS CARD */
+.hans-card{background:var(--ink);border-radius:10px;padding:24px 28px;display:flex;align-items:center;gap:20px;margin-bottom:32px;flex-wrap:wrap}
+.hans-avatar{width:52px;height:52px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid rgba(232,164,59,.4)}
+.hans-avatar img{width:100%;height:100%;object-fit:cover}
+.hans-info{}
+.hans-role{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:3px}
+.hans-name{font-family:var(--font-serif);font-size:18px;color:var(--white);margin-bottom:4px}
+.hans-bio{font-size:13px;color:rgba(255,255,255,.5);line-height:1.6}
+
+@media(max-width:640px){
+  nav{padding:0 20px}
+  .page{padding:36px 20px 60px}
+  .deliverables{grid-template-columns:1fr}
+  .form-row{grid-template-columns:1fr}
+  .check-grid{grid-template-columns:1fr}
+  .form-card{padding:24px 20px}
+  .hans-card{flex-direction:column;text-align:center}
+  .price-strip{flex-direction:column;align-items:flex-start;gap:12px}
+  .price-strip-divider{display:none}
+}
+</style>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RP1MK5ZGM4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RP1MK5ZGM4');
+</script>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="/">DFM<em>·</em>Insights</a>
+  <a class="nav-back" href="/#pricing">← Back to pricing</a>
+</nav>
+
+<div class="page">
+
+  <div class="page-tag">Expert Package · Application</div>
+  <h1>Let Hans review<br>your <em>hardware program</em></h1>
+  <p class="page-sub">Fill in the form below. Hans will review your brief within 48 hours, confirm fit, and send a payment link for the balance. Your €49 founding deposit is credited in full.</p>
+
+  <!-- Hans card -->
+  <div class="hans-card">
+    <div class="hans-avatar">
+      <img src="https://media.licdn.com/dms/image/v2/D4E03AQGGdzdaLGPkpg/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1728136743906?e=1774483200&v=beta&t=MXiqlandu_L6g08mq-lcEfcvEzLU11Ys9aSBXrr0Kg0" alt="Hans Stam">
+    </div>
+    <div class="hans-info">
+      <div class="hans-role">Reviewing your application</div>
+      <div class="hans-name">Hans Stam</div>
+      <div class="hans-bio">18+ years in hardware · Author of The Hardest Hardware Lessons · Category Manager, Voi Technology · AI generates the documents, Hans reviews and signs off.</div>
+    </div>
+  </div>
+
+  <!-- What you get -->
+  <div class="deliverables">
+    <div class="deliv">
+      <div class="deliv-icon">⚠️</div>
+      <div class="deliv-name">FMEA Report</div>
+      <div class="deliv-desc">All subsystems · RPN scoring · recommended mitigations</div>
+    </div>
+    <div class="deliv">
+      <div class="deliv-icon">📋</div>
+      <div class="deliv-name">Project Charter</div>
+      <div class="deliv-desc">Scope · RACI · risk register · success criteria</div>
+    </div>
+    <div class="deliv">
+      <div class="deliv-icon">📅</div>
+      <div class="deliv-name">Build Timeline</div>
+      <div class="deliv-desc">EVT / DVT / PVT · regulatory milestones · CM slots</div>
+    </div>
+  </div>
+
+  <!-- Price strip -->
+  <div class="price-strip">
+    <div class="price-strip-price">€1,200</div>
+    <div class="price-strip-divider"></div>
+    <div class="price-strip-items">
+      <div class="price-strip-item">Personal review by Hans Stam</div>
+      <div class="price-strip-item">60-minute video walkthrough call</div>
+      <div class="price-strip-item">PDF + Word editable formats</div>
+      <div class="price-strip-item">NDA available on request</div>
+      <div class="price-strip-item">48h delivery after payment</div>
+      <div class="price-strip-item">€49 founding deposit credited</div>
+    </div>
+  </div>
+
+  <!-- Form -->
+  <div class="form-card" id="form-card">
+    <form id="expert-form" action="https://formspree.io/f/xbdzvllg" method="POST">
+
+      <!-- Hidden fields -->
+      <input type="hidden" name="_subject" value="DFM Insights — Expert Package Application">
+      <input type="hidden" name="_replyto" id="reply-to-field" value="">
+
+      <!-- Section 1: Contact -->
+      <div class="form-section">
+        <div class="form-section-title">01 · Your Details</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Full name <span>*</span></label>
+            <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+          </div>
+          <div class="form-group">
+            <label for="company">Company</label>
+            <input type="text" id="company" name="company" placeholder="Acme Hardware Ltd">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email <span>*</span></label>
+            <input type="email" id="email" name="email" placeholder="jane@yourcompany.com" required
+              oninput="document.getElementById('reply-to-field').value=this.value">
+          </div>
+          <div class="form-group">
+            <label for="linkedin">LinkedIn profile (optional)</label>
+            <input type="url" id="linkedin" name="linkedin" placeholder="linkedin.com/in/yourname">
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2: Product -->
+      <div class="form-section">
+        <div class="form-section-title">02 · Your Product</div>
+        <div class="form-row full">
+          <div class="form-group">
+            <label for="product">What are you building? <span>*</span></label>
+            <input type="text" id="product" name="product"
+              placeholder="e.g. Bluetooth-enabled industrial IoT sensor, IP67, LoRa WAN, 10-year battery" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="stage">Current build stage <span>*</span></label>
+            <select id="stage" name="build_stage" required>
+              <option value="" disabled selected>Select stage</option>
+              <option>Pre-EVT — design phase, no prototype yet</option>
+              <option>EVT — Engineering Validation Test</option>
+              <option>DVT — Design Validation Test</option>
+              <option>PVT — Production Validation Test</option>
+              <option>Mass production — sustaining issue</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="category">Product category <span>*</span></label>
+            <select id="category" name="product_category" required>
+              <option value="" disabled selected>Select category</option>
+              <option>Consumer electronics</option>
+              <option>Medical device (FDA / CE)</option>
+              <option>Industrial IoT</option>
+              <option>EV / charging infrastructure</option>
+              <option>Smart home / building</option>
+              <option>Wearable</option>
+              <option>Robotics / automation</option>
+              <option>Other hardware</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group">
+            <label>Regulatory requirements (select all that apply)</label>
+            <div class="check-grid" style="margin-top:6px">
+              <label class="check-option"><input type="checkbox" name="regulatory" value="CE marking"> <span>CE marking (EU)</span></label>
+              <label class="check-option"><input type="checkbox" name="regulatory" value="FCC / IC"> <span>FCC / IC (US / Canada)</span></label>
+              <label class="check-option"><input type="checkbox" name="regulatory" value="FDA 510(k)"> <span>FDA 510(k) (medical)</span></label>
+              <label class="check-option"><input type="checkbox" name="regulatory" value="ISO 13485"> <span>ISO 13485 (medical QMS)</span></label>
+              <label class="check-option"><input type="checkbox" name="regulatory" value="UL listing"> <span>UL listing (US safety)</span></label>
+              <label class="check-option"><input type="checkbox" name="regulatory" value="None yet"> <span>None yet</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 3: Documents -->
+      <div class="form-section">
+        <div class="form-section-title">03 · Your Documents</div>
+        <div class="form-row full">
+          <div class="form-group">
+            <label>What documents do you currently have?</label>
+            <div class="check-grid" style="margin-top:6px">
+              <label class="check-option"><input type="checkbox" name="docs" value="PRD"> <span>Product Requirements Document (PRD)</span></label>
+              <label class="check-option"><input type="checkbox" name="docs" value="BOM"> <span>Bill of Materials (BOM)</span></label>
+              <label class="check-option"><input type="checkbox" name="docs" value="CAD"> <span>CAD / mechanical drawings</span></label>
+              <label class="check-option"><input type="checkbox" name="docs" value="Schematic"> <span>Schematic / PCB layout</span></label>
+              <label class="check-option"><input type="checkbox" name="docs" value="Existing FMEA"> <span>Existing FMEA (partial)</span></label>
+              <label class="check-option"><input type="checkbox" name="docs" value="None yet"> <span>None yet — just a brief</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="form-row full" style="margin-top:16px">
+          <div class="form-group">
+            <label>How will you share your documents?</label>
+            <div class="radio-grid" style="margin-top:6px">
+              <label class="radio-pill"><input type="radio" name="doc_sharing" value="Email after confirmation"> <span>Email after Hans confirms fit</span></label>
+              <label class="radio-pill"><input type="radio" name="doc_sharing" value="Google Drive link"> <span>Google Drive link</span></label>
+              <label class="radio-pill"><input type="radio" name="doc_sharing" value="Dropbox link"> <span>Dropbox link</span></label>
+              <label class="radio-pill"><input type="radio" name="doc_sharing" value="I need NDA first"> <span>I need NDA first</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 4: Scope -->
+      <div class="form-section">
+        <div class="form-section-title">04 · What You Need</div>
+        <div class="form-row full">
+          <div class="form-group">
+            <label>Which deliverables are most important? (select all)</label>
+            <div class="check-grid" style="margin-top:6px">
+              <label class="check-option"><input type="checkbox" name="deliverables" value="FMEA" checked> <span>FMEA Report — failure modes &amp; RPN</span></label>
+              <label class="check-option"><input type="checkbox" name="deliverables" value="Project Charter" checked> <span>Project Charter — scope &amp; RACI</span></label>
+              <label class="check-option"><input type="checkbox" name="deliverables" value="Build Timeline" checked> <span>Build Timeline — EVT/DVT/PVT schedule</span></label>
+              <label class="check-option"><input type="checkbox" name="deliverables" value="BOM Intelligence"> <span>BOM Intelligence — supply chain risk</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="form-row" style="margin-top:16px">
+          <div class="form-group">
+            <label for="timeline">Your timeline</label>
+            <select id="timeline" name="timeline">
+              <option value="" disabled selected>When do you need this?</option>
+              <option>ASAP — within 1 week</option>
+              <option>Within 2 weeks</option>
+              <option>Within a month</option>
+              <option>No hard deadline</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="heard">How did you find DFM Insights?</label>
+            <select id="heard" name="how_found">
+              <option value="" disabled selected>Select one</option>
+              <option>The Hardest Hardware Lessons (book)</option>
+              <option>Substack newsletter</option>
+              <option>LinkedIn</option>
+              <option>MotionLab / event</option>
+              <option>Referral from someone</option>
+              <option>Google search</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row full" style="margin-top:0">
+          <div class="form-group">
+            <label for="context">Anything else Hans should know?</label>
+            <textarea id="context" name="context" rows="4"
+              placeholder="Key risks you're aware of, specific concerns, previous build history, regulatory deadlines, CM relationships — anything that helps Hans prepare a better review."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fee confirmation -->
+      <div class="fee-note">
+        <strong>Fee: €1,200 per project.</strong> Hans will review your brief, confirm fit, and send a Stripe payment link for the balance (€1,151 if you have already paid the €49 founding deposit, or €1,200 if not). Delivery within 48 hours of payment. PDF + Word formats. 60-minute video walkthrough included.
+      </div>
+
+      <div class="form-submit">
+        <button class="btn-submit" type="submit" id="submit-btn">
+          Submit Application →
+        </button>
+        <span class="submit-note">Hans reads every application personally and responds within 48 hours.</span>
+      </div>
+
+    </form>
+
+    <!-- Success message -->
+    <div class="success" id="success">
+      <div style="font-size:36px;margin-bottom:12px">✅</div>
+      <h3>Application received.</h3>
+      <p>Hans will review your brief and respond within 48 hours to confirm fit and next steps.<br>Check your inbox — including spam — for a reply from <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="492128273a673a3d2824092e24282025672a2624">[email&#160;protected]</a>.</p>
+    </div>
+  </div>
+
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const form = document.getElementById('expert-form');
+const success = document.getElementById('success');
+const btn = document.getElementById('submit-btn');
+
+form.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  btn.disabled = true;
+  btn.textContent = 'Submitting…';
+
+  const data = new FormData(form);
+  try {
+    const res = await fetch('https://formspree.io/f/xbdzvllg', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      form.style.display = 'none';
+      success.style.display = 'block';
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Submit Application →';
+      alert('Something went wrong. Please email hans.stam@gma<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>DFM Insights — FMEA, Project Charter & Build Timeline from Your PRD</title>
 <meta name="description" content="Upload your PRD and BOM. We generate a full FMEA report, project charter, and EVT/DVT/PVT timeline — the three documents every hardware program needs. From €499.">
 <link rel="canonical" href="https://www.dfminsights.com/">
